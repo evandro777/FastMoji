@@ -25,7 +25,7 @@ src/instance.rs           single instance over a Unix socket
 flatpak/                  manifest, desktop file, metainfo, icon, build.sh
 dev/                      manual test harness (python-xlib), NOT shipped
 README.md, CONTRIBUTING.md, RELEASING.md, THIRD_PARTY.md, LICENSE
-docs/                     screenshots (used by the metainfo) and FLATHUB.md
+docs/                     screenshots (used by the metainfo)
 .github/                  CI workflows, dependabot
 ```
 
@@ -106,4 +106,4 @@ python3 dev/lat.py y "*" <pid> 12   # open latency + RSS
 
 ## Open items
 
-Flatpak build verification; in-app shortcut recorder (the shortcut is edited in `settings.toml` and needs a restart); autostart (Background portal); About dialog; Wayland probe; first real run of the Flatpak CI workflow (untested until pushed); the owner's hand-written Flathub submission (see `docs/FLATHUB.md`).
+Flatpak build verification; in-app shortcut recorder (the shortcut is edited in `settings.toml` and needs a restart); autostart (Background portal); About dialog; Wayland probe; first real run of the Flatpak CI workflow (untested until pushed); the owner's hand-written Flathub submission.
