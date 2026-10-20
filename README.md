@@ -19,7 +19,7 @@ FastMoji is inspired by [Emote](https://github.com/tom-james-watson/Emote) by To
 ## Features
 
 - Instant search, 9 categories that follow scrolling, and your recent emojis first
-- Keyboard first: arrows (also while typing), `Enter` copy and paste, `Shift+Enter` build a multi-emoji selection, `Ctrl+F` search, `Ctrl+Tab` categories, `Esc` close
+- Keyboard first: arrows (also while typing), `Enter` copy and paste, `Shift+Enter` build a multi-emoji selection, `Ctrl+F` search, `Ctrl+Tab` categories (or `Up` from the top row to reach the category bar, then `Left`/`Right`, `Down` to go back), `Esc` close
 - Click copies and pastes, right click adds to the selection
 - Skin tone, emoji size and automatic paste preferences
 - Global shortcut (default `Ctrl+Alt+E`) on X11

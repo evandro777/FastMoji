@@ -30,6 +30,8 @@ export component Main inherits Window {
     in property <string> shortcut-label;
     in property <string> shortcut-error;
     in-out property <bool> settings-open;
+    // Keyboard is on the category bar: Left/Right pick a category, Down/Enter go back to the grid.
+    in-out property <bool> categories-focused;
     in-out property <string> search-text;
     in-out property <length> scroll-y <=> list.content-y;
     out property <length> list-height: list.visible-height;
@@ -42,7 +44,7 @@ export component Main inherits Window {
     callback appended(int);
     callback category-clicked(int);
     callback move-horizontal(int);
-    callback move-vertical(int);
+    callback move-vertical(int) -> bool;
     callback accept-selection(bool);
     callback cycle-category(int);
     callback dismiss();
@@ -63,12 +65,26 @@ export component Main inherits Window {
                 return accept;
             }
             if root.settings-open { return reject; }
+            if root.categories-focused {
+                if e.text == Key.LeftArrow || e.text == Key.RightArrow {
+                    root.cycle-category(e.text == Key.LeftArrow ? -1 : 1);
+                    return accept;
+                }
+                if e.text == Key.DownArrow || e.text == Key.Return { root.categories-focused = false; return accept; }
+                if e.text == Key.UpArrow { return accept; }
+                // Any other key (typing a search, Tab...) leaves the bar.
+                root.categories-focused = false;
+            }
             if e.text == Key.Return {
                 root.accept-selection(e.modifiers.shift);
                 return accept;
             }
             if e.text == Key.DownArrow { root.move-vertical(1); return accept; }
-            if e.text == Key.UpArrow { root.move-vertical(-1); return accept; }
+            if e.text == Key.UpArrow {
+                // Up from the top row reaches the category bar (not while searching: no categories then).
+                if !root.move-vertical(-1) && root.search-text == "" { root.categories-focused = true; }
+                return accept;
+            }
             // Arrows always move through the emoji, even while typing a search.
             if e.text == Key.LeftArrow { root.move-horizontal(-1); return accept; }
             if e.text == Key.RightArrow { root.move-horizontal(1); return accept; }
@@ -82,9 +98,35 @@ export component Main inherits Window {
         }
 
         VerticalLayout {
+            // Category bar
+            HorizontalLayout {
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-top: 8px;
+                spacing: 2px;
+                for category[i] in root.categories: Rectangle {
+                    height: 34px;
+                    border-radius: 17px;
+                    border-width: root.categories-focused && i == root.active-category ? 2px : 0px;
+                    border-color: Palette.accent-background;
+                    background: i == root.active-category ? Palette.selection-background.with-alpha(0.35) : (cat-touch.has-hover ? #8883 : transparent);
+                    Image {
+                        source: category.img;
+                        width: 20px;
+                        height: 20px;
+                        opacity: i == root.active-category ? 1.0 : 0.65;
+                    }
+                    cat-touch := TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { root.category-clicked(i); }
+                    }
+                }
+            }
+
             // Search + menu
             HorizontalLayout {
                 padding: 12px;
+                padding-top: 6px;
                 spacing: 8px;
                 search-box := LineEdit {
                     placeholder-text: "Search emoji";
@@ -110,29 +152,6 @@ export component Main inherits Window {
                         stroke: Palette.foreground;
                         stroke-width: 2px;
                         stroke-line-cap: round;
-                    }
-                }
-            }
-
-            // Category bar
-            HorizontalLayout {
-                padding-left: 8px;
-                padding-right: 8px;
-                padding-bottom: 6px;
-                spacing: 2px;
-                for category[i] in root.categories: Rectangle {
-                    height: 34px;
-                    border-radius: 17px;
-                    background: i == root.active-category ? Palette.selection-background.with-alpha(0.35) : (cat-touch.has-hover ? #8883 : transparent);
-                    Image {
-                        source: category.img;
-                        width: 20px;
-                        height: 20px;
-                        opacity: i == root.active-category ? 1.0 : 0.65;
-                    }
-                    cat-touch := TouchArea {
-                        mouse-cursor: pointer;
-                        clicked => { root.category-clicked(i); }
                     }
                 }
             }

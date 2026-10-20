@@ -519,12 +519,15 @@ impl App {
         self.ensure_selected_visible();
     }
 
-    fn move_vertical(&self, direction: i32) {
+    /// Returns false when there is no row in that direction (Up on the top row moves to the category bar).
+    fn move_vertical(&self, direction: i32) -> bool {
         let target = {
             let st = self.st.borrow();
-            let Some(&row) = st.row_of.get(st.selected) else { return };
+            let Some(&row) = st.row_of.get(st.selected) else {
+                return false;
+            };
             let Some(Item::Cells { start, .. }) = st.items.get(row) else {
-                return;
+                return false;
             };
             let column = st.selected - start;
             let mut next = row as i32 + direction;
@@ -538,10 +541,10 @@ impl App {
             }
             found
         };
-        if let Some(index) = target {
-            self.set_selected(index);
-            self.ensure_selected_visible();
-        }
+        let Some(index) = target else { return false };
+        self.set_selected(index);
+        self.ensure_selected_visible();
+        true
     }
 
     fn cycle_category(&self, delta: i32) {
@@ -827,6 +830,7 @@ impl App {
         }
         ui.set_search_text("".into());
         ui.set_settings_open(false);
+        ui.set_categories_focused(false);
         let (w, h) = {
             let st = self.st.borrow();
             (st.settings.width, st.settings.height)

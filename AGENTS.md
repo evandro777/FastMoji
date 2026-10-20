@@ -56,7 +56,7 @@ System deps: `libfontconfig-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-dev
 - **Focus on show:** Muffin ignores a plain `show()`. `x11::activate` stamps `_NET_WM_USER_TIME` with the hotkey event time, calls `XSetInputFocus` and sends `_NET_ACTIVE_WINDOW` with that time. `app.rs` also retries every 100 ms until a focus-in arrives, and ignores focus-out for 300 ms after showing (re-activating instead of hiding).
 - **Paste must wait for the previous window.** We record `_NET_ACTIVE_WINDOW` before showing; after hiding we poll until that window is active **and** holds the X input focus, restoring it with a pager-style `_NET_ACTIVE_WINDOW` if the WM did not.
 - **XTEST key events must be flushed one by one (~8 ms apart) and followed by a round-trip before the connection closes.** Sending the four events back-to-back and dropping the connection made `xed` (GTK3) lose ~25% of pastes. Fixed; do not "optimize" it.
-- **Arrow keys:** Left/Right/Up/Down always move through the emoji (handled in `capture-key-pressed`), even while the search box has text.
+- **Arrow keys:** Left/Right/Up/Down always move through the emoji (handled in `capture-key-pressed`), even while the search box has text. Up on the top emoji row (no search) sets `categories-focused`: then Left/Right cycle categories and Down/Enter (or any other key) return to the grid. `move-vertical` returns false when there is no row to move to.
 - A global key can be owned by one client only; `x11::spawn_hotkey` reports `BadAccess`. The user's other tools may hold shortcuts.
 - Slint notes: use `content-y` (not `viewport-y`); a callback named `close` shadows a builtin (we use `dismiss`); `FocusScope.capture-key-pressed` is needed to intercept keys before `LineEdit`.
 
