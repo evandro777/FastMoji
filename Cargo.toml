@@ -9,7 +9,7 @@ homepage = "https://github.com/evandro777/FastMoji"
 readme = "README.md"
 keywords = ["emoji", "picker", "slint", "linux"]
 categories = ["gui"]
-rust-version = "1.88"
+rust-version = "1.92"
 publish = false
 
 [dependencies]
