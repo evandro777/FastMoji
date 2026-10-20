@@ -17,7 +17,7 @@ slint = { version = "1.18", default-features = false, features = ["std", "backen
 arboard = { version = "3", default-features = false, features = ["wayland-data-control"] }
 x11rb = { version = "0.14", features = ["xtest"] }
 serde = { version = "1", features = ["derive"] }
-toml = "0.9"
+toml = "1.1"
 raw-window-handle = "0.6"
 rustybuzz = "0.20"
 ttf-parser = "0.25"
