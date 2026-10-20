@@ -76,7 +76,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: flatpak-x86_64
       # The gh CLI on the runner instead of a third-party action: this job can write to the repo.
