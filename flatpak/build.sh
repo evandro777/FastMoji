@@ -7,6 +7,10 @@
 #        org.freedesktop.Sdk.Extension.rust-stable//25.08
 set -euo pipefail
 cd "$(dirname "$0")"
+# CI sets FLATPAK_INSTALLATION=--system: its container has the SDK installed system-wide (updating it there fails
+# on the overlay filesystem, so deps are not installed) and has no FUSE.
+installation=${FLATPAK_INSTALLATION:---user}
+if [ "$installation" = --user ]; then opts=--install-deps-from=flathub; else opts=--disable-rofiles-fuse; fi
 manifest=io.github.evandro777.FastMoji.yml
 app=io.github.evandro777.FastMoji
 devel=0; bundle=0
@@ -29,11 +33,11 @@ if [ "$devel" = 1 ]; then
 fi
 
 echo ">> building $app"
-flatpak-builder --user --install --force-clean --install-deps-from=flathub \
+flatpak-builder $installation --install --force-clean $opts \
   --state-dir=.flatpak-builder build-dir "$manifest"
 
 if [ "$bundle" = 1 ]; then
-  flatpak-builder --user --force-clean --repo=repo --state-dir=.flatpak-builder build-dir "$manifest"
+  flatpak-builder $installation $opts --force-clean --repo=repo --state-dir=.flatpak-builder build-dir "$manifest"
   flatpak build-bundle repo fastmoji.flatpak "$app"
   echo ">> wrote flatpak/fastmoji.flatpak"
 fi

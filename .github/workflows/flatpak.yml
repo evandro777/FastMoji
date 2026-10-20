@@ -22,6 +22,12 @@ jobs:
   bundle:
     name: Build bundle
     runs-on: ubuntu-24.04
+    # Flathub's CI image: the Freedesktop SDK 25.08 is preinstalled, so each run skips a ~1 GB download.
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
+      options: --privileged
+    env:
+      FLATPAK_INSTALLATION: --system
     steps:
       - uses: actions/checkout@v7
 
@@ -34,22 +40,11 @@ jobs:
           grep -q "<release version=\"$version\"" flatpak/$APP_ID.metainfo.xml \
             || { echo "metainfo has no <release> entry for $version"; exit 1; }
 
-      - uses: dtolnay/rust-toolchain@stable
-
-      - name: Flatpak tooling and SDK
+      # Its cargo also runs in the container (same SDK) and is used by build.sh to vendor the crates.
+      - name: Rust SDK extension
         run: |
-          sudo apt-get update
-          sudo apt-get install -y flatpak flatpak-builder
-          flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-          flatpak install --user -y flathub org.freedesktop.Platform//25.08 org.freedesktop.Sdk//25.08 \
-            org.freedesktop.Sdk.Extension.rust-stable//25.08
-
-      - name: Cache flatpak-builder state
-        uses: actions/cache@v6
-        with:
-          path: flatpak/.flatpak-builder
-          key: flatpak-builder-${{ hashFiles('Cargo.lock', 'flatpak/*.yml') }}
-          restore-keys: flatpak-builder-
+          flatpak install --system -y flathub org.freedesktop.Sdk.Extension.rust-stable//25.08
+          echo /var/lib/flatpak/runtime/org.freedesktop.Sdk.Extension.rust-stable/x86_64/25.08/active/files/bin >> "$GITHUB_PATH"
 
       - name: Build
         run: flatpak/build.sh --bundle
