@@ -99,7 +99,7 @@ python3 dev/lat.py y "*" <pid> 12   # open latency + RSS
 
 ## Public project, GitHub flow and Flathub
 
-- Repo: `https://github.com/evandro777/FastMoji` (this directory is the repo root). Work on branches, PRs to `main`; CI is `.github/workflows/ci.yml` (fmt, clippy `-D warnings`, tests, metainfo/desktop validation) and `flatpak.yml` (bundle on every push/PR; on a `v*` tag it publishes the bundle to the GitHub release). `RELEASING.md` has the exact steps; the tag must equal the `Cargo.toml` version and the metainfo needs a matching `<release>`.
+- Repo: `https://github.com/evandro777/FastMoji` (this directory is the repo root). Work on branches, PRs to `master`; CI is `.github/workflows/ci.yml` (fmt, clippy `-D warnings`, tests, metainfo/desktop validation) and `flatpak.yml` (bundle on every push/PR; on a `v*` tag it publishes the bundle to the GitHub release). `RELEASING.md` has the exact steps; the tag must equal the `Cargo.toml` version and the metainfo needs a matching `<release>`.
 - App id is `io.github.evandro777.FastMoji` because Flathub requires `io.github.*` for GitHub-hosted apps.
 - **Flathub policy (important for agents):** Flathub manifests must NOT contain AI-generated or AI-assisted content, AI must not open or automate submission PRs, and AI-generated code/docs must be disclosed by the submitter. So: do **not** write or paste a Flathub manifest, `cargo-sources.json` PR text, or submission PR for the owner. You may explain the process (`docs/FLATHUB.md`), keep the in-repo `flatpak/` files for local/CI builds, and keep the README's AI-assistance note accurate.
 - Formatting is enforced: `rustfmt.toml` has `max_width = 120`; clippy must be clean. Let-chains are used, so `rust-version` is 1.88.

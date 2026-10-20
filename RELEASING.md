@@ -8,7 +8,7 @@ Releases are Git tags. CI builds the Flatpak bundle and attaches it to the GitHu
 
 2. Run `cargo update -p fastmoji` if `Cargo.lock` changed, then `cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test`.
 
-3. Merge to `main` through a pull request, wait for CI.
+3. Merge to `master` through a pull request, wait for CI.
 
 4. Tag and push:
 

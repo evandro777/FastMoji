@@ -4,7 +4,7 @@ Thanks for helping. FastMoji's goals are **light and fast** and **simple**: a ch
 
 ## Workflow (GitHub flow)
 
-1. Fork or branch from `main`, make a focused change.
+1. Fork or branch from `master`, make a focused change.
 2. Run the checks locally (same as CI):
    ```bash
    cargo fmt --check
@@ -12,7 +12,7 @@ Thanks for helping. FastMoji's goals are **light and fast** and **simple**: a ch
    cargo test
    ```
 3. Open a pull request. CI must be green (it also builds the Flatpak). Describe what changed and, for UI or X11 behaviour, how you tested it.
-4. `main` stays releasable; releases are tags (see `RELEASING.md`).
+4. `master` stays releasable; releases are tags (see `RELEASING.md`).
 
 ## Building
 

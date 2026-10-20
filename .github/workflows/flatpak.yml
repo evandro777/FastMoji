@@ -1,10 +1,10 @@
 name: Flatpak
 
-# Builds the Flatpak bundle on every push to main and on pull requests, and publishes it as a
+# Builds the Flatpak bundle on every push to master and on pull requests, and publishes it as a
 # GitHub release asset when a version tag (v0.2.0, ...) is pushed.
 on:
   push:
-    branches: [main]
+    branches: [master]
     tags: ["v*"]
   pull_request:
 
