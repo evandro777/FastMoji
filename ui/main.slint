@@ -1,0 +1,279 @@
+import { Button, ComboBox, LineEdit, ListView, Palette, Switch } from "std-widgets.slint";
+
+export struct Cell { img: image, index: int }
+// A title row has a non-empty `title`; otherwise it is a row of emoji cells.
+export struct Line { title: string, cells: [Cell] }
+export struct Category { img: image, label: string }
+
+export component Main inherits Window {
+    title: "FastMoji";
+    min-width: 356px;
+    min-height: 300px;
+    preferred-width: 515px;
+    preferred-height: 500px;
+
+    in property <[Line]> lines;
+    in property <[Category]> categories;
+    in property <int> active-category;
+    in property <length> cell: 42px;
+    in property <length> emoji-px: 28px;
+    in property <int> selected-index: -1;
+    in property <image> preview-img;
+    in property <string> preview-name;
+    in property <[image]> chosen;
+    in property <string> chosen-more;
+    in property <int> tone;
+    in property <int> size-choice;
+    in property <bool> auto-paste;
+    in property <bool> keep-resident;
+    in property <bool> resident-locked;
+    in property <string> shortcut-label;
+    in property <string> shortcut-error;
+    in-out property <bool> settings-open;
+    in-out property <string> search-text;
+    in-out property <length> scroll-y <=> list.content-y;
+    out property <length> list-height: list.visible-height;
+
+    callback search(string);
+    callback width-changed(length);
+    callback scrolled();
+    callback hovered(int);
+    callback picked(int);
+    callback appended(int);
+    callback category-clicked(int);
+    callback move-horizontal(int);
+    callback move-vertical(int);
+    callback accept-selection(bool);
+    callback cycle-category(int);
+    callback dismiss();
+    callback quit();
+    callback set-tone(int);
+    callback set-size(int);
+    callback set-auto-paste(bool);
+    callback set-keep-resident(bool);
+
+    public function focus-search() {
+        search-box.focus();
+    }
+
+    FocusScope {
+        capture-key-pressed(e) => {
+            if e.text == Key.Escape {
+                if root.settings-open { root.settings-open = false; } else { root.dismiss(); }
+                return accept;
+            }
+            if root.settings-open { return reject; }
+            if e.text == Key.Return {
+                root.accept-selection(e.modifiers.shift);
+                return accept;
+            }
+            if e.text == Key.DownArrow { root.move-vertical(1); return accept; }
+            if e.text == Key.UpArrow { root.move-vertical(-1); return accept; }
+            // Arrows always move through the emoji, even while typing a search.
+            if e.text == Key.LeftArrow { root.move-horizontal(-1); return accept; }
+            if e.text == Key.RightArrow { root.move-horizontal(1); return accept; }
+            if e.modifiers.control && (e.text == "f" || e.text == "F") { search-box.focus(); return accept; }
+            if e.modifiers.control && e.text == Key.Tab {
+                root.cycle-category(e.modifiers.shift ? -1 : 1);
+                return accept;
+            }
+            if e.text == Key.Backtab { root.cycle-category(-1); return accept; }
+            return reject;
+        }
+
+        VerticalLayout {
+            // Search + menu
+            HorizontalLayout {
+                padding: 12px;
+                spacing: 8px;
+                search-box := LineEdit {
+                    placeholder-text: "Search emoji";
+                    text <=> root.search-text;
+                    edited(text) => { root.search(text); }
+                }
+                Button {
+                    text: "Settings";
+                    clicked => { root.settings-open = true; }
+                }
+            }
+
+            // Category bar
+            HorizontalLayout {
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-bottom: 6px;
+                spacing: 2px;
+                for category[i] in root.categories: Rectangle {
+                    height: 34px;
+                    border-radius: 17px;
+                    background: i == root.active-category ? Palette.selection-background.with-alpha(0.35) : (cat-touch.has-hover ? #8883 : transparent);
+                    Image {
+                        source: category.img;
+                        width: 20px;
+                        height: 20px;
+                        opacity: i == root.active-category ? 1.0 : 0.65;
+                    }
+                    cat-touch := TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { root.category-clicked(i); }
+                    }
+                }
+            }
+
+            Rectangle {
+                height: 1px;
+                background: Palette.border;
+            }
+
+            list := ListView {
+                vertical-stretch: 1;
+                changed width => { root.width-changed(self.width); }
+                changed content-y => { root.scrolled(); }
+                init => { root.width-changed(self.width); }
+
+                for line in root.lines: Rectangle {
+                    height: root.cell;
+                    if line.title != "": Text {
+                        x: 12px;
+                        text: line.title;
+                        font-size: 13px;
+                        font-weight: 600;
+                        vertical-alignment: center;
+                        color: Palette.foreground.with-alpha(0.7);
+                    }
+                    if line.title == "": HorizontalLayout {
+                        padding-left: 6px;
+                        alignment: start;
+                        for e in line.cells: Rectangle {
+                            width: root.cell;
+                            height: root.cell;
+                            border-radius: 8px;
+                            background: e.index == root.selected-index ? Palette.selection-background.with-alpha(0.35) : transparent;
+                            Image {
+                                source: e.img;
+                                width: root.emoji-px;
+                                height: root.emoji-px;
+                            }
+                            touch := TouchArea {
+                                changed has-hover => {
+                                    if self.has-hover { root.hovered(e.index); }
+                                }
+                                pointer-event(ev) => {
+                                    if ev.kind == PointerEventKind.up {
+                                        if ev.button == PointerEventButton.left { root.picked(e.index); }
+                                        if ev.button == PointerEventButton.right { root.appended(e.index); }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                height: 1px;
+                background: Palette.border;
+            }
+
+            // Preview + multi-select strip
+            HorizontalLayout {
+                padding: 10px;
+                spacing: 12px;
+                height: 56px;
+                Image {
+                    source: root.preview-img;
+                    width: 36px;
+                    height: 36px;
+                    y: 0px;
+                }
+                Text {
+                    text: root.preview-name;
+                    font-size: 14px;
+                    font-weight: 600;
+                    overflow: elide;
+                    vertical-alignment: center;
+                    horizontal-stretch: 1;
+                }
+                Text {
+                    visible: root.chosen-more != "";
+                    text: root.chosen-more;
+                    color: Palette.foreground.with-alpha(0.6);
+                    vertical-alignment: center;
+                }
+                for img in root.chosen: Image {
+                    source: img;
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+        }
+    }
+
+    if root.settings-open: Rectangle {
+        background: #0008;
+        TouchArea { clicked => { root.settings-open = false; } }
+        Rectangle {
+            width: min(root.width - 40px, 340px);
+            height: min(root.height - 20px, 345px);
+            background: Palette.background;
+            border-radius: 10px;
+            border-width: 1px;
+            border-color: Palette.border;
+            TouchArea { }
+            VerticalLayout {
+                padding: 18px;
+                spacing: 14px;
+                Text { text: "Preferences"; font-size: 16px; font-weight: 700; }
+                HorizontalLayout {
+                    spacing: 12px;
+                    Text { text: "Skin tone"; vertical-alignment: center; horizontal-stretch: 1; }
+                    ComboBox {
+                        model: ["Default", "Light", "Medium-light", "Medium", "Medium-dark", "Dark"];
+                        current-index: root.tone;
+                        selected => { root.set-tone(self.current-index); }
+                    }
+                }
+                HorizontalLayout {
+                    spacing: 12px;
+                    Text { text: "Emoji size"; vertical-alignment: center; horizontal-stretch: 1; }
+                    ComboBox {
+                        model: ["Small (20 px)", "Compact (24 px)", "Default (28 px)", "Large (32 px)", "Extra large (36 px)"];
+                        current-index: root.size-choice;
+                        selected => { root.set-size(self.current-index); }
+                    }
+                }
+                HorizontalLayout {
+                    spacing: 12px;
+                    Text { text: "Automatic paste"; vertical-alignment: center; horizontal-stretch: 1; }
+                    Switch {
+                        checked: root.auto-paste;
+                        toggled => { root.set-auto-paste(self.checked); }
+                    }
+                }
+                HorizontalLayout {
+                    spacing: 12px;
+                    Text { text: "Keep FastMoji in memory"; vertical-alignment: center; horizontal-stretch: 1; }
+                    Switch {
+                        checked: root.keep-resident;
+                        enabled: !root.resident-locked;
+                        toggled => { root.set-keep-resident(self.checked); }
+                    }
+                }
+                Text {
+                    wrap: word-wrap;
+                    font-size: 11px;
+                    color: root.keep-resident && root.shortcut-error == "" ? Palette.foreground.with-alpha(0.6) : #e5a50a;
+                    text: root.resident-locked ? "Always on in this session (the clipboard needs it)."
+                        : (root.keep-resident ? (root.shortcut-error != "" ? root.shortcut-error : "Required for the " + root.shortcut-label + " shortcut. Opens instantly and uses a little memory.")
+                        : "Warning: " + root.shortcut-label + " is disabled while this is off. Open FastMoji with your own shortcut that runs `fastmoji`.");
+                }
+                HorizontalLayout {
+                    spacing: 8px;
+                    alignment: end;
+                    Button { text: "Quit FastMoji"; clicked => { root.quit(); } }
+                    Button { text: "Close"; primary: true; clicked => { root.settings-open = false; } }
+                }
+            }
+        }
+    }
+}

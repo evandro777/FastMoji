@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.evandro777.FastMoji</id>
+  <name>FastMoji</name>
+  <summary>Light and fast popup emoji picker</summary>
+
+  <url type="homepage">https://github.com/evandro777/FastMoji</url>
+  <url type="bugtracker">https://github.com/evandro777/FastMoji/issues</url>
+  <url type="vcs-browser">https://github.com/evandro777/FastMoji</url>
+  <url type="contribute">https://github.com/evandro777/FastMoji/blob/main/CONTRIBUTING.md</url>
+
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer id="io.github.evandro777">
+    <name translatable="no">evandro777</name>
+  </developer>
+
+  <description>
+    <p>
+      FastMoji is a popup emoji picker for Linux built to be light and fast: written in Rust with Slint,
+      it opens in a few milliseconds and uses a fraction of the memory of a typical toolkit-based picker.
+      It is inspired by the Emote emoji picker.
+    </p>
+    <p>
+      On X11, press Ctrl+Alt+E (configurable) to open the picker. Selected emojis are copied to the clipboard
+      and, when automatic paste is enabled, pasted into the app you were using.
+    </p>
+    <ul>
+      <li>Search as you type, browse by category, and see your recent emojis first</li>
+      <li>Navigate with the arrow keys, Enter to select, Shift+Enter to build a multi-emoji selection</li>
+      <li>Skin tone and emoji size preferences</li>
+      <li>Optional: exit when closed to use no memory in the background</li>
+    </ul>
+    <p>
+      On Wayland, global shortcuts and automatic paste are not available yet: bind a desktop shortcut to the
+      command "fastmoji --toggle". Emojis are still copied to the clipboard.
+    </p>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/evandro777/FastMoji/main/docs/screenshots/picker.png</image>
+      <caption>Recent emojis and categories</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/evandro777/FastMoji/main/docs/screenshots/search.png</image>
+      <caption>Instant search, navigated with the arrow keys</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/evandro777/FastMoji/main/docs/screenshots/preferences.png</image>
+      <caption>Preferences, including keeping FastMoji out of memory</caption>
+    </screenshot>
+  </screenshots>
+
+  <launchable type="desktop-id">io.github.evandro777.FastMoji.desktop</launchable>
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-10-16">
+      <description>
+        <p>First release.</p>
+      </description>
+    </release>
+  </releases>
+</component>

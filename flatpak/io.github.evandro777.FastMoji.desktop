@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=FastMoji
+Type=Application
+GenericName=Emoji picker
+Comment=Light and fast popup emoji picker
+Exec=fastmoji
+Categories=Utility;
+Keywords=emoji;smiley;emoticon;icon;
+Icon=io.github.evandro777.FastMoji
+Terminal=false
+StartupNotify=false

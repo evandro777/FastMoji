@@ -1,0 +1,49 @@
+app-id: io.github.evandro777.FastMoji
+runtime: org.freedesktop.Platform
+runtime-version: "25.08"
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: fastmoji
+
+# Wayland is used when available; otherwise X11, where the global shortcut and paste work.
+# No filesystem, D-Bus or GPU access is needed (software rendering, settings in the app data dir).
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+
+modules:
+  - name: fastmoji
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        CARGO_HOME: /run/build/fastmoji/cargo
+    build-commands:
+      - cargo build --release --offline --locked
+      - install -Dm755 target/release/fastmoji ${FLATPAK_DEST}/bin/fastmoji
+      - install -Dm644 flatpak/io.github.evandro777.FastMoji.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 flatpak/io.github.evandro777.FastMoji.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 flatpak/io.github.evandro777.FastMoji.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      # A development build (app-id ...FastMoji.Devel) must not collide with an installed release.
+      - sed -i "s/io\\.github\\.evandro777\\.FastMoji/${FLATPAK_ID}/g" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - case "${FLATPAK_ID}" in *.Devel) sed -i "s/^Name=FastMoji$/Name=FastMoji (Devel)/" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop ;; esac
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - target
+          - dev
+          - flatpak/build-dir
+          - flatpak/devel
+          - flatpak/.flatpak-builder
+          - flatpak/vendor
+      # Crates are vendored by flatpak/build.sh, because the build runs without network access.
+      - type: dir
+        path: vendor
+        dest: vendor
+      - type: file
+        path: cargo-config.toml
+        dest: .cargo
+        dest-filename: config.toml

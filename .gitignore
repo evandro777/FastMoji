@@ -1,0 +1,23 @@
+target/
+dev/*.png
+dev/*.log
+dev/*.pid
+__pycache__/
+
+# Flatpak
+flatpak/vendor/
+flatpak/build-dir/
+flatpak/.flatpak-builder/
+flatpak/repo/
+flatpak/*.flatpak
+flatpak/io.github.evandro777.FastMoji.Devel.yml
+flatpak/devel/
+
+# Local test harness output
+dev/data/
+dev/run/
+dev/__pycache__/
+dev/scratch.txt
+dev/*.png
+dev/*.log
+dev/*.pid

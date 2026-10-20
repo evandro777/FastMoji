@@ -1,0 +1,42 @@
+[package]
+name = "fastmoji"
+version = "0.1.0"
+edition = "2024"
+description = "Light and fast emoji picker built in Rust with Slint."
+license = "GPL-3.0-or-later"
+repository = "https://github.com/evandro777/FastMoji"
+homepage = "https://github.com/evandro777/FastMoji"
+readme = "README.md"
+keywords = ["emoji", "picker", "slint", "linux"]
+categories = ["gui"]
+rust-version = "1.88"
+publish = false
+
+[dependencies]
+slint = { version = "1.18", default-features = false, features = ["std", "backend-winit", "renderer-software", "software-renderer-systemfonts", "compat-1-2", "unstable-winit-030"] }
+arboard = { version = "3", default-features = false, features = ["wayland-data-control"] }
+x11rb = { version = "0.14", features = ["xtest"] }
+serde = { version = "1", features = ["derive"] }
+toml = "0.9"
+raw-window-handle = "0.6"
+rustybuzz = "0.20"
+ttf-parser = "0.25"
+png = "0.18"
+
+[build-dependencies]
+slint-build = "1.18"
+csv = "1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 4
+panic = "abort"
+strip = true
+opt-level = 3
+
+# Quick iteration: `cargo build --profile fast` (no LTO, parallel codegen).
+[profile.fast]
+inherits = "release"
+lto = false
+codegen-units = 16
+incremental = true
