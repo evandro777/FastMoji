@@ -93,9 +93,35 @@ fn keycodes(conn: &impl Connection, keysyms: &[u32]) -> Result<Vec<u8>> {
         .collect()
 }
 
+/// The unshifted character on the physical key that produces `c` in the current layout (`{` -> `7` on layouts
+/// where AltGr+7 gives `{`; Ctrl+Alt is AltGr there). Lets the recorder name keys independently of Ctrl/Alt/Shift.
+pub fn base_key(c: char) -> Option<char> {
+    let (conn, _) = x11rb::connect(None).ok()?;
+    let setup = conn.setup();
+    let (min, max) = (setup.min_keycode, setup.max_keycode);
+    let map = conn.get_keyboard_mapping(min, max - min + 1).ok()?.reply().ok()?;
+    let per = map.keysyms_per_keycode as usize;
+    let keysym = c as u32;
+    let first = map.keysyms.chunks(per).find(|k| k.contains(&keysym))?[0];
+    char::from_u32(first).filter(char::is_ascii_graphic)
+}
+
+/// A grabbed shortcut. `release` frees the key combination; the idle listener thread stays blocked on its socket.
+pub struct Hotkey {
+    conn: Arc<RustConnection>,
+    root: u32,
+}
+
+impl Hotkey {
+    pub fn release(&self) {
+        let _ = self.conn.ungrab_key(0, self.root, ModMask::ANY);
+        let _ = self.conn.flush();
+    }
+}
+
 /// Grab the shortcut on its own thread (blocking on the X socket, no polling) and call
 /// `on_press` with the event timestamp. Returns an error text if the combination is taken.
-pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> std::result::Result<(), String> {
+pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> std::result::Result<Hotkey, String> {
     let (mods, keysym) = parse_shortcut(shortcut).ok_or_else(|| format!("cannot parse shortcut {shortcut:?}"))?;
     let (conn, screen) = x11rb::connect(None).map_err(|e| e.to_string())?;
     let root = conn.setup().roots[screen].root;
@@ -112,17 +138,19 @@ pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> 
             .map_err(|e| e.to_string())?;
         cookie
             .check()
-            .map_err(|e| format!("another application owns {shortcut}: {e}"))?;
+            .map_err(|_| format!("{shortcut} is already used by another application."))?;
     }
     conn.flush().map_err(|e| e.to_string())?;
+    let conn = Arc::new(conn);
+    let listener = conn.clone();
     std::thread::spawn(move || {
-        while let Ok(event) = conn.wait_for_event() {
+        while let Ok(event) = listener.wait_for_event() {
             if let Event::KeyPress(ev) = event {
                 on_press(ev.time);
             }
         }
     });
-    Ok(())
+    Ok(Hotkey { conn, root })
 }
 
 /// Terminals that paste with Ctrl+Shift+V (plain Ctrl+V reaches the shell as a control character).

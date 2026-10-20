@@ -106,4 +106,4 @@ python3 dev/lat.py y "*" <pid> 12   # open latency + RSS
 
 ## Open items
 
-Flatpak build verification; in-app shortcut recorder (the shortcut is edited in `settings.toml` and needs a restart); autostart (Background portal); About dialog; Wayland probe; first real run of the Flatpak CI workflow (untested until pushed); the owner's hand-written Flathub submission.
+Flatpak build verification; autostart (Background portal); About dialog; Wayland probe; first real run of the Flatpak CI workflow (untested until pushed); the owner's hand-written Flathub submission.

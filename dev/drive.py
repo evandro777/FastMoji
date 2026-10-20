@@ -26,7 +26,7 @@ def find_window(klass="fastmoji", min_w=200):
                 return g['Absolute upper-left X'], g['Absolute upper-left Y'], g['Width'], g['Height']
 def shot(path, win):
     x, y, w, h = win
-    subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-f', 'x11grab', '-video_size', f'{w}x{h}',
+    subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-f', 'x11grab', '-draw_mouse', '0', '-video_size', f'{w}x{h}',
                     '-i', f':0.0+{x},{y}', '-frames:v', '1', path])
 
 def find_window_by_title(fragment, min_w=200):

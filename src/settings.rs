@@ -22,7 +22,7 @@ pub struct Settings {
     /// Keep the process running when the picker is closed (needed for the global shortcut).
     /// When false, FastMoji exits after closing, as soon as nothing needs the clipboard any more.
     pub keep_resident: bool,
-    /// e.g. "Ctrl+Alt+E". Applied at start-up; restart to change.
+    /// e.g. "Ctrl+Alt+.". Also editable in Preferences.
     pub shortcut: String,
     pub width: u32,
     pub height: u32,
@@ -36,7 +36,7 @@ impl Default for Settings {
             emoji_size: 28,
             auto_paste: true,
             keep_resident: true,
-            shortcut: "Ctrl+Alt+E".into(),
+            shortcut: "Ctrl+Alt+.".into(),
             width: 515,
             height: 500,
         }

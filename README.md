@@ -22,7 +22,7 @@ FastMoji is inspired by [Emote](https://github.com/tom-james-watson/Emote) by To
 - Keyboard first: arrows (also while typing), `Enter` copy and paste, `Shift+Enter` build a multi-emoji selection, `Ctrl+F` search, `Ctrl+Tab` categories (or `Up` from the top row to reach the category bar, then `Left`/`Right`, `Down` to go back), `Esc` close
 - Click copies and pastes, right click adds to the selection
 - Skin tone, emoji size and automatic paste preferences
-- Global shortcut (default `Ctrl+Alt+E`) on X11
+- Global shortcut (default `Ctrl+Alt+.`) on X11
 - Optional: **do not stay in memory** (see below)
 - Follows the desktop's light/dark theme
 
@@ -82,7 +82,7 @@ flatpak run io.github.evandro777.FastMoji.Devel
 `~/.local/share/FastMoji/settings.toml` (written by the Preferences panel):
 
 ```toml
-shortcut = "Ctrl+Alt+E"   # X11 global shortcut, applied at start (e.g. "Ctrl+Alt+period", "Super+F2", "Ctrl+Alt+Tab"; keys: letters, digits, F1-F12, Tab, Return, space, period, comma, minus)
+shortcut = "Ctrl+Alt+."   # X11 global shortcut, also set in Preferences by clicking the button and pressing the keys (e.g. "Ctrl+Alt+E", "Super+F2", "Ctrl+Alt+Tab"; keys: letters, digits, F1-F12, Tab, Return, space, period, comma, minus)
 keep_resident = true      # see below
 auto_paste = true
 skin_tone = 0             # 0 = default, 1..5
@@ -93,7 +93,7 @@ emoji_size = 28           # 20, 24, 28, 32 or 36
 
 By default FastMoji stays resident, so it opens instantly and the global shortcut works. In *Preferences → Keep FastMoji in memory* (or `keep_resident = false`) you can turn that off:
 
-- FastMoji exits as soon as the picker is closed, so **the global shortcut no longer works**. Open it with your own desktop shortcut that runs `fastmoji` (for example Super+Y in Cinnamon's keyboard settings).
+- FastMoji exits as soon as the picker is closed, so **the global shortcut no longer works**. Open it with your own desktop shortcut that runs `fastmoji` (for example Super+Y in Cinnamon's keyboard settings). This is still very fast: you can skip the built-in shortcut entirely, bind `fastmoji` in your desktop environment's keyboard settings and leave "Keep FastMoji in memory" off, so nothing stays in RAM between uses.
 - After you pick an emoji and it is pasted, FastMoji exits at once. The clipboard then belongs to nobody, so the emoji stays available only if a clipboard manager (CopyQ, ...) keeps it. If nothing was pasted (automatic paste off), FastMoji waits for *your* paste: it exits shortly after another application reads the clipboard (clipboard managers reading it in the first second are ignored), as soon as the clipboard is replaced, or after 5 minutes.
 - On Wayland the setting is locked on, because the clipboard needs the process.
 

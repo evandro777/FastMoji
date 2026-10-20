@@ -53,6 +53,11 @@ export component Main inherits Window {
     callback set-size(int);
     callback set-auto-paste(bool);
     callback set-keep-resident(bool);
+    callback record-key(string, bool, bool, bool, bool) -> bool;
+    pure callback held-text(bool, bool, bool, bool) -> string;
+    in-out property <bool> recording-shortcut;
+    // Modifiers currently held while recording, for the live label.
+    in-out property <[bool]> held: [false, false, false, false];
 
     public function focus-search() {
         search-box.focus();
@@ -60,6 +65,13 @@ export component Main inherits Window {
 
     FocusScope {
         capture-key-pressed(e) => {
+            if root.recording-shortcut {
+                root.held = [e.modifiers.control, e.modifiers.alt, e.modifiers.shift, e.modifiers.meta];
+                if e.text == Key.Escape || root.record-key(e.text, e.modifiers.control, e.modifiers.alt, e.modifiers.shift, e.modifiers.meta) {
+                    root.recording-shortcut = false;
+                }
+                return accept;
+            }
             if e.text == Key.Escape {
                 if root.settings-open { root.settings-open = false; } else { root.dismiss(); }
                 return accept;
@@ -94,6 +106,20 @@ export component Main inherits Window {
                 return accept;
             }
             if e.text == Key.Backtab { root.cycle-category(-1); return accept; }
+            return reject;
+        }
+
+        capture-key-released(e) => {
+            if root.recording-shortcut {
+                // The released modifier may still be set in the event, so clear it by key.
+                root.held = [
+                    e.modifiers.control && e.text != Key.Control && e.text != Key.ControlR,
+                    e.modifiers.alt && e.text != Key.Alt && e.text != Key.AltGr,
+                    e.modifiers.shift && e.text != Key.Shift && e.text != Key.ShiftR,
+                    e.modifiers.meta && e.text != Key.Meta && e.text != Key.MetaR,
+                ];
+                return accept;
+            }
             return reject;
         }
 
@@ -247,7 +273,7 @@ export component Main inherits Window {
 
     if root.settings-open: Rectangle {
         background: #0008;
-        TouchArea { clicked => { root.settings-open = false; } }
+        TouchArea { clicked => { root.recording-shortcut = false; root.settings-open = false; } }
         Rectangle {
             width: min(root.width - 40px, 340px);
             height: min(root.height - 20px, 345px);
@@ -295,6 +321,16 @@ export component Main inherits Window {
                         toggled => { root.set-keep-resident(self.checked); }
                     }
                 }
+                HorizontalLayout {
+                    spacing: 12px;
+                    Text { text: "Shortcut"; vertical-alignment: center; horizontal-stretch: 1; }
+                    Button {
+                        width: 190px;
+                        text: root.recording-shortcut ? root.held-text(root.held[0], root.held[1], root.held[2], root.held[3]) : root.shortcut-label;
+                        enabled: root.keep-resident;
+                        clicked => { root.held = [false, false, false, false]; root.recording-shortcut = true; }
+                    }
+                }
                 Text {
                     wrap: word-wrap;
                     font-size: 11px;
@@ -307,7 +343,7 @@ export component Main inherits Window {
                     spacing: 8px;
                     alignment: end;
                     Button { text: "Quit FastMoji"; clicked => { root.quit(); } }
-                    Button { text: "Close"; primary: true; clicked => { root.settings-open = false; } }
+                    Button { text: "Close"; primary: true; clicked => { root.recording-shortcut = false; root.settings-open = false; } }
                 }
             }
         }

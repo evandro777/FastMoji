@@ -37,6 +37,51 @@ const CATEGORY_PX: f32 = 20.0;
 const PREVIEW_PX: f32 = 36.0;
 const CHOSEN_PX: f32 = 24.0;
 
+/// "Ctrl+Alt+." from a key press, or None for a lone modifier or a key the shortcut parser does not know.
+/// `mods` is [ctrl, alt, shift, meta]; at least one is required (a bare key would steal normal typing).
+fn shortcut_from_key(text: &str, mods: [bool; 4]) -> Option<String> {
+    let mut chars = text.chars();
+    let c = chars.next().filter(|_| chars.next().is_none())?;
+    let key = match c {
+        ' ' => "space".to_string(),
+        '\t' => "Tab".into(),
+        '\r' | '\n' => "Return".into(),
+        // Slint reports F1..F12 as private-use characters.
+        '\u{f704}'..='\u{f70f}' => format!("F{}", c as u32 - 0xf704 + 1),
+        c if c.is_ascii_alphanumeric() => c.to_ascii_uppercase().to_string(),
+        '.' | ',' | '-' => c.to_string(),
+        _ => return None,
+    };
+    let mut parts: Vec<&str> = MODIFIER_NAMES
+        .iter()
+        .zip(mods)
+        .filter(|(_, on)| *on)
+        .map(|(n, _)| *n)
+        .collect();
+    if parts.is_empty() {
+        return None;
+    }
+    parts.push(&key);
+    Some(parts.join("+"))
+}
+
+const MODIFIER_NAMES: [&str; 4] = ["Ctrl", "Alt", "Shift", "Super"];
+
+/// Live label while recording: "Ctrl + Alt + …", or the prompt when nothing is held.
+fn held_text(mods: [bool; 4]) -> String {
+    let held: Vec<&str> = MODIFIER_NAMES
+        .iter()
+        .zip(mods)
+        .filter(|(_, on)| *on)
+        .map(|(n, _)| *n)
+        .collect();
+    if held.is_empty() {
+        "Press keys… (Esc cancels)".into()
+    } else {
+        format!("{} + …", held.join(" + "))
+    }
+}
+
 fn debug(message: impl FnOnce() -> String) {
     static ON: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
     if *ON.get_or_init(|| std::env::var_os("FASTMOJI_DEBUG").is_some()) {
@@ -299,7 +344,7 @@ struct App {
     exit_polls: StdCell<u32>,
     exit_read_at: StdCell<Option<u32>>,
     exit_timer: Timer,
-    hotkey_started: StdCell<bool>,
+    hotkey: RefCell<Option<x11::Hotkey>>,
     shown_at: StdCell<Option<Instant>>,
     last_time: StdCell<u32>,
     ignore_scroll_until: StdCell<Instant>,
@@ -777,13 +822,13 @@ impl App {
     }
 
     fn start_hotkey(&self) {
-        if !self.x11 || self.hotkey_started.get() {
+        if !self.x11 || self.hotkey.borrow().is_some() {
             return;
         }
         let shortcut = self.st.borrow().settings.shortcut.clone();
         match x11::spawn_hotkey(&shortcut, |time| post(move |app| app.toggle(time))) {
-            Ok(()) => {
-                self.hotkey_started.set(true);
+            Ok(hotkey) => {
+                *self.hotkey.borrow_mut() = Some(hotkey);
                 self.ui().set_shortcut_error("".into());
             }
             Err(e) => {
@@ -792,6 +837,31 @@ impl App {
                     .set_shortcut_error(format!("Shortcut unavailable: {e}").into());
             }
         }
+    }
+
+    /// Switch the global shortcut; on failure the previous one is grabbed again and stays in the settings.
+    fn change_shortcut(&self, text: &str) {
+        let text = text.trim();
+        if self.x11 && x11::parse_shortcut(text).is_none() {
+            self.ui()
+                .set_shortcut_error(format!("Cannot parse {text:?}. Example: Ctrl+Alt+.").into());
+            return;
+        }
+        let old = std::mem::replace(&mut self.st.borrow_mut().settings.shortcut, text.to_string());
+        if let Some(hotkey) = self.hotkey.borrow_mut().take() {
+            hotkey.release();
+        }
+        if self.resident() {
+            self.start_hotkey();
+        }
+        let error = self.ui().get_shortcut_error();
+        if !error.is_empty() {
+            self.st.borrow_mut().settings.shortcut = old;
+            self.start_hotkey();
+            self.ui().set_shortcut_error(error);
+        }
+        self.st.borrow().settings.save();
+        self.sync();
     }
 
     fn accept_selection(&self, shift: bool) {
@@ -806,7 +876,10 @@ impl App {
     // ---- window lifecycle -----------------------------------------------------------------
 
     fn toggle(&self, time: u32) {
-        if self.ui().window().is_visible() {
+        // The grab swallows the current shortcut while recording: pressing it again means "keep it".
+        if self.ui().get_recording_shortcut() {
+            self.ui().set_recording_shortcut(false);
+        } else if self.ui().window().is_visible() {
             self.hide()
         } else {
             self.open(time)
@@ -850,6 +923,7 @@ impl App {
     fn hide(&self) {
         debug(|| "hide".into());
         let ui = self.ui();
+        ui.set_recording_shortcut(false);
         let window = ui.window();
         if window.is_visible() {
             let size = window.size().to_logical(window.scale_factor());
@@ -983,7 +1057,7 @@ pub fn run(show: bool, command: &str) {
         exit_polls: StdCell::new(0),
         exit_read_at: StdCell::new(None),
         exit_timer: Timer::default(),
-        hotkey_started: StdCell::new(false),
+        hotkey: RefCell::new(None),
         shown_at: StdCell::new(None),
         last_time: StdCell::new(0),
         ignore_scroll_until: StdCell::new(Instant::now()),
@@ -1052,6 +1126,26 @@ pub fn run(show: bool, command: &str) {
         }
         app.sync();
     });
+    ui.on_record_key({
+        let app = app.clone();
+        move |text, ctrl, alt, shift, meta| {
+            let mut text = text.to_string();
+            if app.x11
+                && let Some(c) = text.chars().next().filter(|_| text.chars().count() == 1)
+                && let Some(base) = x11::base_key(c)
+            {
+                text = base.to_string();
+            }
+            match shortcut_from_key(&text, [ctrl, alt, shift, meta]) {
+                Some(shortcut) => {
+                    app.change_shortcut(&shortcut);
+                    true
+                }
+                None => false,
+            }
+        }
+    });
+    ui.on_held_text(|ctrl, alt, shift, meta| held_text([ctrl, alt, shift, meta]).into());
     ui.on_quit(|| {
         let _ = slint::quit_event_loop();
     });
@@ -1102,6 +1196,20 @@ pub fn run(show: bool, command: &str) {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn records_shortcuts() {
+        use super::shortcut_from_key as key;
+        assert_eq!(key(".", [true, true, false, false]).as_deref(), Some("Ctrl+Alt+."));
+        assert_eq!(key("e", [true, false, true, false]).as_deref(), Some("Ctrl+Shift+E"));
+        assert_eq!(
+            key("\u{f708}", [false, false, false, true]).as_deref(),
+            Some("Super+F5")
+        );
+        assert_eq!(super::held_text([true, true, false, false]), "Ctrl + Alt + …");
+        assert_eq!(key("a", [false; 4]), None, "needs a modifier");
+        assert_eq!(key("\u{11}", [true, false, false, false]), None, "lone modifier");
+    }
+
     use super::*;
 
     const SEC: Duration = Duration::from_secs(1);

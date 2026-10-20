@@ -22,7 +22,7 @@
       It is inspired by the Emote emoji picker.
     </p>
     <p>
-      On X11, press Ctrl+Alt+E (configurable) to open the picker. Selected emojis are copied to the clipboard
+      On X11, press Ctrl+Alt+. (configurable) to open the picker. Selected emojis are copied to the clipboard
       and, when automatic paste is enabled, pasted into the app you were using.
     </p>
     <ul>
