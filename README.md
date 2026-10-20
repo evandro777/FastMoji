@@ -119,7 +119,7 @@ Adjust `ExecStart` to where `fastmoji` is installed (for the Flatpak use `flatpa
 ## How it is built
 
 - **Rust + Slint** with the winit backend and the **software renderer** (no GPU/GL context, which is where most of the memory of a toolkit app goes).
-- **Emoji drawn as images**: the software renderer cannot draw the bitmap (CBDT) Noto font, so `src/glyphs.rs` shapes each emoji (`rustybuzz`), reads its PNG from the font (`ttf-parser`, `png`) and downsizes it. Only the visible rows are decoded.
+- **Emoji drawn as images**: the software renderer cannot draw the bitmap (CBDT) Noto font, so `src/glyphs.rs` shapes each emoji (`rustybuzz`), reads its PNG from the font (`ttf-parser`, `png`) and downsizes it to the exact pixel size it is shown at, so it stays sharp. Only the visible rows are decoded.
 - **Emoji data baked in** by `build.rs` from `assets/emojis.csv`; search is a substring match over precomputed lowercase terms.
 - **X11 through `x11rb`**: `XGrabKey` hotkey, XTEST Ctrl+V paste (Ctrl+Shift+V when the previous window is a known terminal), EWMH focus hand-over, and a small clipboard owner that knows when another app takes the clipboard.
 - **Single instance** through a Unix socket; the daemon shows/hides one window.

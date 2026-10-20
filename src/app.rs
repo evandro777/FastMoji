@@ -32,6 +32,10 @@ const HOLD_GRACE: Duration = Duration::from_millis(400);
 /// How long to keep an unpasted copy alive before giving up and exiting.
 const HOLD_MAX: Duration = Duration::from_secs(300);
 const CELL_PADDING: f32 = 14.0;
+/// Image sizes used in `ui/main.slint`; images are rendered at exactly these (times the scale).
+const CATEGORY_PX: f32 = 20.0;
+const PREVIEW_PX: f32 = 36.0;
+const CHOSEN_PX: f32 = 24.0;
 
 fn debug(message: impl FnOnce() -> String) {
     static ON: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
@@ -254,7 +258,7 @@ impl Model for RowsModel {
                     .map(|d| {
                         let ch = emojis::char_for(st.display[d], st.settings.skin_tone);
                         Cell {
-                            img: self.glyphs.image(ch),
+                            img: self.glyphs.image(ch, st.settings.emoji_size as f32),
                             index: d as i32,
                         }
                     })
@@ -325,6 +329,27 @@ impl App {
         self.sync();
     }
 
+    fn set_categories(&self) {
+        let categories: Vec<Category> = emojis::CATEGORIES
+            .iter()
+            .map(|(_, label, icon)| Category {
+                img: self.glyphs.image(icon, CATEGORY_PX),
+                label: (*label).into(),
+            })
+            .collect();
+        self.ui().set_categories(ModelRc::new(VecModel::from(categories)));
+    }
+
+    /// Images are made for the current scale factor, which is only known once the window exists
+    /// and changes when it moves to another monitor; redraw them all when it does.
+    fn refresh_scale(&self) {
+        if self.glyphs.set_scale(self.ui().window().scale_factor()) {
+            self.set_categories();
+            self.model.notify.reset();
+            self.sync();
+        }
+    }
+
     /// Push derived state (selection, preview, multi-select strip, settings) into the UI.
     fn sync(&self) {
         let ui = self.ui();
@@ -347,7 +372,7 @@ impl App {
         match st.display.get(st.selected) {
             Some(&e) => {
                 ui.set_selected_index(st.selected as i32);
-                ui.set_preview_img(self.glyphs.image(emojis::char_for(e, tone)));
+                ui.set_preview_img(self.glyphs.image(emojis::char_for(e, tone), PREVIEW_PX));
                 ui.set_preview_name(emojis::EMOJIS[e].name.into());
             }
             None => {
@@ -357,7 +382,7 @@ impl App {
             }
         }
         let shown = &st.chosen[st.chosen.len().saturating_sub(4)..];
-        let images: Vec<Image> = shown.iter().map(|c| self.glyphs.image(c)).collect();
+        let images: Vec<Image> = shown.iter().map(|c| self.glyphs.image(c, CHOSEN_PX)).collect();
         ui.set_chosen(ModelRc::new(VecModel::from(images)));
         let hidden = st.chosen.len() - shown.len();
         ui.set_chosen_more(
@@ -376,6 +401,7 @@ impl App {
         if width <= 0.0 {
             return;
         }
+        self.refresh_scale();
         let ui = self.ui();
         let (anchor, cell) = {
             let mut st = self.st.borrow_mut();
@@ -811,6 +837,7 @@ impl App {
         self.shown_at.set(Some(Instant::now()));
         self.last_time.set(time);
         let _ = ui.show();
+        self.refresh_scale();
         self.activate(time);
         ui.invoke_focus_search();
         self.keep_requesting_focus();
@@ -967,14 +994,7 @@ pub fn run(show: bool, command: &str) {
     APP.with(|a| *a.borrow_mut() = Some(app.clone()));
 
     ui.set_lines(ModelRc::from(model));
-    let categories: Vec<Category> = emojis::CATEGORIES
-        .iter()
-        .map(|(_, label, icon)| Category {
-            img: glyphs.image(icon),
-            label: (*label).into(),
-        })
-        .collect();
-    ui.set_categories(ModelRc::new(VecModel::from(categories)));
+    app.set_categories();
 
     macro_rules! wire {
         ($on:ident, |$app:ident $(, $arg:ident)*| $body:expr) => {{
