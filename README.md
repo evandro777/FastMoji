@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/evandro777/FastMoji/actions/workflows/ci.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/ci.yml)
 [![Flatpak](https://github.com/evandro777/FastMoji/actions/workflows/flatpak.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/flatpak.yml)
+[![made-for-linux](https://img.shields.io/badge/Linux-1f425f?logo=linux)](https://www.linux.org/)
+[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-orange)](https://opensource.org/licenses/GPL-3.0)
 
 A popup emoji picker for Linux that is **light and fast**. Written in Rust with [Slint](https://slint.dev).
 

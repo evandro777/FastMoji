@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FastMoji</title>
+<meta name="description" content="A light and fast popup emoji picker for Linux, written in Rust.">
+<style>
+  :root { --bg:#fff; --fg:#1d1d20; --muted:#5f6368; --card:#f4f5f7; --accent:#2f9e63; --border:#dadce0; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#17181a; --fg:#ececee; --muted:#9aa0a6; --card:#222427; --accent:#4cc38a; --border:#34373b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui, sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 0 16px 64px; }
+  header { padding: 56px 0 24px; text-align: center; }
+  h1 { font-size: 2.6rem; margin: 0; }
+  .tag { color: var(--muted); font-size: 1.15rem; margin: 8px 0 0; }
+  h2 { margin-top: 48px; }
+  a { color: var(--accent); }
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+  .shots img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--border); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .card { background: var(--card); border-radius: 10px; padding: 16px; }
+  .card b { display: block; font-size: 1.7rem; color: var(--accent); }
+  .card span { color: var(--muted); font-size: .9rem; }
+  pre { background: var(--card); padding: 14px; border-radius: 10px; overflow-x: auto; font-size: .9rem; }
+  ul { padding-left: 1.2rem; }
+  small, .note { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>FastMoji</h1>
+    <p class="tag">A popup emoji picker for Linux that is light and fast.</p>
+    <p><a href="https://github.com/evandro777/FastMoji">GitHub</a> ·
+       <a href="https://github.com/evandro777/FastMoji/releases">Releases</a></p>
+  </header>
+
+  <div class="shots">
+    <img src="screenshots/picker.png" alt="The FastMoji picker" loading="lazy">
+    <img src="screenshots/search.png" alt="Searching for hearts" loading="lazy">
+    <img src="screenshots/preferences.png" alt="Preferences" loading="lazy">
+  </div>
+
+  <h2>Press a shortcut, search, pick</h2>
+  <p>The emoji is pasted into the app you were using. Written in Rust with Slint, inspired by
+     <a href="https://github.com/tom-james-watson/Emote">Emote</a>, and focused on startup time and memory.</p>
+  <div class="cards">
+    <div class="card"><b>~23 MB</b><span>idle memory (Emote: ~99 MB)</span></div>
+    <div class="card"><b>6–12 ms</b><span>shortcut to window mapped (Emote: 130 ms)</span></div>
+    <div class="card"><b>0.3 ms</b><span>per-keystroke search</span></div>
+  </div>
+
+  <h2>Features</h2>
+  <ul>
+    <li>Instant search, 9 categories that follow scrolling, recent emojis first</li>
+    <li>Keyboard first: arrows, <code>Enter</code> to paste, <code>Shift+Enter</code> for several emojis, <code>Esc</code> to close</li>
+    <li>Skin tone, emoji size and automatic paste options</li>
+    <li>Global shortcut you set by pressing the keys (default <code>Ctrl+Alt+.</code>) on X11</li>
+    <li>Optional: do not stay in memory, and open it with your desktop's own shortcut</li>
+    <li>Follows the light/dark theme</li>
+  </ul>
+  <p class="note">Status: early pilot. Works on X11 (tested on Cinnamon). On Wayland it copies to the clipboard only;
+     bind a key to <code>fastmoji --toggle</code>.</p>
+
+  <h2>Install with Flatpak</h2>
+  <p>This remote keeps FastMoji updated with <code>flatpak update</code>:</p>
+<pre>flatpak remote-add --user --if-not-exists fastmoji https://evandro777.github.io/FastMoji/fastmoji.flatpakrepo
+flatpak install --user fastmoji io.github.evandro777.FastMoji</pre>
+  <p><small>The runtime comes from Flathub. The remote is not GPG-signed, so it is as trustworthy as the
+     <a href="https://github.com/evandro777/FastMoji">source repository</a> it is built from.
+     You can also download a single <code>.flatpak</code> file from Releases; that one does not update by itself.</small></p>
+
+  <h2>License</h2>
+  <p>GPL-3.0. See the <a href="https://github.com/evandro777/FastMoji">repository</a>.</p>
+</main>
+</body>
+</html>
