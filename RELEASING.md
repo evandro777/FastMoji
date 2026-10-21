@@ -22,3 +22,7 @@ Releases are Git tags. CI builds the Flatpak bundle and attaches it to the GitHu
 6. Smoke-test the downloaded bundle: `flatpak install --user ./FastMoji-0.2.0-x86_64.flatpak`, press the shortcut, paste an emoji.
 
 Flathub: see <https://docs.flathub.org/docs/for-app-authors/requirements>.
+
+## Flatpak remote (GitHub Pages)
+
+On a `v*` tag `flatpak.yml` also deploys the OSTree repo and `fastmoji.flatpakrepo` to GitHub Pages. One-time: repository Settings -> Pages -> Source: **GitHub Actions**. Not exercised yet (first tag will be the test).

@@ -468,6 +468,12 @@ mod tests {
     }
 
     #[test]
+    fn default_shortcut_parses() {
+        let (mods, key) = parse_shortcut(&crate::settings::Settings::default().shortcut).unwrap();
+        assert_eq!((mods, key), (ModMask::CONTROL | ModMask::M1, 0x2e));
+    }
+
+    #[test]
     fn parses_shortcuts() {
         let (mods, key) = parse_shortcut("Ctrl+Alt+E").unwrap();
         assert_eq!(mods, ModMask::CONTROL | ModMask::M1);

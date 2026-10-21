@@ -64,6 +64,18 @@ flatpak install --user ./FastMoji-<version>-x86_64.flatpak
 flatpak run io.github.evandro777.FastMoji
 ```
 
+### Install with automatic updates
+
+Until FastMoji is on Flathub, every release is also published as a Flatpak remote, so `flatpak update` (or your software centre) keeps it current. A bundle downloaded from Releases does **not** update by itself; you would install the next one over it.
+
+```bash
+flatpak remote-add --user --if-not-exists fastmoji https://evandro777.github.io/FastMoji/fastmoji.flatpakrepo
+flatpak install --user fastmoji io.github.evandro777.FastMoji
+flatpak update --user
+```
+
+The remote is not GPG-signed, so it is only as trustworthy as the GitHub repository it is built from. It needs the Flathub remote for the runtime (`flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo`).
+
 ### Build the Flatpak yourself
 
 App id: `io.github.evandro777.FastMoji`.

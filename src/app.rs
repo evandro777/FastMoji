@@ -351,6 +351,7 @@ struct App {
     focused: StdCell<bool>,
     focus_attempts: StdCell<u32>,
     focus_timer: Timer,
+    blur_timer: Timer,
     /// The window that had focus before the picker opened; it should receive the paste.
     previous_window: StdCell<Option<u32>>,
     paste_attempts: StdCell<u32>,
@@ -924,6 +925,7 @@ impl App {
         debug(|| "hide".into());
         let ui = self.ui();
         ui.set_recording_shortcut(false);
+        ui.set_recording_shortcut(false);
         let window = ui.window();
         if window.is_visible() {
             let size = window.size().to_logical(window.scale_factor());
@@ -991,6 +993,18 @@ impl App {
         if self.shown_at.get().is_some_and(|t| t.elapsed() < FOCUS_GRACE) {
             // The WM sometimes bounces focus right after mapping; ask again instead of hiding.
             self.activate(self.last_time.get());
+        } else if self.ui().get_recording_shortcut() {
+            // Pressing the grabbed shortcut itself takes the focus for a moment (X grab), and the hotkey
+            // thread's toggle arrives separately. Hide only if the focus really went elsewhere.
+            self.blur_timer.start(
+                slint::TimerMode::SingleShot,
+                FOCUS_GRACE,
+                tick(|app| {
+                    if !app.focused.get() {
+                        app.hide();
+                    }
+                }),
+            );
         } else {
             self.hide();
         }
@@ -1064,6 +1078,7 @@ pub fn run(show: bool, command: &str) {
         focused: StdCell::new(false),
         focus_attempts: StdCell::new(0),
         focus_timer: Timer::default(),
+        blur_timer: Timer::default(),
         previous_window: StdCell::new(None),
         paste_attempts: StdCell::new(0),
         paste_timer: Timer::default(),
@@ -1207,6 +1222,25 @@ mod tests {
         );
         assert_eq!(super::held_text([true, true, false, false]), "Ctrl + Alt + …");
         assert_eq!(key("a", [false; 4]), None, "needs a modifier");
+        assert_eq!(
+            key("{", [true, true, false, false]),
+            None,
+            "layout symbols are resolved to the key before this"
+        );
+        // Everything the recorder produces must be accepted by the hotkey parser.
+        for (text, mods) in [
+            (".", [true, true, false, false]),
+            ("7", [true, false, true, false]),
+            ("\u{f70b}", [false, false, false, true]),
+            (" ", [true, false, false, false]),
+            ("\t", [true, true, false, false]),
+        ] {
+            let shortcut = key(text, mods).unwrap();
+            assert!(
+                crate::x11::parse_shortcut(&shortcut).is_some(),
+                "{shortcut} not parseable"
+            );
+        }
         assert_eq!(key("\u{11}", [true, false, false, false]), None, "lone modifier");
     }
 
