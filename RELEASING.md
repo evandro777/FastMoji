@@ -3,8 +3,8 @@
 Releases are Git tags. CI builds the Flatpak bundle and attaches it to the GitHub release.
 
 1. Pick the version (`0.2.0`). Update **both**:
-   - `Cargo.toml` → `version`
-   - `flatpak/io.github.evandro777.FastMoji.metainfo.xml` → add a `<release version="0.2.0" date="YYYY-MM-DD">` entry with notes (newest first)
+   - [Cargo.toml](./Cargo.toml) → `version`
+   - [io.github.evandro777.FastMoji.metainfo.xml](./flatpak/io.github.evandro777.FastMoji.metainfo.xml) → add a `<release version="0.2.0" date="YYYY-MM-DD">` entry with notes (newest first)
 
 2. Run `cargo update -p fastmoji` if `Cargo.lock` changed, then `cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test`.
 
