@@ -411,6 +411,7 @@ impl App {
                 .unwrap_or(2) as i32,
         );
         ui.set_auto_paste(st.settings.auto_paste);
+        ui.set_version(env!("CARGO_PKG_VERSION").into());
         ui.set_keep_resident(!self.x11 || st.settings.keep_resident);
         ui.set_resident_locked(!self.x11);
         ui.set_shortcut_label(st.settings.shortcut.as_str().into());
@@ -904,6 +905,7 @@ impl App {
         }
         ui.set_search_text("".into());
         ui.set_settings_open(false);
+        ui.set_about_open(false);
         ui.set_categories_focused(false);
         let (w, h) = {
             let st = self.st.borrow();
@@ -1161,6 +1163,10 @@ pub fn run(show: bool, command: &str) {
         }
     });
     ui.on_held_text(|ctrl, alt, shift, meta| held_text([ctrl, alt, shift, meta]).into());
+    ui.on_open_url(|url| {
+        // Needs xdg-open on the host; inside Flatpak it is missing, so the click does nothing there yet.
+        let _ = std::process::Command::new("xdg-open").arg(url.as_str()).spawn();
+    });
     ui.on_quit(|| {
         let _ = slint::quit_event_loop();
     });

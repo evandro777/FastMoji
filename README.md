@@ -9,12 +9,16 @@ A popup emoji picker for Linux that is **light and fast**. Written in Rust with 
 
 FastMoji is inspired by [Emote](https://github.com/tom-james-watson/Emote) by Tom Watson, a great GTK4 picker. FastMoji keeps the same idea (press a shortcut, search, pick, and the emoji is pasted into the app you were using) and focuses on startup time and memory:
 
-|                              | Emote 4.0.2 (Python + GTK) | FastMoji       |
-|------------------------------|----------------------------|----------------|
-| Idle memory (resident)       | ~99 MB                     | **~23 MB**     |
-| Memory with the picker shown | ~99 MB                     | **~27 MB**     |
-| Shortcut to window mapped    | median 130 ms              | **6–12 ms**    |
-| Per-keystroke search         | not measured               | **0.2–0.3 ms** |
+|                                               | Emote 4.0.2 (Python + GTK) | FastMoji       |
+|-----------------------------------------------|----------------------------|----------------|
+| Idle memory (resident)                        | ~99 MB                     | **~23 MB**     |
+| Memory with the picker shown                  | ~99 MB                     | **~27 MB**     |
+| Shortcut to window mapped                     | median 130 ms              | **6–12 ms**    |
+| Per-keystroke search                          | not measured               | **0.2–0.3 ms** |
+| Launch to window, not resident, native binary | not measured               | **~57 ms**     |
+| Launch to window, not resident, Flatpak       | not measured               | **~0.5 s**     |
+
+The Flatpak build matches the native one when resident (23 MB idle, 27 MB shown, about 6 ms to open). The "not resident" rows are the *Keep FastMoji in memory* option turned off: FastMoji itself needs about 55 ms to start, and about 450 ms of the Flatpak figure is Flatpak setting up its sandbox, so Flatpak users who care about speed should leave the option on. Measured on one machine (Cinnamon, X11).
 
 ![FastMoji searching for hearts](docs/screenshots/search.png)
 

@@ -30,6 +30,8 @@ export component Main inherits Window {
     in property <string> shortcut-label;
     in property <string> shortcut-error;
     in-out property <bool> settings-open;
+    in-out property <bool> about-open;
+    in property <string> version;
     // Keyboard is on the category bar: Left/Right pick a category, Down/Enter go back to the grid.
     in-out property <bool> categories-focused;
     in-out property <string> search-text;
@@ -49,6 +51,7 @@ export component Main inherits Window {
     callback cycle-category(int);
     callback dismiss();
     callback quit();
+    callback open-url(string);
     callback set-tone(int);
     callback set-size(int);
     callback set-auto-paste(bool);
@@ -289,10 +292,17 @@ export component Main inherits Window {
                 HorizontalLayout {
                     spacing: 12px;
                     Text { text: "Skin tone"; vertical-alignment: center; horizontal-stretch: 1; }
-                    ComboBox {
-                        model: ["Default", "Light", "Medium-light", "Medium", "Medium-dark", "Dark"];
-                        current-index: root.tone;
-                        selected => { root.set-tone(self.current-index); }
+                    for c[i] in [#ffc83d, #fadcbc, #e0bb95, #bf8f68, #9b643d, #594539]: Rectangle {
+                        width: 24px;
+                        height: 24px;
+                        border-radius: 12px;
+                        background: c;
+                        border-width: root.tone == i ? 3px : 1px;
+                        border-color: root.tone == i ? Palette.accent-background : Palette.border;
+                        TouchArea {
+                            mouse-cursor: pointer;
+                            clicked => { root.set-tone(i); }
+                        }
                     }
                 }
                 HorizontalLayout {
@@ -343,8 +353,43 @@ export component Main inherits Window {
                     spacing: 8px;
                     alignment: end;
                     Button { text: "Quit FastMoji"; clicked => { root.quit(); } }
+                    Button { text: "About"; clicked => { root.about-open = true; } }
                     Button { text: "Close"; primary: true; clicked => { root.recording-shortcut = false; root.settings-open = false; } }
                 }
+            }
+        }
+    }
+
+    if root.about-open: Rectangle {
+        background: #0008;
+        TouchArea { clicked => { root.about-open = false; } }
+        Rectangle {
+            width: min(root.width - 40px, 320px);
+            height: min(root.height - 20px, 250px);
+            background: Palette.background;
+            border-radius: 10px;
+            border-width: 1px;
+            border-color: Palette.border;
+            TouchArea { }
+            VerticalLayout {
+                padding: 18px;
+                spacing: 8px;
+                alignment: center;
+                Text { text: "FastMoji"; font-size: 20px; font-weight: 700; horizontal-alignment: center; }
+                Text { text: "Version " + root.version; horizontal-alignment: center; }
+                Text { text: "Light and fast emoji picker for Linux."; horizontal-alignment: center; wrap: word-wrap; }
+                Text { text: "Author: evandro777"; horizontal-alignment: center; }
+                Text { text: "License: GPL-3.0-or-later"; horizontal-alignment: center; }
+                Text {
+                    text: "github.com/evandro777/FastMoji";
+                    horizontal-alignment: center;
+                    color: #3584e4;
+                    TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { root.open-url("https://github.com/evandro777/FastMoji"); }
+                    }
+                }
+                Button { text: "Close"; primary: true; clicked => { root.about-open = false; } }
             }
         }
     }
