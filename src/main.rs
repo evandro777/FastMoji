@@ -1,5 +1,6 @@
 mod app;
 mod emojis;
+mod fold;
 mod glyphs;
 mod instance;
 mod settings;

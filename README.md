@@ -31,6 +31,7 @@ The Flatpak build matches the native one when resident (23 MB idle, 27 MB shown,
 - Global shortcut (default `Ctrl+Alt+.`) on X11
 - Optional: **do not stay in memory** (see below)
 - Follows the desktop's light/dark theme
+- Translated into Português (Brasil), Français, Deutsch, Español, Italiano, 日本語 and 中文: the interface and the emoji names and search keywords (CLDR data, accent-insensitive, English keywords keep working). It follows the system locale; change it in Preferences
 
 ## Status
 
@@ -105,6 +106,7 @@ keep_resident = true      # see below
 auto_paste = true
 skin_tone = 0             # 0 = default, 1..5
 emoji_size = 28           # 20, 24, 28, 32 or 36
+language = ""             # "" = system locale, "en", "pt_BR", "fr", "de", "es", "it", "ja" or "zh_CN"
 ```
 
 ### Keeping FastMoji in memory

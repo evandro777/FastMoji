@@ -1,0 +1,156 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: ja\n"
+
+msgctxt "Main"
+msgid "Search emoji"
+msgstr "絵文字を検索"
+
+msgctxt "Main"
+msgid "Settings"
+msgstr "設定"
+
+msgctxt "Main"
+msgid "Preferences"
+msgstr "環境設定"
+
+msgctxt "Main"
+msgid "Skin tone"
+msgstr "肌の色"
+
+msgctxt "Main"
+msgid "Emoji size"
+msgstr "絵文字のサイズ"
+
+msgctxt "Main"
+msgid "Small ({} px)"
+msgstr "小 ({} px)"
+
+msgctxt "Main"
+msgid "Compact ({} px)"
+msgstr "やや小 ({} px)"
+
+msgctxt "Main"
+msgid "Default ({} px)"
+msgstr "標準 ({} px)"
+
+msgctxt "Main"
+msgid "Large ({} px)"
+msgstr "大 ({} px)"
+
+msgctxt "Main"
+msgid "Extra large ({} px)"
+msgstr "特大 ({} px)"
+
+msgctxt "Main"
+msgid "Language"
+msgstr "言語"
+
+msgctxt "Main"
+msgid "System default"
+msgstr "システムの既定"
+
+msgctxt "Main"
+msgid "Automatic paste"
+msgstr "自動で貼り付け"
+
+msgctxt "Main"
+msgid "Keep FastMoji in memory"
+msgstr "FastMoji をメモリに常駐"
+
+msgctxt "Main"
+msgid "Shortcut"
+msgstr "ショートカット"
+
+msgctxt "Main"
+msgid "Always on in this session (the clipboard needs it)."
+msgstr "このセッションでは常に有効です（クリップボードに必要）。"
+
+msgctxt "Main"
+msgid "Required for the {} shortcut. Opens instantly and uses a little memory."
+msgstr "ショートカット {} に必要です。すぐに開き、少しメモリを使います。"
+
+msgctxt "Main"
+msgid "Warning: {} is disabled while this is off. Open FastMoji with your own shortcut that runs `fastmoji`."
+msgstr "注意: これがオフの間は {} は無効です。`fastmoji` を実行する独自のショートカットで FastMoji を開いてください。"
+
+msgctxt "Main"
+msgid "Quit FastMoji"
+msgstr "FastMoji を終了"
+
+msgctxt "Main"
+msgid "About"
+msgstr "情報"
+
+msgctxt "Main"
+msgid "Close"
+msgstr "閉じる"
+
+msgctxt "Main"
+msgid "Version {}"
+msgstr "バージョン {}"
+
+msgctxt "Main"
+msgid "Light and fast emoji picker for Linux."
+msgstr "Linux 向けの軽くて高速な絵文字ピッカー。"
+
+msgctxt "Main"
+msgid "Author: {}"
+msgstr "作者: {}"
+
+msgctxt "Main"
+msgid "License: {}"
+msgstr "ライセンス: {}"
+
+msgctxt "Tr"
+msgid "Recently Used"
+msgstr "最近使用した絵文字"
+
+msgctxt "Tr"
+msgid "Smileys & People"
+msgstr "顔と人"
+
+msgctxt "Tr"
+msgid "Animals & Nature"
+msgstr "動物と自然"
+
+msgctxt "Tr"
+msgid "Food & Drink"
+msgstr "食べ物と飲み物"
+
+msgctxt "Tr"
+msgid "Activities"
+msgstr "アクティビティ"
+
+msgctxt "Tr"
+msgid "Travel & Places"
+msgstr "旅行と場所"
+
+msgctxt "Tr"
+msgid "Objects"
+msgstr "物"
+
+msgctxt "Tr"
+msgid "Symbols"
+msgstr "記号"
+
+msgctxt "Tr"
+msgid "Flags"
+msgstr "旗"
+
+msgctxt "Tr"
+msgid "No matches for “{}”"
+msgstr "「{}」に一致するものはありません"
+
+msgctxt "Tr"
+msgid "Results for “{}”"
+msgstr "「{}」の検索結果"
+
+msgctxt "Tr"
+msgid "Shortcut unavailable: {}"
+msgstr "ショートカットを使用できません: {}"
+
+msgctxt "Tr"
+msgid "Cannot parse {}. Example: Ctrl+Alt+."
+msgstr "{} を解釈できません。例: Ctrl+Alt+."

@@ -12,12 +12,26 @@ use slint::{
 };
 
 use crate::{
-    Category, Cell, Line, Main, emojis,
+    Category, Cell, Line, Main, Tr, emojis,
     glyphs::Glyphs,
     instance,
     settings::{self, Settings},
     x11,
 };
+
+/// Values of the language setting in the order of the Preferences list: system default, English, then the translations.
+fn language_choices() -> impl Iterator<Item = &'static str> {
+    ["", "en"].into_iter().chain(emojis::language_codes())
+}
+
+/// The language of the session from the usual POSIX variables ("pt_BR.UTF-8", "fr:en"...).
+fn system_language() -> &'static str {
+    let locale = ["LC_ALL", "LC_MESSAGES", "LANGUAGE", "LANG"]
+        .iter()
+        .find_map(|v| std::env::var(v).ok().filter(|s| !s.is_empty()))
+        .unwrap_or_default();
+    emojis::resolve_language(locale.split(':').next().unwrap_or(""))
+}
 
 /// Grace period after showing during which the WM may bounce focus before we trust a focus-out.
 const FOCUS_GRACE: Duration = Duration::from_millis(300);
@@ -193,6 +207,8 @@ enum Item {
 }
 
 struct State {
+    /// Only to read the translated titles (`Tr`).
+    ui: slint::Weak<Main>,
     settings: Settings,
     /// Trimmed search text; empty means the category catalogue is shown.
     query: String,
@@ -237,11 +253,13 @@ impl State {
     }
 
     fn rebuild(&mut self) {
+        let Some(ui) = self.ui.upgrade() else { return };
+        let tr = ui.global::<Tr>();
         self.display.clear();
         self.items.clear();
         self.row_of.clear();
         if self.query.is_empty() {
-            for (c, (_, title, _)) in emojis::CATEGORIES.iter().enumerate() {
+            for c in 0..emojis::CATEGORIES.len() {
                 let ids: Vec<usize> = if c == 0 {
                     self.recent_ids()
                 } else {
@@ -249,18 +267,19 @@ impl State {
                 };
                 self.category_row[c] = self.items.len();
                 if !ids.is_empty() {
-                    self.items.push(Item::Title(title.to_string()));
+                    self.items.push(Item::Title(tr.invoke_category(c as i32).to_string()));
                     self.push_cells(&ids);
                 }
             }
         } else {
             let hits = emojis::search(&self.query);
+            let query = self.query.as_str().into();
             let title = if hits.is_empty() {
-                format!("No matches for “{}”", self.query)
+                tr.invoke_no_matches(query)
             } else {
-                format!("Results for “{}”", self.query)
+                tr.invoke_results(query)
             };
-            self.items.push(Item::Title(title));
+            self.items.push(Item::Title(title.to_string()));
             self.push_cells(&hits);
         }
         if self.selected >= self.display.len() {
@@ -375,12 +394,26 @@ impl App {
         self.sync();
     }
 
+    /// Pick the UI and emoji-name language from the setting (or the system locale). Callers redraw afterwards.
+    fn apply_language(&self) {
+        let pref = self.st.borrow().settings.language.clone();
+        let code = if pref.is_empty() {
+            system_language()
+        } else {
+            emojis::resolve_language(&pref)
+        };
+        emojis::set_language(code);
+        // Only fails when the UI was built without bundled translations; the source strings are English anyway.
+        let _ = slint::select_bundled_translation(code);
+    }
+
     fn set_categories(&self) {
         let categories: Vec<Category> = emojis::CATEGORIES
             .iter()
-            .map(|(_, label, icon)| Category {
+            .enumerate()
+            .map(|(i, (_, icon))| Category {
                 img: self.glyphs.image(icon, CATEGORY_PX),
-                label: (*label).into(),
+                label: self.ui().global::<Tr>().invoke_category(i as i32),
             })
             .collect();
         self.ui().set_categories(ModelRc::new(VecModel::from(categories)));
@@ -411,6 +444,7 @@ impl App {
                 .unwrap_or(2) as i32,
         );
         ui.set_auto_paste(st.settings.auto_paste);
+        ui.set_language_choice(language_choices().position(|c| c == st.settings.language).unwrap_or(0) as i32);
         ui.set_version(env!("CARGO_PKG_VERSION").into());
         ui.set_keep_resident(!self.x11 || st.settings.keep_resident);
         ui.set_resident_locked(!self.x11);
@@ -420,7 +454,7 @@ impl App {
             Some(&e) => {
                 ui.set_selected_index(st.selected as i32);
                 ui.set_preview_img(self.glyphs.image(emojis::char_for(e, tone), PREVIEW_PX));
-                ui.set_preview_name(emojis::EMOJIS[e].name.into());
+                ui.set_preview_name(emojis::name(e).into());
             }
             None => {
                 ui.set_selected_index(-1);
@@ -835,8 +869,11 @@ impl App {
             }
             Err(e) => {
                 eprintln!("global shortcut unavailable: {e}");
-                self.ui()
-                    .set_shortcut_error(format!("Shortcut unavailable: {e}").into());
+                self.ui().set_shortcut_error(
+                    self.ui()
+                        .global::<Tr>()
+                        .invoke_shortcut_unavailable(e.to_string().into()),
+                );
             }
         }
     }
@@ -846,7 +883,7 @@ impl App {
         let text = text.trim();
         if self.x11 && x11::parse_shortcut(text).is_none() {
             self.ui()
-                .set_shortcut_error(format!("Cannot parse {text:?}. Example: Ctrl+Alt+.").into());
+                .set_shortcut_error(self.ui().global::<Tr>().invoke_cannot_parse(format!("{text:?}").into()));
             return;
         }
         let old = std::mem::replace(&mut self.st.borrow_mut().settings.shortcut, text.to_string());
@@ -1020,6 +1057,7 @@ pub fn run(show: bool, command: &str) {
     // Match the shortcut the user has configured (see `settings.toml`).
     let keep_resident = settings.keep_resident;
     let st = Rc::new(RefCell::new(State {
+        ui: ui.as_weak(),
         settings,
         query: String::new(),
         display: Vec::new(),
@@ -1088,6 +1126,7 @@ pub fn run(show: bool, command: &str) {
     });
     APP.with(|a| *a.borrow_mut() = Some(app.clone()));
 
+    app.apply_language();
     ui.set_lines(ModelRc::from(model));
     app.set_categories();
 
@@ -1126,6 +1165,16 @@ pub fn run(show: bool, command: &str) {
             st.last_width
         };
         app.on_width(width, true);
+    });
+    wire!(on_set_language, |app, i| {
+        {
+            let mut st = app.st.borrow_mut();
+            st.settings.language = language_choices().nth(i as usize).unwrap_or_default().to_string();
+            st.settings.save();
+        }
+        app.apply_language();
+        app.set_categories();
+        app.relayout();
     });
     wire!(on_set_auto_paste, |app, on| {
         let mut st = app.st.borrow_mut();

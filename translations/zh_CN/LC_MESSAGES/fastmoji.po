@@ -1,0 +1,156 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_CN\n"
+
+msgctxt "Main"
+msgid "Search emoji"
+msgstr "搜索表情符号"
+
+msgctxt "Main"
+msgid "Settings"
+msgstr "设置"
+
+msgctxt "Main"
+msgid "Preferences"
+msgstr "首选项"
+
+msgctxt "Main"
+msgid "Skin tone"
+msgstr "肤色"
+
+msgctxt "Main"
+msgid "Emoji size"
+msgstr "表情符号大小"
+
+msgctxt "Main"
+msgid "Small ({} px)"
+msgstr "小 ({} px)"
+
+msgctxt "Main"
+msgid "Compact ({} px)"
+msgstr "紧凑 ({} px)"
+
+msgctxt "Main"
+msgid "Default ({} px)"
+msgstr "默认 ({} px)"
+
+msgctxt "Main"
+msgid "Large ({} px)"
+msgstr "大 ({} px)"
+
+msgctxt "Main"
+msgid "Extra large ({} px)"
+msgstr "特大 ({} px)"
+
+msgctxt "Main"
+msgid "Language"
+msgstr "语言"
+
+msgctxt "Main"
+msgid "System default"
+msgstr "系统默认"
+
+msgctxt "Main"
+msgid "Automatic paste"
+msgstr "自动粘贴"
+
+msgctxt "Main"
+msgid "Keep FastMoji in memory"
+msgstr "让 FastMoji 常驻内存"
+
+msgctxt "Main"
+msgid "Shortcut"
+msgstr "快捷键"
+
+msgctxt "Main"
+msgid "Always on in this session (the clipboard needs it)."
+msgstr "此会话中始终开启（剪贴板需要）。"
+
+msgctxt "Main"
+msgid "Required for the {} shortcut. Opens instantly and uses a little memory."
+msgstr "快捷键 {} 需要此选项。可即时打开，会占用少量内存。"
+
+msgctxt "Main"
+msgid "Warning: {} is disabled while this is off. Open FastMoji with your own shortcut that runs `fastmoji`."
+msgstr "注意：关闭此选项后 {} 将失效。请用自己设置的、运行 `fastmoji` 的快捷键打开 FastMoji。"
+
+msgctxt "Main"
+msgid "Quit FastMoji"
+msgstr "退出 FastMoji"
+
+msgctxt "Main"
+msgid "About"
+msgstr "关于"
+
+msgctxt "Main"
+msgid "Close"
+msgstr "关闭"
+
+msgctxt "Main"
+msgid "Version {}"
+msgstr "版本 {}"
+
+msgctxt "Main"
+msgid "Light and fast emoji picker for Linux."
+msgstr "轻巧快速的 Linux 表情符号选择器。"
+
+msgctxt "Main"
+msgid "Author: {}"
+msgstr "作者：{}"
+
+msgctxt "Main"
+msgid "License: {}"
+msgstr "许可证：{}"
+
+msgctxt "Tr"
+msgid "Recently Used"
+msgstr "最近使用"
+
+msgctxt "Tr"
+msgid "Smileys & People"
+msgstr "表情和人物"
+
+msgctxt "Tr"
+msgid "Animals & Nature"
+msgstr "动物和自然"
+
+msgctxt "Tr"
+msgid "Food & Drink"
+msgstr "食物和饮料"
+
+msgctxt "Tr"
+msgid "Activities"
+msgstr "活动"
+
+msgctxt "Tr"
+msgid "Travel & Places"
+msgstr "旅行和地点"
+
+msgctxt "Tr"
+msgid "Objects"
+msgstr "物体"
+
+msgctxt "Tr"
+msgid "Symbols"
+msgstr "符号"
+
+msgctxt "Tr"
+msgid "Flags"
+msgstr "旗帜"
+
+msgctxt "Tr"
+msgid "No matches for “{}”"
+msgstr "没有与“{}”匹配的结果"
+
+msgctxt "Tr"
+msgid "Results for “{}”"
+msgstr "“{}”的搜索结果"
+
+msgctxt "Tr"
+msgid "Shortcut unavailable: {}"
+msgstr "快捷键不可用：{}"
+
+msgctxt "Tr"
+msgid "Cannot parse {}. Example: Ctrl+Alt+."
+msgstr "无法解析 {}。示例：Ctrl+Alt+."

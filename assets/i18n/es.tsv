@@ -1,0 +1,1941 @@
+0023-20E3	Teclas: #	teclas
+002A-20E3	Teclas: *	teclas
+0030-20E3	Teclas: 0	teclas
+0031-20E3	Teclas: 1	teclas
+0032-20E3	Teclas: 2	teclas
+0033-20E3	Teclas: 3	teclas
+0034-20E3	Teclas: 4	teclas
+0035-20E3	Teclas: 5	teclas
+0036-20E3	Teclas: 6	teclas
+0037-20E3	Teclas: 7	teclas
+0038-20E3	Teclas: 8	teclas
+0039-20E3	Teclas: 9	teclas
+00A9	copyright	c, símbolo
+00AE	marca registrada	r, símbolo de marca registrada
+1F004	dragón rojo de mahjong	dragón rojo, juego, mahjong
+1F0CF	comodín	joker
+1F170	grupo sanguíneo A	a, grupo, sanguíneo, tipo a
+1F171	grupo sanguíneo B	b, grupo, sanguíneo, tipo b
+1F17E	grupo sanguíneo tipo O	grupo sanguíneo, grupo sanguíneo tipo o, o
+1F17F	aparcamiento	p, parking
+1F18E	grupo sanguíneo AB	ab, grupo, sanguíneo, tipo ab
+1F191	borrar	símbolo
+1F192	botón COOL	botón, cool, mola
+1F193	botón FREE	botón free, gratis, símbolo gratis
+1F194	símbolo de identificación	id, identidad, símbolo identidad
+1F195	botón NEW	botón, new, nuevo
+1F196	botón NG	botón, ng, nuevo
+1F197	botón OK	botón, ok
+1F198	símbolo de socorro	ayuda, socorro, sos, símbolo
+1F199	botón UP!	arriba, botón up!, información, novedad, símbolo, up
+1F19A	botón VS	botón vs, contra, frente a, símbolo, versus, vs
+1F1E6	indicador regional A	
+1F1E6-1F1E8	Bandera: Isla de la Ascensión	AC, bandera
+1F1E6-1F1E9	Bandera: Andorra	AD, bandera
+1F1E6-1F1EA	Bandera: Emiratos Árabes Unidos	AE, bandera
+1F1E6-1F1EB	Bandera: Afganistán	AF, bandera
+1F1E6-1F1EC	Bandera: Antigua y Barbuda	AG, bandera
+1F1E6-1F1EE	Bandera: Anguila	AI, bandera
+1F1E6-1F1F1	Bandera: Albania	AL, bandera
+1F1E6-1F1F2	Bandera: Armenia	AM, bandera
+1F1E6-1F1F4	Bandera: Angola	AO, bandera
+1F1E6-1F1F6	Bandera: Antártida	AQ, bandera
+1F1E6-1F1F7	Bandera: Argentina	AR, bandera
+1F1E6-1F1F8	Bandera: Samoa Americana	AS, bandera
+1F1E6-1F1F9	Bandera: Austria	AT, bandera
+1F1E6-1F1FA	Bandera: Australia	AU, bandera
+1F1E6-1F1FC	Bandera: Aruba	AW, bandera
+1F1E6-1F1FD	Bandera: Islas Aland	AX, bandera
+1F1E6-1F1FF	Bandera: Azerbaiyán	AZ, bandera
+1F1E7	indicador regional B	
+1F1E7-1F1E6	Bandera: Bosnia y Herzegovina	BA, bandera
+1F1E7-1F1E7	Bandera: Barbados	BB, bandera
+1F1E7-1F1E9	Bandera: Bangladés	BD, bandera
+1F1E7-1F1EA	Bandera: Bélgica	BE, bandera
+1F1E7-1F1EB	Bandera: Burkina Faso	BF, bandera
+1F1E7-1F1EC	Bandera: Bulgaria	BG, bandera
+1F1E7-1F1ED	Bandera: Baréin	BH, bandera
+1F1E7-1F1EE	Bandera: Burundi	BI, bandera
+1F1E7-1F1EF	Bandera: Benín	BJ, bandera
+1F1E7-1F1F1	Bandera: San Bartolomé	BL, bandera
+1F1E7-1F1F2	Bandera: Bermudas	BM, bandera
+1F1E7-1F1F3	Bandera: Brunéi	BN, bandera
+1F1E7-1F1F4	Bandera: Bolivia	BO, bandera
+1F1E7-1F1F6	Bandera: Caribe neerlandés	BQ, bandera
+1F1E7-1F1F7	Bandera: Brasil	BR, bandera
+1F1E7-1F1F8	Bandera: Bahamas	BS, bandera
+1F1E7-1F1F9	Bandera: Bután	BT, bandera
+1F1E7-1F1FB	Bandera: Isla Bouvet	BV, bandera
+1F1E7-1F1FC	Bandera: Botsuana	BW, bandera
+1F1E7-1F1FE	Bandera: Bielorrusia	BY, bandera
+1F1E7-1F1FF	Bandera: Belice	BZ, bandera
+1F1E8	indicador regional C	
+1F1E8-1F1E6	Bandera: Canadá	CA, bandera
+1F1E8-1F1E8	Bandera: Islas Cocos	CC, bandera
+1F1E8-1F1E9	Bandera: República Democrática del Congo	CD, bandera
+1F1E8-1F1EB	Bandera: República Centroafricana	CF, bandera
+1F1E8-1F1EC	Bandera: Congo	CG, bandera
+1F1E8-1F1ED	Bandera: Suiza	CH, bandera
+1F1E8-1F1EE	Bandera: Côte d’Ivoire	CI, bandera
+1F1E8-1F1F0	Bandera: Islas Cook	CK, bandera
+1F1E8-1F1F1	Bandera: Chile	CL, bandera
+1F1E8-1F1F2	Bandera: Camerún	CM, bandera
+1F1E8-1F1F3	Bandera: China	CN, bandera
+1F1E8-1F1F4	Bandera: Colombia	CO, bandera
+1F1E8-1F1F5	Bandera: Isla Clipperton	CP, bandera
+1F1E8-1F1F6	flag: Sark	CQ
+1F1E8-1F1F7	Bandera: Costa Rica	CR, bandera
+1F1E8-1F1FA	Bandera: Cuba	CU, bandera
+1F1E8-1F1FB	Bandera: Cabo Verde	CV, bandera
+1F1E8-1F1FC	Bandera: Curazao	CW, bandera
+1F1E8-1F1FD	Bandera: Isla de Navidad	CX, bandera
+1F1E8-1F1FE	Bandera: Chipre	CY, bandera
+1F1E8-1F1FF	Bandera: Chequia	CZ, bandera
+1F1E9	indicador regional D	
+1F1E9-1F1EA	Bandera: Alemania	DE, bandera
+1F1E9-1F1EC	Bandera: Diego García	DG, bandera
+1F1E9-1F1EF	Bandera: Yibuti	DJ, bandera
+1F1E9-1F1F0	Bandera: Dinamarca	DK, bandera
+1F1E9-1F1F2	Bandera: Dominica	DM, bandera
+1F1E9-1F1F4	Bandera: República Dominicana	DO, bandera
+1F1E9-1F1FF	Bandera: Argelia	DZ, bandera
+1F1EA	indicador regional E	
+1F1EA-1F1E6	Bandera: Ceuta y Melilla	EA, bandera
+1F1EA-1F1E8	Bandera: Ecuador	EC, bandera
+1F1EA-1F1EA	Bandera: Estonia	EE, bandera
+1F1EA-1F1EC	Bandera: Egipto	EG, bandera
+1F1EA-1F1ED	Bandera: Sáhara Occidental	EH, bandera
+1F1EA-1F1F7	Bandera: Eritrea	ER, bandera
+1F1EA-1F1F8	Bandera: España	ES, bandera
+1F1EA-1F1F9	Bandera: Etiopía	ET, bandera
+1F1EA-1F1FA	Bandera: Unión Europea	EU, bandera
+1F1EB	indicador regional F	
+1F1EB-1F1EE	Bandera: Finlandia	FI, bandera
+1F1EB-1F1EF	Bandera: Fiyi	FJ, bandera
+1F1EB-1F1F0	Bandera: Islas Malvinas	FK, bandera
+1F1EB-1F1F2	Bandera: Micronesia	FM, bandera
+1F1EB-1F1F4	Bandera: Islas Feroe	FO, bandera
+1F1EB-1F1F7	Bandera: Francia	FR, bandera
+1F1EC	indicador regional G	
+1F1EC-1F1E6	Bandera: Gabón	GA, bandera
+1F1EC-1F1E7	Bandera: Reino Unido	GB, bandera
+1F1EC-1F1E9	Bandera: Granada	GD, bandera
+1F1EC-1F1EA	Bandera: Georgia	GE, bandera
+1F1EC-1F1EB	Bandera: Guayana Francesa	GF, bandera
+1F1EC-1F1EC	Bandera: Guernesey	GG, bandera
+1F1EC-1F1ED	Bandera: Ghana	GH, bandera
+1F1EC-1F1EE	Bandera: Gibraltar	GI, bandera
+1F1EC-1F1F1	Bandera: Groenlandia	GL, bandera
+1F1EC-1F1F2	Bandera: Gambia	GM, bandera
+1F1EC-1F1F3	Bandera: Guinea	GN, bandera
+1F1EC-1F1F5	Bandera: Guadalupe	GP, bandera
+1F1EC-1F1F6	Bandera: Guinea Ecuatorial	GQ, bandera
+1F1EC-1F1F7	Bandera: Grecia	GR, bandera
+1F1EC-1F1F8	Bandera: Islas Georgia del Sur y Sandwich del Sur	GS, bandera
+1F1EC-1F1F9	Bandera: Guatemala	GT, bandera
+1F1EC-1F1FA	Bandera: Guam	GU, bandera
+1F1EC-1F1FC	Bandera: Guinea-Bisáu	GW, bandera
+1F1EC-1F1FE	Bandera: Guyana	GY, bandera
+1F1ED	indicador regional H	
+1F1ED-1F1F0	Bandera: RAE de Hong Kong (China)	HK, bandera
+1F1ED-1F1F2	Bandera: Islas Heard y McDonald	HM, bandera
+1F1ED-1F1F3	Bandera: Honduras	HN, bandera
+1F1ED-1F1F7	Bandera: Croacia	HR, bandera
+1F1ED-1F1F9	Bandera: Haití	HT, bandera
+1F1ED-1F1FA	Bandera: Hungría	HU, bandera
+1F1EE	indicador regional I	
+1F1EE-1F1E8	Bandera: Canarias	IC, bandera
+1F1EE-1F1E9	Bandera: Indonesia	ID, bandera
+1F1EE-1F1EA	Bandera: Irlanda	IE, bandera
+1F1EE-1F1F1	Bandera: Israel	IL, bandera
+1F1EE-1F1F2	Bandera: Isla de Man	IM, bandera
+1F1EE-1F1F3	Bandera: India	IN, bandera
+1F1EE-1F1F4	Bandera: Territorio Británico del Océano Índico	IO, bandera
+1F1EE-1F1F6	Bandera: Irak	IQ, bandera
+1F1EE-1F1F7	Bandera: Irán	IR, bandera
+1F1EE-1F1F8	Bandera: Islandia	IS, bandera
+1F1EE-1F1F9	Bandera: Italia	IT, bandera
+1F1EF	indicador regional J	
+1F1EF-1F1EA	Bandera: Jersey	JE, bandera
+1F1EF-1F1F2	Bandera: Jamaica	JM, bandera
+1F1EF-1F1F4	Bandera: Jordania	JO, bandera
+1F1EF-1F1F5	Bandera: Japón	JP, bandera
+1F1F0	indicador regional K	
+1F1F0-1F1EA	Bandera: Kenia	KE, bandera
+1F1F0-1F1EC	Bandera: Kirguistán	KG, bandera
+1F1F0-1F1ED	Bandera: Camboya	KH, bandera
+1F1F0-1F1EE	Bandera: Kiribati	KI, bandera
+1F1F0-1F1F2	Bandera: Comoras	KM, bandera
+1F1F0-1F1F3	Bandera: San Cristóbal y Nieves	KN, bandera
+1F1F0-1F1F5	Bandera: Corea del Norte	KP, bandera
+1F1F0-1F1F7	Bandera: Corea del Sur	KR, bandera
+1F1F0-1F1FC	Bandera: Kuwait	KW, bandera
+1F1F0-1F1FE	Bandera: Islas Caimán	KY, bandera
+1F1F0-1F1FF	Bandera: Kazajistán	KZ, bandera
+1F1F1	indicador regional L	
+1F1F1-1F1E6	Bandera: Laos	LA, bandera
+1F1F1-1F1E7	Bandera: Líbano	LB, bandera
+1F1F1-1F1E8	Bandera: Santa Lucía	LC, bandera
+1F1F1-1F1EE	Bandera: Liechtenstein	LI, bandera
+1F1F1-1F1F0	Bandera: Sri Lanka	LK, bandera
+1F1F1-1F1F7	Bandera: Liberia	LR, bandera
+1F1F1-1F1F8	Bandera: Lesoto	LS, bandera
+1F1F1-1F1F9	Bandera: Lituania	LT, bandera
+1F1F1-1F1FA	Bandera: Luxemburgo	LU, bandera
+1F1F1-1F1FB	Bandera: Letonia	LV, bandera
+1F1F1-1F1FE	Bandera: Libia	LY, bandera
+1F1F2	indicador regional M	
+1F1F2-1F1E6	Bandera: Marruecos	MA, bandera
+1F1F2-1F1E8	Bandera: Mónaco	MC, bandera
+1F1F2-1F1E9	Bandera: Moldavia	MD, bandera
+1F1F2-1F1EA	Bandera: Montenegro	ME, bandera
+1F1F2-1F1EB	Bandera: San Martín	MF, bandera
+1F1F2-1F1EC	Bandera: Madagascar	MG, bandera
+1F1F2-1F1ED	Bandera: Islas Marshall	MH, bandera
+1F1F2-1F1F0	Bandera: Macedonia del Norte	MK, bandera
+1F1F2-1F1F1	Bandera: Mali	ML, bandera
+1F1F2-1F1F2	Bandera: Myanmar (Birmania)	MM, bandera
+1F1F2-1F1F3	Bandera: Mongolia	MN, bandera
+1F1F2-1F1F4	Bandera: RAE de Macao (China)	MO, bandera
+1F1F2-1F1F5	Bandera: Islas Marianas del Norte	MP, bandera
+1F1F2-1F1F6	Bandera: Martinica	MQ, bandera
+1F1F2-1F1F7	Bandera: Mauritania	MR, bandera
+1F1F2-1F1F8	Bandera: Montserrat	MS, bandera
+1F1F2-1F1F9	Bandera: Malta	MT, bandera
+1F1F2-1F1FA	Bandera: Mauricio	MU, bandera
+1F1F2-1F1FB	Bandera: Maldivas	MV, bandera
+1F1F2-1F1FC	Bandera: Malaui	MW, bandera
+1F1F2-1F1FD	Bandera: México	MX, bandera
+1F1F2-1F1FE	Bandera: Malasia	MY, bandera
+1F1F2-1F1FF	Bandera: Mozambique	MZ, bandera
+1F1F3	indicador regional N	
+1F1F3-1F1E6	Bandera: Namibia	NA, bandera
+1F1F3-1F1E8	Bandera: Nueva Caledonia	NC, bandera
+1F1F3-1F1EA	Bandera: Níger	NE, bandera
+1F1F3-1F1EB	Bandera: Isla Norfolk	NF, bandera
+1F1F3-1F1EC	Bandera: Nigeria	NG, bandera
+1F1F3-1F1EE	Bandera: Nicaragua	NI, bandera
+1F1F3-1F1F1	Bandera: Países Bajos	NL, bandera
+1F1F3-1F1F4	Bandera: Noruega	NO, bandera
+1F1F3-1F1F5	Bandera: Nepal	NP, bandera
+1F1F3-1F1F7	Bandera: Nauru	NR, bandera
+1F1F3-1F1FA	Bandera: Niue	NU, bandera
+1F1F3-1F1FF	Bandera: Nueva Zelanda	NZ, bandera
+1F1F4	indicador regional O	
+1F1F4-1F1F2	Bandera: Omán	OM, bandera
+1F1F5	indicador regional P	
+1F1F5-1F1E6	Bandera: Panamá	PA, bandera
+1F1F5-1F1EA	Bandera: Perú	PE, bandera
+1F1F5-1F1EB	Bandera: Polinesia Francesa	PF, bandera
+1F1F5-1F1EC	Bandera: Papúa Nueva Guinea	PG, bandera
+1F1F5-1F1ED	Bandera: Filipinas	PH, bandera
+1F1F5-1F1F0	Bandera: Pakistán	PK, bandera
+1F1F5-1F1F1	Bandera: Polonia	PL, bandera
+1F1F5-1F1F2	Bandera: San Pedro y Miquelón	PM, bandera
+1F1F5-1F1F3	Bandera: Islas Pitcairn	PN, bandera
+1F1F5-1F1F7	Bandera: Puerto Rico	PR, bandera
+1F1F5-1F1F8	Bandera: Territorios Palestinos	PS, bandera
+1F1F5-1F1F9	Bandera: Portugal	PT, bandera
+1F1F5-1F1FC	Bandera: Palaos	PW, bandera
+1F1F5-1F1FE	Bandera: Paraguay	PY, bandera
+1F1F6	indicador regional Q	
+1F1F6-1F1E6	Bandera: Catar	QA, bandera
+1F1F7	indicador regional R	
+1F1F7-1F1EA	Bandera: Reunión	RE, bandera
+1F1F7-1F1F4	Bandera: Rumanía	RO, bandera
+1F1F7-1F1F8	Bandera: Serbia	RS, bandera
+1F1F7-1F1FA	Bandera: Rusia	RU, bandera
+1F1F7-1F1FC	Bandera: Ruanda	RW, bandera
+1F1F8	indicador regional S	
+1F1F8-1F1E6	Bandera: Arabia Saudí	SA, bandera
+1F1F8-1F1E7	Bandera: Islas Salomón	SB, bandera
+1F1F8-1F1E8	Bandera: Seychelles	SC, bandera
+1F1F8-1F1E9	Bandera: Sudán	SD, bandera
+1F1F8-1F1EA	Bandera: Suecia	SE, bandera
+1F1F8-1F1EC	Bandera: Singapur	SG, bandera
+1F1F8-1F1ED	Bandera: Santa Elena	SH, bandera
+1F1F8-1F1EE	Bandera: Eslovenia	SI, bandera
+1F1F8-1F1EF	Bandera: Svalbard y Jan Mayen	SJ, bandera
+1F1F8-1F1F0	Bandera: Eslovaquia	SK, bandera
+1F1F8-1F1F1	Bandera: Sierra Leona	SL, bandera
+1F1F8-1F1F2	Bandera: San Marino	SM, bandera
+1F1F8-1F1F3	Bandera: Senegal	SN, bandera
+1F1F8-1F1F4	Bandera: Somalia	SO, bandera
+1F1F8-1F1F7	Bandera: Surinam	SR, bandera
+1F1F8-1F1F8	Bandera: Sudán del Sur	SS, bandera
+1F1F8-1F1F9	Bandera: Santo Tomé y Príncipe	ST, bandera
+1F1F8-1F1FB	Bandera: El Salvador	SV, bandera
+1F1F8-1F1FD	Bandera: Sint Maarten	SX, bandera
+1F1F8-1F1FE	Bandera: Siria	SY, bandera
+1F1F8-1F1FF	Bandera: Esuatini	SZ, bandera
+1F1F9	indicador regional T	
+1F1F9-1F1E6	Bandera: Tristán de Acuña	TA, bandera
+1F1F9-1F1E8	Bandera: Islas Turcas y Caicos	TC, bandera
+1F1F9-1F1E9	Bandera: Chad	TD, bandera
+1F1F9-1F1EB	Bandera: Territorios Australes Franceses	TF, bandera
+1F1F9-1F1EC	Bandera: Togo	TG, bandera
+1F1F9-1F1ED	Bandera: Tailandia	TH, bandera
+1F1F9-1F1EF	Bandera: Tayikistán	TJ, bandera
+1F1F9-1F1F0	Bandera: Tokelau	TK, bandera
+1F1F9-1F1F1	Bandera: Timor-Leste	TL, bandera
+1F1F9-1F1F2	Bandera: Turkmenistán	TM, bandera
+1F1F9-1F1F3	Bandera: Túnez	TN, bandera
+1F1F9-1F1F4	Bandera: Tonga	TO, bandera
+1F1F9-1F1F7	Bandera: Turquía	TR, bandera
+1F1F9-1F1F9	Bandera: Trinidad y Tobago	TT, bandera
+1F1F9-1F1FB	Bandera: Tuvalu	TV, bandera
+1F1F9-1F1FC	Bandera: Taiwán	TW, bandera
+1F1F9-1F1FF	Bandera: Tanzania	TZ, bandera
+1F1FA	indicador regional U	
+1F1FA-1F1E6	Bandera: Ucrania	UA, bandera
+1F1FA-1F1EC	Bandera: Uganda	UG, bandera
+1F1FA-1F1F2	Bandera: Islas menores alejadas de EE. UU.	UM, bandera
+1F1FA-1F1F3	Bandera: Naciones Unidas	UN, bandera
+1F1FA-1F1F8	Bandera: Estados Unidos	US, bandera
+1F1FA-1F1FE	Bandera: Uruguay	UY, bandera
+1F1FA-1F1FF	Bandera: Uzbekistán	UZ, bandera
+1F1FB	indicador regional V	
+1F1FB-1F1E6	Bandera: Ciudad del Vaticano	VA, bandera
+1F1FB-1F1E8	Bandera: San Vicente y las Granadinas	VC, bandera
+1F1FB-1F1EA	Bandera: Venezuela	VE, bandera
+1F1FB-1F1EC	Bandera: Islas Vírgenes Británicas	VG, bandera
+1F1FB-1F1EE	Bandera: Islas Vírgenes de EE. UU.	VI, bandera
+1F1FB-1F1F3	Bandera: Vietnam	VN, bandera
+1F1FB-1F1FA	Bandera: Vanuatu	VU, bandera
+1F1FC	indicador regional W	
+1F1FC-1F1EB	Bandera: Wallis y Futuna	WF, bandera
+1F1FC-1F1F8	Bandera: Samoa	WS, bandera
+1F1FD	indicador regional X	
+1F1FD-1F1F0	Bandera: Kosovo	XK, bandera
+1F1FE	indicador regional Y	
+1F1FE-1F1EA	Bandera: Yemen	YE, bandera
+1F1FE-1F1F9	Bandera: Mayotte	YT, bandera
+1F1FF	indicador regional Z	
+1F1FF-1F1E6	Bandera: Sudáfrica	ZA, bandera
+1F1FF-1F1F2	Bandera: Zambia	ZM, bandera
+1F1FF-1F1FC	Bandera: Zimbabue	ZW, bandera
+1F201	ideograma japonés para "aquí"	japonés, katakana, “aquí”
+1F202	ideograma japonés para "de cortesía"	cortesía, japonés, katakana
+1F21A	ideograma japonés para "gratis"	gratis, ideograma, japonés, kanji
+1F22F	ideograma japonés para "reservado"	ideograma, japonés, kanji, reservado
+1F232	ideograma japonés para "prohibido"	ideograma, japonés, kanji, prohibido
+1F233	ideograma japonés para "vacante"	ideograma, japonés, kanji, vacante
+1F234	ideograma japonés para "aprobado"	aprobado, ideograma, japonés, kanji
+1F235	ideograma japonés para "completo"	completo, ideograma, japonés, kanji, lleno
+1F236	ideograma japonés para "de pago"	ideograma, japonés, kanji, “de pago”
+1F237	ideograma japonés para "cantidad mensual"	ideograma, japonés, kanji, “cantidad mensual”
+1F238	ideograma japonés para "aplicación"	aplicación, ideograma, japonés, kanji
+1F239	ideograma japonés para "descuento"	descuento, ideograma, japonés, kanji
+1F23A	ideograma japonés para "abierto"	abierto, ideograma, japonés, kanji
+1F250	ideograma japonés para "ganga"	ganga, ideograma, japonés, kanji
+1F251	ideograma japonés para "aceptable"	aceptable, ideograma, japonés, kanji
+1F300	ciclón	mareo, tifón, tornado
+1F301	bruma	niebla
+1F302	paraguas cerrado	accesorios, lluvia, paraguas
+1F303	noche estrellada	estrellas, noche
+1F304	amanecer sobre montañas	amanecer, montaña, salida, sol
+1F305	amanecer	salida del sol
+1F306	ciudad al atardecer	atardecer, ciudad, edificios, paisaje
+1F307	puesta del sol	edificios
+1F308	arcoíris	colores, lluvia
+1F309	puente de noche	noche, puente
+1F30A	ola de mar	mar, océano, ola
+1F30B	volcán	erupción, erupción volcánica
+1F30C	Vía Láctea	espacio, galaxia, láctea, vía
+1F30D	globo terráqueo mostrando Europa y África	europa, globo terráqueo mostrando europa y áfrica, mundo, planeta, tierra, áfrica
+1F30E	globo terráqueo mostrando América	américa, globo, globo terráqueo mostrando américa, mundo, planeta, tierra
+1F30F	globo terráqueo mostrando Asia y Australia	asia, australia, globo terráqueo mostrando asia y australia, mundo, planeta, tierra
+1F310	globo terráqueo con meridianos	globo, meridianos, mundo, tierra
+1F311	luna nueva	luna, oscuridad
+1F312	luna creciente	creciente, cuarto, espacio, luna
+1F313	luna en cuarto creciente	creciente, cuarto, espacio, luna
+1F314	luna gibosa creciente	creciente, gibosa, luna
+1F315	luna llena	llena, luna, plenilunio
+1F316	luna gibosa menguante	gibosa, luna, menguante
+1F317	luna en cuarto menguante	cuarto, luna, menguante
+1F318	luna menguante	luna, menguante
+1F319	luna	creciente, espacio
+1F31A	luna nueva con cara	cara, espacio, luna
+1F31B	luna de cuarto creciente con cara	cara, creciente, cuarto, espacio, luna
+1F31C	luna de cuarto menguante con cara	cara, creciente, cuarto, espacio, luna
+1F31D	luna llena con cara	cara, llena, luna
+1F31E	sol con cara	brillante, cara, sol
+1F31F	estrella brillante	brillante, estrella, resplandeciente
+1F320	estrella fugaz	estrella, lluvia
+1F321	termómetro	temperatura
+1F324	sol detrás de una nube pequeña	nube, sol
+1F325	sol detrás de una nube grande	nube, sol
+1F326	sol detrás de una nube con lluvia	lluvia, nube, sol
+1F327	nube con lluvia	lluvia, nube
+1F328	nube con nieve	frío, nieve, nube
+1F329	nube con rayo	nube, rayo
+1F32A	tornado	nube, torbellino
+1F32B	niebla	nube
+1F32C	cara de viento	cara, nube, soplar, viento
+1F32D	perrito caliente	perrito, salchicha
+1F32E	taco	comida, mexicano
+1F32F	burrito	comida, mexicano, tex mex, wrap
+1F330	castaña	castaño, fruto seco
+1F331	planta joven	plantón
+1F332	árbol de hoja perenne	hoja perenne, perenne, árbol
+1F333	árbol de hoja caduca	caducifolio, hoja caduca, árbol
+1F334	palmera	árbol, árbol de palma
+1F335	cactus	planta
+1F336	chile picante	chile, picante, planta
+1F337	tulipán	flor
+1F338	flor de cerezo	cerezo, flor
+1F339	rosa	flor
+1F33A	flor de hibisco	flor, hibisco
+1F33B	girasol	flor, sol
+1F33C	flor	flor
+1F33D	espiga de maíz	espiga, mazorca, maíz, mijo
+1F33E	espiga de arroz	arroz, espiga, planta
+1F33F	hierba	hoja, verde
+1F340	trébol de cuatro hojas	suerte, trébol
+1F341	hoja de arce	arce, hoja
+1F342	hojas caídas	caída, hojas
+1F343	hojas revoloteando al viento	hoja, revolotear, soplar, viento
+1F344	champiñón	hongo, seta
+1F344-200D-1F7EB	champiñón marrón	comida, hongo, naturaleza, seta, vegetal
+1F345	tomate	ensalada, fruta, verdura
+1F346	berenjena	fruto, verdura
+1F347	uvas	agracejo, fruta, racimo, uva
+1F348	melón	fruta
+1F349	sandía	fruta
+1F34A	mandarina	fruta, naranja
+1F34B	limón	citrón, cítrico, fruta
+1F34B-200D-1F7E9	lima	cítrico, fruta, tropical
+1F34C	plátano	banana, fruta
+1F34D	piña	ananás, fruta
+1F34E	manzana roja	fruta, manzana, poma, roja
+1F34F	manzana verde	fruta, manzana, poma, verde
+1F350	pera	fruta, perilla
+1F351	melocotón	durazno, fruta
+1F352	cerezas	cereza, fruta, guindas
+1F353	fresa	fresón, fruta
+1F354	hamburguesa	burger
+1F355	pizza	porción, restaurante
+1F356	carne con hueso	carne, hueso, restaurante
+1F357	muslo de pollo	muslo, pollo, restaurante
+1F358	galleta de arroz	arroz, galleta
+1F359	bola de arroz	arroz, japonés, onigiri, restaurante
+1F35A	arroz cocido	arroz, restaurante
+1F35B	arroz con curry	arroz, curry, restaurante
+1F35C	tazón de fideos	fideos calientes, fideos chinos, fideos ramen, ramen
+1F35D	espagueti	pasta, restaurante
+1F35E	pan de molde	pan, rebanada, tostada
+1F35F	patatas fritas	papas fritas, patatas, restaurante
+1F360	patata asada	asada, papa asada, patata, restaurante
+1F361	dango	japonés, pincho, postre, restaurante
+1F362	brocheta	japonés, marisco, oden, pincho
+1F363	sushi	restaurante
+1F364	gamba frita	frito, gamba, restaurante
+1F365	pastel de pescado japonés	comida japonesa, pastel, pescado
+1F366	cucurucho de helado	cucurucho, dulce, helado, helado de cucurucho, restaurante
+1F367	granizado hawaiano	helado, hielo, postre, raspado
+1F368	helado	postre, sorbete
+1F369	dónut	berlina, pastel, rosquilla
+1F36A	galleta	dulce, pasta, postre
+1F36B	tableta de chocolate	barra, chocolate, restaurante, tableta
+1F36C	caramelo	chuche, chuchería, dulce, golosina
+1F36D	piruleta	chuche, chuchería, dulce, golosina
+1F36E	flan	dulce, postre, pudding
+1F36F	tarro de miel	dulce, miel, tarro
+1F370	trozo de tarta	pedazo de tarta, restaurante, tarta
+1F371	caja de bento	bento, caja, comida, restaurante
+1F372	olla de comida	comida de olla, puchero, restaurante
+1F373	cocinar	freír, huevo, sartén
+1F374	tenedor y cuchillo	cuchillo, restaurante, tenedor
+1F375	tazón de té	bebida, taza, té
+1F376	sake	bar, bebida, botella, restaurante, tazón
+1F377	copa de vino	bar, bebida, copa, vaso, vino
+1F378	copa de cóctel	bar, copa, cóctel, restaurante
+1F379	bebida tropical	bar, bebida, restaurante, tropical
+1F37A	jarra de cerveza	bar, cerveza, jarra, restaurante
+1F37B	jarras de cerveza brindando	bar, cerveza, jarra, jarras, restaurante
+1F37C	biberón	bebé, bibe, bibi, botella, leche
+1F37D	cuchillo y tenedor con un plato	cuchillo, plato, restaurante, tenedor
+1F37E	botella descorchada	bar, beber, botella, cava, corcho
+1F37F	palomitas	maíz
+1F380	lazo	celebración
+1F381	regalo	celebración, envoltorio, presente, regalo envuelto
+1F382	tarta de cumpleaños	celebración, cumpleaños, tarta
+1F383	calabaza de Halloween	calabaza, calabaza de halloween, celebración, halloween, linterna
+1F384	árbol de Navidad	abeto de navidad, celebración, navidad, árbol, árbol de navidad
+1F385	Papá Noel	celebración, claus, cuento, fantasía, feliz, fiestas, navidad, padre, papá noel, santa
+1F386	fuegos artificiales	celebración
+1F387	bengala	celebración, fuegos artificiales
+1F388	globo	celebración
+1F389	cañón de confeti	celebración, confeti, fiesta
+1F38A	bola de confeti	celebración, confeti
+1F38B	árbol de tanabata	celebración, festividad, tanabata, árbol
+1F38C	banderas cruzadas	banderas, celebración, japón
+1F38D	decoración de pino	año nuevo japonés, bambú, celebración, decoración, kadomatsu
+1F38E	muñecas japonesas	celebración, festival, hinamatsuri, muñecas
+1F38F	banderín de carpas	banderín, carpa, celebración, koinobori
+1F390	campanilla de viento	campanilla, furin, viento
+1F391	ceremonia de contemplación de la luna	celebración, contemplación, luna, tsukimi
+1F392	mochila escolar	colegio, mochila
+1F393	birrete	celebración, gorro, graduación
+1F396	medalla militar	celebración, medalla, militar
+1F397	lazo conmemorativo	conmemorativo, lazo
+1F399	micrófono de estudio	estudio, micrófono, música
+1F39A	control de volumen	control, fader, volumen
+1F39B	ruedas de control	control, diales, música, potenciómetros, ruedas
+1F39E	fotograma de película	cine, fotograma, película
+1F39F	entradas	acceso, admisión, entrada, evento
+1F3A0	caballo de tiovivo	caballo, entretenimiento, tiovivo
+1F3A1	noria de feria	atracciones, entretenimiento, feria, noria
+1F3A2	montaña rusa	atracciones, entretenimiento, feria, parque
+1F3A3	caña de pescar	caña, entretenimiento, esparcimiento, pesca, pez
+1F3A4	micrófono	entretenimiento, karaoke, micro
+1F3A5	cámara de cine	cine, cámara, entretenimiento, película
+1F3A6	cine	entretenimiento, película
+1F3A7	auricular	cascos
+1F3A8	paleta de pintor	arte, artista, paleta, pintura
+1F3A9	sombrero de copa	chistera, copa, ropa, sombrero
+1F3AA	carpa de circo	carpa, circo, entretenimiento
+1F3AB	tique	acceso, admisión
+1F3AC	claqueta	cine, claqueta de cine, entretenimiento, película
+1F3AD	máscaras de teatro	actuación, arte, artes escénicas, entretenimiento
+1F3AE	mando de videoconsola	juego, mando, videojuego
+1F3AF	diana	blanco, en el blanco, juego
+1F3B0	máquina tragaperras	juego, máquina
+1F3B1	bola negra de billar	8, billar, bola ocho, juego
+1F3B2	dado	juego
+1F3B3	bolos	bola, bola de bolos, juego
+1F3B4	cartas de flores	carta, flor, hanafuda, naipe japonés
+1F3B5	nota musical	música, nota
+1F3B6	notas musicales	música, notas
+1F3B7	saxofón	instrumento, instrumento musical, música, saxo
+1F3B8	guitarra	instrumento, instrumento musical, música
+1F3B9	teclado musical	instrumento, instrumento musical, música, piano, teclado
+1F3BA	trompeta	instrumento, instrumento musical, música
+1F3BB	violín	instrumento, instrumento musical, música
+1F3BC	pentagrama	música, partitura
+1F3BD	camiseta sin mangas	banda, camiseta con banda, camiseta de correr, deporte
+1F3BE	pelota de tenis	deporte, pelota, tenis
+1F3BF	esquís	esquí, esquíes, nieve
+1F3C0	balón de baloncesto	balón, canasta, deporte
+1F3C1	bandera de cuadros	bandera, carreras, cuadros, deporte, motor
+1F3C2	practicante de snowboard	nieve, snowboard
+1F3C3	persona corriendo	carrera, deporte, maratón
+1F3C3-200D-2640	mujer corriendo	carrera, correr, maratón, mujer
+1F3C3-200D-2640-200D-27A1	mujer corriendo hacia la derecha	carrera, correr, maratón, mujer, mujer corriendo
+1F3C3-200D-2642	hombre corriendo	carrera, correr, hombre, maratón
+1F3C3-200D-2642-200D-27A1	hombre corriendo hacia la derecha	carrera, correr, hombre, hombre corriendo, maratón
+1F3C3-200D-27A1	persona corriendo hacia la derecha	carrera, deporte, maratón, persona corriendo
+1F3C4	persona haciendo surf	surf, surfear
+1F3C4-200D-2640	mujer haciendo surf	mujer, surf, surfera, surfista
+1F3C4-200D-2642	hombre haciendo surf	hombre, surf, surfero, surfista
+1F3C5	medalla deportiva	medalla, premio
+1F3C6	trofeo	premio
+1F3C7	carrera de caballos	caballo, caballo de carreras, carreras, jinete
+1F3C8	balón de fútbol americano	balón, deporte, fútbol americano
+1F3C9	balón de rugby	balón, deporte, rugby
+1F3CA	persona nadando	nadar, natación
+1F3CA-200D-2640	mujer nadando	mujer, nadar
+1F3CA-200D-2642	hombre nadando	hombre, nadar
+1F3CB	persona levantando pesas	halterofilia, levantador, pesas, peso
+1F3CB-200D-2640	mujer levantando pesas	halterofilia, levantadora de pesas, mujer, pesas
+1F3CB-200D-2642	hombre levantando pesas	halterofilia, hombre, levantador de pesas, pesas
+1F3CC	persona jugando al golf	golf, golfista, pelota
+1F3CC-200D-2640	mujer jugando al golf	golf, jugadora, mujer
+1F3CC-200D-2642	hombre jugando al golf	golf, hombre, jugador
+1F3CD	moto	carreras, motocicleta, vehículo
+1F3CE	coche de carreras	carreras, coche
+1F3CF	críquet	juego, pelota
+1F3D0	pelota de voleibol	balón, juego, pelota, voleibol
+1F3D1	hockey sobre hierba	hierba, hockey, juego, palo, pelota
+1F3D2	hockey sobre hielo	disco, hielo, hockey, palo
+1F3D3	tenis de mesa	juego, mesa, pelota, ping pong
+1F3D4	montaña con nieve	frío, montaña, nieve
+1F3D5	camping	acampada, campamento, vacaciones
+1F3D6	playa y sombrilla	playa, sombrilla
+1F3D7	construcción	edificio, obra
+1F3D8	casas	edificio, urbanización
+1F3D9	paisaje urbano	ciudad, edificio, paisaje
+1F3DA	casa abandonada	abandonada, casa, deshabitada, inhabitada, vacía
+1F3DB	edificio clásico	clásico, edificio
+1F3DC	desierto	arena
+1F3DD	isla desierta	desierta, isla
+1F3DE	parque nacional	nacional, parque
+1F3DF	estadio	estadio
+1F3E0	casa	vivienda
+1F3E1	casa con jardín	casa, construcción, jardín, vivienda
+1F3E2	edificio de oficinas	construcción, edificio, oficinas
+1F3E3	oficina de correos japonesa	correos, edificio, japón, oficina de correos
+1F3E4	oficina de correos europea	correos, edificio, europa, oficina de correos
+1F3E5	hospital	doctor, edificio, medicina, médico
+1F3E6	banco	banca, edificio
+1F3E7	señal de cajero automático	atm, banco, cajero
+1F3E8	hotel	alojamiento, edificio, turismo
+1F3E9	hotel del amor	amor, edificio, hotel
+1F3EA	tienda 24 horas	edificio, establecimiento, tienda de comestibles
+1F3EB	colegio	edificio, escuela
+1F3EC	grandes almacenes	comercio
+1F3ED	fábrica	edificio, industria
+1F3EE	lámpara japonesa	izakaya, linterna izakaya, linterna japonesa, lámpara roja, restaurante
+1F3EF	castillo japonés	castillo, construcción
+1F3F0	castillo europeo	castillo, construcción
+1F3F3	bandera blanca	bandera, blanca, ondear
+1F3F3-200D-1F308	bandera del arcoíris	arcoíris, bandera
+1F3F3-200D-26A7	bandera transgénero	azul, bandera, blanco, lgtb, rosa, transgénero
+1F3F4	bandera negra	bandera, negra, ondear
+1F3F4-200D-2620	bandera pirata	botín, jolly roger, pirata, tesoro
+1F3F4-E0067-E0062-E0065-E006E-E0067-E007F	Bandera: Inglaterra	bandera, gbeng
+1F3F4-E0067-E0062-E0073-E0063-E0074-E007F	Bandera: Escocia	bandera, gbsct
+1F3F4-E0067-E0062-E0077-E006C-E0073-E007F	Bandera: Gales	bandera, gbwls
+1F3F5	roseta	flor, planta
+1F3F7	etiqueta	etiqueta
+1F3F8	bádminton	pluma, raqueta, volante
+1F3F9	arco y flecha	arco, arquero, flecha, sagitario, zodiaco
+1F3FA	ánfora	acuario, beber, jarra, zodiaco
+1F3FB	tono de piel claro	piel, tipo 1, tipo 2, tono, tono de piel
+1F3FC	tono de piel claro medio	piel, tipo 3, tono, tono de piel
+1F3FD	tono de piel medio	piel, tipo 4, tono, tono de piel
+1F3FE	tono de piel oscuro medio	piel, tipo 5, tono, tono de piel
+1F3FF	tono de piel oscuro	piel, tipo 6, tono, tono de piel
+1F400	rata	roedor
+1F401	ratón	roedor
+1F402	buey	cabestro, tauro, zodiaco
+1F403	búfalo de agua	agua, búfalo
+1F404	vaca	bovino, res
+1F405	tigre	felino
+1F406	leopardo	felino
+1F407	conejo	conejito, gazapo
+1F408	gato	gatete, minino
+1F408-200D-2B1B	gato negro	gato, mala suerte, negro
+1F409	dragón	cuento, fantasía
+1F40A	cocodrilo	caimán
+1F40B	ballena	cachalote, cetáceo
+1F40C	caracol	caracola, molusco
+1F40D	serpiente	culebra, reptil, víbora
+1F40E	caballo	caballo de carreras, carreras de caballos, ecuestre
+1F40F	carnero	aries, morueco, zodiaco
+1F410	cabra	capricornio, caprino, chivo, zodiaco
+1F411	oveja	borrego, cordero, ovino
+1F412	mono	macaco, simio
+1F413	gallo	ave, gallina, gallinácea, pollo
+1F414	gallina	ave, gallinácea, pollo
+1F415	perro	cachorro, perrete, perrito
+1F415-200D-1F9BA	perro de servicio	accesibilidad, apoyo, asistencia, perro, servicio
+1F416	cerdo	cochino, gorrino, puerco
+1F417	jabalí	cerdo salvaje
+1F418	elefante	paquidermo
+1F419	pulpo	cefalópodo, octópodo
+1F41A	caracola	concha, espiral
+1F41B	bicho	gusano, insecto
+1F41C	hormiga	antenas, insecto
+1F41D	abeja	insecto, miel
+1F41E	mariquita	cochinilla, insecto
+1F41F	pez	pececillo, pescado, piscis, zodiaco
+1F420	pez tropical	pez, tropical
+1F421	pez globo	globo, pez
+1F422	tortuga	galápago
+1F423	pollito rompiendo el cascarón	ave, huevo, pollito, pollo
+1F424	pollito	ave, pollo, polluelo
+1F425	pollito de frente	ave, pollito, pollo
+1F426	pájaro	ave, pajarillo
+1F426-200D-1F525	fénix	ave de fuego, ave fénix, fantasía, reencarnación, renacer
+1F426-200D-2B1B	pájaro negro	cuervo, grajo, mirlo, negro, pájaro
+1F427	pingüino	ave
+1F428	koala	cara, marsupial
+1F429	caniche	perrito, perro
+1F42A	dromedario	camello, desierto, joroba
+1F42B	camello	bactriano, desierto, dromedario, jorobas
+1F42C	delfín	cetáceo
+1F42D	cara de ratón	cara, ratón
+1F42E	cara de vaca	cara, vaca
+1F42F	cara de tigre	cara, tigre
+1F430	cara de conejo	cara, conejo, mascota
+1F431	cara de gato	cara, gato, mascota
+1F432	cara de dragón	cara, cuento, dragón, fantasía
+1F433	ballena soltando un chorro	ballena, chorro de agua
+1F434	cara de caballo	caballo, cara
+1F435	cara de mono	cara, mono
+1F436	cara de perro	cara, mascota, perro
+1F437	cara de cerdo	cara, cerdo, gorrino
+1F438	rana	cara
+1F439	hámster	cara, mascota
+1F43A	lobo	cara
+1F43B	oso	cara
+1F43B-200D-2744	oso polar	blanco, oso, polar, ártico
+1F43C	panda	cara, oso panda
+1F43D	nariz de cerdo	cara, cerdo, morro, nariz
+1F43E	huellas de pezuñas	huellas, pezuñas
+1F43F	ardilla	ardilla
+1F440	ojos	cara
+1F441	ojo	cuerpo
+1F441-200D-1F5E8	ojo en bocadillo de texto	bocadillo de texto, ojo, testigo
+1F442	oreja	cuerpo
+1F443	nariz	cuerpo
+1F444	boca	labios
+1F445	lengua	cuerpo
+1F446	dorso de mano con índice hacia arriba	apuntar, arriba, dedo, mano
+1F447	dorso de mano con índice hacia abajo	abajo, apuntar, dedo, mano
+1F448	dorso de mano con índice a la izquierda	dedo, izquierda, mano, índice
+1F449	dorso de mano con índice a la derecha	dedo, derecha, mano, índice
+1F44A	puño cerrado	puñetazo, puño
+1F44B	mano saludando	agitar, mano, saludar, saludo
+1F44C	señal de aprobación con la mano	aprobación, mano, ok
+1F44D	pulgar hacia arriba	arriba, mano, pulgar, señal
+1F44E	pulgar hacia abajo	abajo, mano, pulgar, señal
+1F44F	manos aplaudiendo	aplaudir, manos, palmas, señal
+1F450	manos abiertas	abiertas, manos
+1F451	corona	accesorios, complementos, reina, rey
+1F452	sombrero de mujer	accesorio, mujer, ropa, sombrero
+1F453	gafas	accesorios, ojo, ropa
+1F454	corbata	accesorio, ropa
+1F455	camiseta	ropa
+1F456	vaqueros	pantalones, ropa
+1F457	vestido	mujer, ropa
+1F458	kimono	japonés, ropa
+1F459	bikini	baño, playa, ropa
+1F45A	ropa de mujer	blusa, camisa, femenina, ropa
+1F45B	monedero	accesorios, cartera, complementos
+1F45C	bolso	accesorios, complementos
+1F45D	bolso de mano	accesorios, bolso, cartera, complementos
+1F45E	zapato de hombre	calzado, hombre, ropa, zapato
+1F45F	zapatilla deportiva	calzado, correr, ropa, tenis
+1F460	zapato de tacón	mujer, tacón, zapato
+1F461	sandalia de mujer	calzado, mujer, ropa, sandalia
+1F462	bota de mujer	bota, calzado, mujer, ropa
+1F463	huellas de pies	huellas, pies
+1F464	silueta de busto	busto, silueta
+1F465	dos siluetas de bustos	bustos, siluetas
+1F466	niño	joven
+1F467	niña	chica, joven
+1F468	hombre	adulto
+1F468-200D-1F33E	profesional de la agricultura hombre	agricultor, campo, granjero, hombre, labrador
+1F468-200D-1F373	chef hombre	chef, cocinero, hombre, pinche
+1F468-200D-1F37C	hombre alimentando a bebé	alimentar, amamantar, bebé, hombre, lactancia
+1F468-200D-1F393	estudiante hombre	estudiante, graduado, hombre, licenciado, universitario
+1F468-200D-1F3A4	cantante hombre	artista, estrella, hombre, rock
+1F468-200D-1F3A8	artista hombre	hombre, paleta, pintor, pinturas
+1F468-200D-1F3EB	docente hombre	educador, hombre, instructor, maestro, profesor
+1F468-200D-1F3ED	profesional industrial hombre	fábrica, montaje, obrero, operario, trabajador
+1F468-200D-1F466	familia: hombre y niño	familia, hombre, niño
+1F468-200D-1F466-200D-1F466	familia: hombre, niño, niño	familia, hombre, niño
+1F468-200D-1F467	familia: hombre y niña	familia, hombre, niña
+1F468-200D-1F467-200D-1F466	familia: hombre, niña, niño	familia, hombre, niña, niño
+1F468-200D-1F467-200D-1F467	familia: hombre, niña, niña	familia, hombre, niña
+1F468-200D-1F468-200D-1F466	familia: hombre, hombre, niño	familia, hombre, niño
+1F468-200D-1F468-200D-1F466-200D-1F466	familia: hombre, hombre, niño, niño	familia, hombre, niño
+1F468-200D-1F468-200D-1F467	familia: hombre, hombre, niña	familia, hombre, niña
+1F468-200D-1F468-200D-1F467-200D-1F466	familia: hombre, hombre, niña, niño	familia, hombre, niña, niño
+1F468-200D-1F468-200D-1F467-200D-1F467	familia: hombre, hombre, niña, niña	familia, hombre, niña
+1F468-200D-1F469-200D-1F466	familia: hombre, mujer, niño	familia, hombre, mujer, niño
+1F468-200D-1F469-200D-1F466-200D-1F466	familia: hombre, mujer, niño, niño	familia, hombre, mujer, niño
+1F468-200D-1F469-200D-1F467	familia: hombre, mujer, niña	familia, hombre, mujer, niña
+1F468-200D-1F469-200D-1F467-200D-1F466	familia: hombre, mujer, niña, niño	familia, hombre, mujer, niña, niño
+1F468-200D-1F469-200D-1F467-200D-1F467	familia: hombre, mujer, niña, niña	familia, hombre, mujer, niña
+1F468-200D-1F4BB	profesional de la tecnología hombre	desarrollador, hombre, informático, programador, tecnólogo
+1F468-200D-1F4BC	oficinista hombre	director, ejecutivo, empresa, hombre, oficina, oficinista
+1F468-200D-1F527	profesional de la mecánica hombre	electricista, fontanero, hombre, mecánico, operario
+1F468-200D-1F52C	profesional de la ciencia hombre	biólogo, científico, físico, hombre, químico
+1F468-200D-1F680	astronauta hombre	astronauta, cohete, espacio, hombre
+1F468-200D-1F692	bombero hombre	apagafuegos, bombero, camión, manguera
+1F468-200D-1F9AF	hombre con bastón	accesibilidad, bastón, ciego, hombre, invidente
+1F468-200D-1F9AF-200D-27A1	hombre con bastón hacia la derecha	accesibilidad, bastón, ciego, hombre, hombre con bastón, invidente
+1F468-200D-1F9B0	hombre: pelo pelirrojo	adulto, hombre, pelo pelirrojo
+1F468-200D-1F9B1	hombre: pelo rizado	adulto, hombre, pelo rizado
+1F468-200D-1F9B2	hombre: sin pelo	adulto, hombre, sin pelo
+1F468-200D-1F9B3	hombre: pelo blanco	adulto, hombre, pelo blanco
+1F468-200D-1F9BC	hombre en silla de ruedas eléctrica	accesibilidad, hombre, silla de ruedas
+1F468-200D-1F9BC-200D-27A1	hombre en silla de ruedas eléctrica hacia la derecha	accesibilidad, hombre, hombre en silla de ruedas eléctrica, silla de ruedas
+1F468-200D-1F9BD	hombre en silla de ruedas manual	accesibilidad, hombre, silla de ruedas
+1F468-200D-1F9BD-200D-27A1	hombre en silla de ruedas manual hacia la derecha	accesibilidad, hombre, hombre en silla de ruedas manual, silla de ruedas
+1F468-200D-2695	profesional sanitario hombre	doctor, enfermero, médico, sanitario, terapeuta hombre
+1F468-200D-2696	fiscal hombre	hombre, juez, justicia, magistrado
+1F468-200D-2708	piloto hombre	avión, capitán, hombre, piloto, vuelo
+1F468-200D-2764-200D-1F468	pareja enamorada: hombre y hombre	amor, hombre, pareja, pareja enamorada, personas enamoradas
+1F468-200D-2764-200D-1F48B-200D-1F468	beso: hombre y hombre	beso, hombre, personas, romance
+1F469	mujer	adulta
+1F469-200D-1F33E	profesional de la agricultura mujer	agricultora, campo, granjera, labradora, mujer
+1F469-200D-1F373	chef mujer	chef, cocinera, mujer, pinche
+1F469-200D-1F37C	mujer alimentando a bebé	alimentar, amamantar, bebé, lactancia, mujer
+1F469-200D-1F393	estudiante mujer	estudiante, graduada, licenciada, mujer, universitaria
+1F469-200D-1F3A4	cantante mujer	artista, estrella, mujer, rock
+1F469-200D-1F3A8	artista mujer	mujer, paleta, pintora, pinturas
+1F469-200D-1F3EB	docente mujer	educadora, instructora, maestra, mujer, profesora
+1F469-200D-1F3ED	profesional industrial mujer	fábrica, montaje, obrera, operaria, trabajadora
+1F469-200D-1F466	familia: mujer y niño	familia, mujer, niño
+1F469-200D-1F466-200D-1F466	familia: mujer, niño, niño	familia, mujer, niño
+1F469-200D-1F467	familia: mujer y niña	familia, mujer, niña
+1F469-200D-1F467-200D-1F466	familia: mujer, niña, niño	familia, mujer, niña, niño
+1F469-200D-1F467-200D-1F467	familia: mujer, niña, niña	familia, mujer, niña
+1F469-200D-1F469-200D-1F466	familia: mujer, mujer, niño	familia, mujer, niño
+1F469-200D-1F469-200D-1F466-200D-1F466	familia: mujer, mujer, niño, niño	familia, mujer, niño
+1F469-200D-1F469-200D-1F467	familia: mujer, mujer, niña	familia, mujer, niña
+1F469-200D-1F469-200D-1F467-200D-1F466	familia: mujer, mujer, niña, niño	familia, mujer, niña, niño
+1F469-200D-1F469-200D-1F467-200D-1F467	familia: mujer, mujer, niña, niña	familia, mujer, niña
+1F469-200D-1F4BB	profesional de la tecnología mujer	desarrolladora, informática, mujer, programadora, tecnóloga
+1F469-200D-1F4BC	oficinista mujer	directora, ejecutiva, empresa, mujer, oficina, oficinista
+1F469-200D-1F527	profesional de la mecánica mujer	electricista, fontanera, mecánica, mujer, operaria
+1F469-200D-1F52C	profesional de la ciencia mujer	bióloga, científica, física, mujer, química
+1F469-200D-1F680	astronauta mujer	astronauta, cohete, espacio, mujer
+1F469-200D-1F692	bombera	apagafuegos, bombera mujera, camión, manguera
+1F469-200D-1F9AF	mujer con bastón	accesibilidad, bastón, ciega, invidente, mujer
+1F469-200D-1F9AF-200D-27A1	mujer con bastón hacia la derecha	accesibilidad, bastón, ciega, invidente, mujer, mujer con bastón
+1F469-200D-1F9B0	mujer: pelo pelirrojo	adulta, mujer, pelo pelirrojo
+1F469-200D-1F9B1	mujer: pelo rizado	adulta, mujer, pelo rizado
+1F469-200D-1F9B2	mujer: sin pelo	adulta, mujer, sin pelo
+1F469-200D-1F9B3	mujer: pelo blanco	adulta, mujer, pelo blanco
+1F469-200D-1F9BC	mujer en silla de ruedas eléctrica	accesibilidad, mujer, silla de ruedas
+1F469-200D-1F9BC-200D-27A1	mujer en silla de ruedas eléctrica hacia la derecha	accesibilidad, mujer, mujer en silla de ruedas eléctrica, silla de ruedas
+1F469-200D-1F9BD	mujer en silla de ruedas manual	accesibilidad, mujer, silla de ruedas
+1F469-200D-1F9BD-200D-27A1	mujer en silla de ruedas manual hacia la derecha	accesibilidad, mujer, mujer en silla de ruedas manual, silla de ruedas
+1F469-200D-2695	profesional sanitario mujer	doctora, enfermera, médica, sanitaria, terapeuta mujer
+1F469-200D-2696	fiscal mujer	jueza, justicia, magistrada, mujer
+1F469-200D-2708	piloto mujer	avión, capitana, mujer, piloto, vuelo
+1F469-200D-2764-200D-1F468	pareja enamorada: mujer y hombre	amor, hombre, mujer, pareja, pareja enamorada, personas enamoradas
+1F469-200D-2764-200D-1F469	pareja enamorada: mujer y mujer	amor, mujer, pareja, pareja enamorada, personas enamoradas
+1F469-200D-2764-200D-1F48B-200D-1F468	beso: mujer y hombre	beso, hombre, mujer, personas, romance
+1F469-200D-2764-200D-1F48B-200D-1F469	beso: mujer y mujer	beso, mujer, personas, romance
+1F46A	familia	familia
+1F46B	mujer y hombre de la mano	hombre, hombre y mujer de la mano, mujer, novios, pareja
+1F46C	hombres de la mano	gays, hombres, novios, pareja
+1F46D	mujeres de la mano	lesbianas, mujeres, novias, pareja
+1F46E	agente de policía	agente, personas, policía
+1F46E-200D-2640	agente de policía mujer	agente, mujer, poli, policía
+1F46E-200D-2642	agente de policía hombre	agente, hombre, poli, policía
+1F46F	personas con orejas de conejo	bailar, fiesta, orejas de conejo, personas
+1F46F-200D-2640	mujeres con orejas de conejo	bailar, fiesta, mujer, orejas de conejo
+1F46F-200D-2642	hombres con orejas de conejo	bailar, fiesta, hombre, orejas de conejo
+1F470	persona con velo	boda, novia, persona, velo
+1F470-200D-2640	mujer con velo	boda, mujer, novia, velo
+1F470-200D-2642	hombre con velo	boda, hombre, novio, velo
+1F471	persona adulta rubia	rubia, rubias, rubio, rubios
+1F471-200D-2640	mujer rubia	mujer, rubia, rubiales
+1F471-200D-2642	hombre rubio	hombre, rubiales, rubio
+1F472	persona con gorro chino	gorro, gua, gua pi mao, mao, persona
+1F473	persona con turbante	turbante
+1F473-200D-2640	mujer con turbante	mujer, turbante
+1F473-200D-2642	hombre con turbante	hombre, turbante
+1F474	anciano	hombre, mayor
+1F475	anciana	mayor, mujer
+1F476	bebé	joven, niño
+1F477	profesional de la construcción	casco, construcción, obrero, trabajador
+1F477-200D-2640	profesional de la construcción mujer	albañila, construcción, mujer, obrera, trabajadora
+1F477-200D-2642	profesional de la construcción hombre	albañil, construcción, hombre, obrero, trabajador
+1F478	princesa	cuento, fantasía, hadas
+1F479	demonio japonés oni	cara, cuento, cuernos, sonrisa
+1F47A	demonio japonés tengu	cara, cuento, fantasía, monstruo, tengu
+1F47B	fantasma	cara, criatura, cuento, monstruo
+1F47C	bebé ángel	bebé, cara, cuento, ángel
+1F47D	alienígena	alien, cara, criatura, extraterrestre, ovni
+1F47E	monstruo alienígena	alien, cara, criatura, extraterrestre, ovni
+1F47F	cara enfadada con cuernos	cara, cuernos, demonio, diablo
+1F480	calavera	cara, cuento, monstruo, muerte
+1F481	persona de mostrador de información	información, mano, mostrador, persona
+1F481-200D-2640	empleada de mostrador de información	información, mano, mostrador, mujer
+1F481-200D-2642	empleado de mostrador de información	hombre, información, mano, mostrador
+1F482	guardia	guardia real británica
+1F482-200D-2640	guardia mujer	guardia, mujer, vigilante
+1F482-200D-2642	guardia hombre	guardia, hombre, vigilante
+1F483	mujer bailando	bailar, mujer
+1F484	pintalabios	barra, cosmética, labios, maquillaje
+1F485	pintarse las uñas	cosmética, esmalte, manicura, uñas
+1F486	persona recibiendo masaje	cara, facial, masaje, salón
+1F486-200D-2640	mujer recibiendo masaje	cara, facial, masaje, salón
+1F486-200D-2642	hombre recibiendo masaje	cara, facial, masaje, salón
+1F487	persona cortándose el pelo	belleza, corte, pelo, peluquero
+1F487-200D-2640	mujer cortándose el pelo	belleza, corte, pelo, peluquero
+1F487-200D-2642	hombre cortándose el pelo	belleza, corte, pelo, peluquero
+1F488	poste de barbero	barbero, barbería, peluquero, poste
+1F489	jeringuilla	aguja, jeringa, medicina, médico
+1F48A	píldora	comprimido, medicina, médico, pastilla
+1F48B	marca de beso	beso, labios, romance
+1F48C	carta de amor	amor, carta, corazón, correo
+1F48D	anillo	diamante
+1F48E	piedra preciosa	diamante, gema, joya, piedra, preciosa
+1F48F	beso	personas, romance
+1F490	ramo de flores	bouquet, flores, ramo
+1F491	pareja enamorada	amor, pareja, personas enamoradas
+1F492	iglesia celebrando boda	boda, iglesia, romance
+1F493	corazón latiendo	amor, corazón, emoción, latido
+1F494	corazón roto	corazón, emoción, partido, roto
+1F495	dos corazones	amantes, amor, corazón
+1F496	corazón brillante	amor, brillante, emoción
+1F497	corazón creciente	corazón, creciente, emocionado, latido, nervioso
+1F498	corazón con flecha	amor, corazón, emoción, flecha
+1F499	corazón azul	azul, corazón, emoción
+1F49A	corazón verde	corazón, emoción, verde
+1F49B	corazón amarillo	amarillo, corazón, emoción
+1F49C	corazón morado	corazón, emoción, morado
+1F49D	corazón con lazo	corazón, emoción, lazo, san valentín
+1F49E	corazones giratorios	corazón, giratorio
+1F49F	adorno de corazón	corazón
+1F4A0	rombo con pétalo	flor, geometría, rombo
+1F4A1	bombilla	cómic, electricidad, idea, luz
+1F4A2	símbolo de enfado	cómic, enfadado, enfado
+1F4A3	bomba	cómic, emoción
+1F4A4	símbolo de sueño	cómic, dormir, sueño, zzz
+1F4A5	colisión	cómic
+1F4A6	gotas de sudor	cómic, emoción, sudor
+1F4A7	gota	agua, cómic, sudor
+1F4A8	salir corriendo	carrera, correr, cómic, humo
+1F4A9	caca con ojos	caca, cómic, mierda, mojón
+1F4AA	bíceps flexionado	bíceps, cómic, flexionado, fuerte, músculo
+1F4AB	símbolo de mareo	cómic, emoción, estrella, mareo
+1F4AC	bocadillo de diálogo	bocadillo, conversación, cómic, diálogo
+1F4AD	bocadillo de pensamiento	bocadillo, burbuja, cómic, pensamiento
+1F4AE	flor blanca	blanca, flor
+1F4AF	cien puntos	100, pleno, puntos
+1F4B0	bolsa de dinero	bolsa, bolsa de dólares, dinero
+1F4B1	cambio de divisas	cambio, dinero, divisa, moneda
+1F4B2	símbolo de dólar	dinero, dólar, símbolo
+1F4B3	tarjeta de crédito	crédito, tarjeta
+1F4B4	billete de yen	billete, billete de banco, dinero, yen
+1F4B5	billete de dólar	billete, billete de banco, dinero, dólar
+1F4B6	billete de euro	billete, billete de banco, dinero, euro
+1F4B7	billete de libra	billete de banco, dinero, libra
+1F4B8	billete con alas	billete, billete de banco, dinero, dinero con alas
+1F4B9	mercado al alza	alza, mercado, mercado alcista, tabla
+1F4BA	asiento de transporte	asiento, plaza, silla
+1F4BB	ordenador portátil	ordenador, pc, personal
+1F4BC	maletín	cartera, documentos
+1F4BD	minidisc	disco, md
+1F4BE	disquete	disco, disco de 3 1/2
+1F4BF	disco óptico	cd, disco
+1F4C0	disco DVD	disco, dvd
+1F4C1	carpeta de archivos	archivo, carpeta
+1F4C2	carpeta de archivos abierta	abierta, archivo, carpeta
+1F4C3	página doblada	documento, página
+1F4C4	página hacia arriba	anverso, documento, página
+1F4C5	calendario	fecha
+1F4C6	calendario recortable	calendario, fecha
+1F4C7	organizador de fichas	cartera, ficha, organizador, tarjetas
+1F4C8	gráfica de evolución ascendente	ascendente, gráfica, gráfico, tendencia ascendente
+1F4C9	gráfica de evolución descendente	descendente, gráfica, gráfico, tendencia descendente
+1F4CA	gráfico de barras	barras, gráfico
+1F4CB	portapapeles	papeles, pinza, tabla
+1F4CC	chincheta	tachuela
+1F4CD	chincheta redonda	chincheta
+1F4CE	clip	clip
+1F4CF	regla	regla
+1F4D0	escuadra	regla, regla triangular, triángulo
+1F4D1	marcadores	pestañas
+1F4D2	libro de contabilidad	cuaderno
+1F4D3	cuaderno	libreta
+1F4D4	cuaderno con tapa decorativa	cuaderno, decoración, tapa
+1F4D5	libro cerrado	cerrado, libro
+1F4D6	libro abierto	abierto, libro
+1F4D7	libro verde	libro, verde
+1F4D8	libro azul	azul, libro
+1F4D9	libro naranja	libro, naranja
+1F4DA	libros	libro
+1F4DB	etiqueta identificativa	etiqueta, nombre
+1F4DC	pergamino	pergamino de papel
+1F4DD	cuaderno de notas	comunicación
+1F4DE	auricular de teléfono	comunicación, teléfono
+1F4DF	busca	comunicación, localizador
+1F4E0	máquina de fax	comunicación, fax
+1F4E1	antena de satélite	antena, comunicación, satélite
+1F4E2	altavoz de mano	altavoz, comunicación
+1F4E3	megáfono	comunicación
+1F4E4	bandeja de salida	bandeja, comunicación, correo, enviado, salida
+1F4E5	bandeja de entrada	bandeja, comunicación, correo, entrada, recibido
+1F4E6	paquete	caja
+1F4E7	correo electrónico	comunicación, correo, sobre
+1F4E8	sobre entrante	carta, comunicación, correo, correo electrónico, sobre
+1F4E9	sobre con flecha	carta, comunicación, correo, correo electrónico, sobre
+1F4EA	buzón cerrado con la bandera bajada	bandera, buzón, buzón cerrado, vacío
+1F4EB	buzón cerrado con la bandera levantada	bandera, buzón, buzón cerrado, con contenido
+1F4EC	buzón abierto con la bandera levantada	bandera, buzón, buzón abierto, con contenido
+1F4ED	buzón abierto con la bandera bajada	bandera, buzón, buzón abierto, vacío
+1F4EE	buzón	cartas, correo
+1F4EF	corneta de posta	corneta, posta
+1F4F0	periódico	diario
+1F4F1	teléfono móvil	celular, móvil, teléfono
+1F4F2	móvil con una flecha	flecha, llamada, móvil, recibir, teléfono
+1F4F3	modo vibración	móvil, teléfono, teléfono celular, vibración
+1F4F4	teléfono móvil apagado	apagado, móvil, teléfono, teléfono celular
+1F4F5	prohibido el uso de móviles	móvil, no hacer llamadas, prohibido, teléfono
+1F4F6	barras de cobertura	antena, celular, móvil, señal, teléfono
+1F4F7	cámara de fotos	cámara
+1F4F8	cámara con flash	cámara, flash
+1F4F9	videocámara	cámara, vídeo
+1F4FA	televisión	tv
+1F4FB	radio	radio
+1F4FC	cinta de vídeo	cinta
+1F4FD	proyector de cine	cine, película, proyector
+1F4FF	rosario	collar, cuentas, religión
+1F500	reproducción aleatoria	cruzado, flechas, flechas entrecruzadas
+1F501	repetir	flechas, repetición
+1F502	repetir una vez	flechas, repetición, uno
+1F503	flechas verticales en sentido horario	flechas, flechas verticales sentido horario, horario, señal de recarga
+1F504	flechas en sentido antihorario	dirección, flechas, sentido antihorario, señal de recarga
+1F505	brillo bajo	bajo, brillo, señal de brillo bajo, tenue
+1F506	brillo alto	alto, brillante, brillo, señal de brillo alto
+1F507	altavoz silenciado	altavoz, altavoz con marca de cancelación, mute, silencio
+1F508	altavoz a volumen bajo	volumen bajo
+1F509	altavoz a volumen medio	altavoz con volumen medio, medio, volumen medio
+1F50A	altavoz a volumen alto	altavoz, alto, volumen alto
+1F50B	pila	batería
+1F50C	enchufe eléctrico	corriente, electricidad, eléctrico, enchufe
+1F50D	lupa orientada hacia la izquierda	buscar, lupa
+1F50E	lupa orientada hacia la derecha	buscar, lupa
+1F50F	candado con pluma estilográfica	candado, cerrado, estilográfica, pluma, privacidad
+1F510	candado cerrado y llave	candado, cerrado, llave, seguro
+1F511	llave	contraseña
+1F512	candado cerrado	candado, cerrado, cerrar
+1F513	candado abierto	abierto, abrir, candado
+1F514	campana	campana
+1F515	campana con signo de cancelación	campana, cancelación, ruido
+1F516	marcapáginas	marcador
+1F517	eslabón	eslabón
+1F518	botón de opción	botón, opción
+1F519	flecha BACK	atrás, atrás con flecha izquierda, back, flecha, flecha a la izquierda
+1F51A	flecha END	final, final con flecha izquierda, flecha, flecha a la izquierda, flecha end
+1F51B	flecha ON!	flecha, flecha de doble punta con la palabra "on" encima, flecha on!, on, señal
+1F51C	flecha SOON	flecha, soon, soon con flecha a la derecha
+1F51D	flecha TOP	arriba, flecha hacia arriba, flecha top, top, top con flecha hacia arriba
+1F51E	prohibido para menos de 18 años	18, no apto para menores, prohibido, prohibido para menores de 18 años
+1F51F	Teclas: 10	teclas
+1F520	letras latinas mayúsculas	abcd, letras, mayúsculas
+1F521	letras latinas minúsculas	abcd, letras, minúsculas
+1F522	números	1234, dígitos
+1F523	símbolos	〒♪&%
+1F524	alfabeto latino	abc, latino
+1F525	fuego	llama
+1F526	linterna	luz
+1F527	llave inglesa	herramienta
+1F528	martillo	herramienta
+1F529	tornillo y tuerca	herramienta, tornillo, tuerca
+1F52A	cuchillo de cocina	arma, cocinar, cuchillo
+1F52B	pistola de agua	agua, juguete, pistola, verano
+1F52C	microscopio	instrumento, laboratorio
+1F52D	telescopio	astronomía, instrumento
+1F52E	bola de cristal	adivinación, bola, buena fortuna, cristal
+1F52F	estrella de seis puntas	adivinación, buena fortuna, estrella, seis puntas
+1F530	símbolo japonés para principiante	amarillo, japonés, principiante, verde
+1F531	emblema de tridente	ancla, emblema, tridente
+1F532	botón cuadrado con borde negro	botón, cuadrado
+1F533	botón cuadrado con borde blanco	botón, cuadrado
+1F534	círculo rojo	círculo, geometría, rojo
+1F535	círculo azul	azul, círculo, geometría
+1F536	rombo naranja grande	geometría, naranja, rombo
+1F537	rombo azul grande	azul, geometría, rombo
+1F538	rombo naranja pequeño	geometría, naranja, rombo
+1F539	rombo azul pequeño	azul, geometría, rombo
+1F53A	triángulo rojo hacia arriba	geometría, rojo, triángulo, triángulo hacia arriba rojo
+1F53B	triángulo rojo hacia abajo	geometría, rojo, triángulo, triángulo hacia abajo rojo
+1F53C	triángulo hacia arriba	arriba, botón, botón triángulo hacia arriba, triángulo
+1F53D	triángulo hacia abajo	abajo, botón, botón triángulo hacia abajo, triángulo
+1F549	om	hindú, religión
+1F54A	paloma	ave, paz, pájaro
+1F54B	Kaaba	hach, islam, kaaba, musulmán, religión, umrah
+1F54C	mezquita	islam, religión
+1F54D	sinagoga	judaísmo, religión
+1F54E	menorá	candelabro, religión
+1F550	1 en punto	1:00, reloj, una
+1F551	2 en punto	2:00, dos, reloj
+1F552	3 en punto	3:00, reloj, tres
+1F553	4 en punto	4:00, cuatro, reloj
+1F554	5 en punto	5:00, cinco, reloj
+1F555	6 en punto	6:00, reloj, seis
+1F556	7 en punto	7:00, reloj, siete
+1F557	8 en punto	8:00, ocho, reloj
+1F558	9 en punto	9:00, nueve, reloj
+1F559	10 en punto	10:00, diez, reloj
+1F55A	11 en punto	11:00, once, reloj
+1F55B	12 en punto	12:00, doce, reloj
+1F55C	una y media	1:30, reloj
+1F55D	dos y media	2:30, reloj
+1F55E	tres y media	3:30, reloj
+1F55F	cuatro y media	4:30, reloj
+1F560	cinco y media	5:30, reloj
+1F561	seis y media	6:30, reloj
+1F562	siete y media	7:30, reloj
+1F563	ocho y media	8:30, reloj
+1F564	nueve y media	9:30, reloj
+1F565	diez y media	10:30, reloj
+1F566	once y media	11:30, reloj
+1F567	doce y media	12:30, reloj
+1F56F	vela	luz
+1F570	reloj de sobremesa	reloj, sobremesa
+1F573	agujero	orificio
+1F574	persona trajeada levitando	levitar, negocios, persona, traje
+1F575	detective	cara, espía
+1F575-200D-2640	detective mujer	agente, detective, espía, investigadora, mujer
+1F575-200D-2642	detective hombre	agente, detective, espía, hombre, investigador
+1F576	gafas de sol	gafas, ojo, oscuras, sol
+1F577	araña	insecto
+1F578	tela de araña	araña, tela, telaraña
+1F579	joystick	juego, mando, palanca, videojuego
+1F57A	hombre bailando	bailar, hombre
+1F587	clips unidos	clips, unidos, unión
+1F58A	bolígrafo	boli, escribir
+1F58B	estilográfica	bolígrafo, escribir, pluma, tinta
+1F58C	pincel	pintar
+1F58D	lápiz de cera	cera, lápiz
+1F590	mano abierta	abierta, dedo, mano
+1F595	dedo corazón hacia arriba	corazón, dedo, mano, peineta
+1F596	saludo vulcano	mano, saludo, spock, vulcano
+1F5A4	corazón negro	corazón, negro
+1F5A5	ordenador de sobremesa	ordenador, sobremesa
+1F5A8	impresora	ordenador
+1F5B1	ratón de ordenador	ordenador, ratón
+1F5B2	bola de desplazamiento	ordenador, trackball
+1F5BC	cuadro enmarcado	marco, museo
+1F5C2	separador de fichas	fichas, fichero, separador
+1F5C3	archivador de tarjetas	archivador, archivo, caja
+1F5C4	archivador	archivos, oficina, organizador
+1F5D1	papelera	basura, cubo
+1F5D2	bloc de notas de espiral	bloc, cuaderno, espiral, notas
+1F5D3	calendario de espiral	calendario, espiral
+1F5DC	tornillo de banco	herramienta, tornillo
+1F5DD	llave antigua	antigua, llave
+1F5DE	periódico enrollado	noticias, papel, periódico
+1F5E1	puñal	arma, cuchillo, daga
+1F5E3	cabeza parlante	cabeza, cara, hablar, silueta
+1F5E8	bocadillo de diálogo por la izquierda	bocadillo, burbuja, conversación, diálogo
+1F5EF	bocadillo de enfado por la derecha	bocadillo, cabreo, enfado, rabia
+1F5F3	urna con papeleta	papeleta, urna, voto
+1F5FA	mapa mundial	mapa, mapamundi, mundo
+1F5FB	monte Fuji	fuji, montaña, monte, naturaleza
+1F5FC	Torre de Tokio	tokio, torre, torre de tokio
+1F5FD	Estatua de la Libertad	estatua, estatua de la libertad, libertad, nueva, ny, nyc, york
+1F5FE	mapa de Japón	japón, mapa
+1F5FF	estatua moái	estatua, moái, pascua
+1F600	cara sonriendo	cara, divertido, feliz, sonrisa
+1F601	cara radiante con ojos sonrientes	cara, ojo, risa, sonrisa
+1F602	cara llorando de risa	cara, felicidad, lágrima, risa
+1F603	cara sonriendo con ojos grandes	cara, divertido, risa, sonriendo
+1F604	cara sonriendo con ojos sonrientes	abierta, cara, ojo, sonrisa
+1F605	cara sonriendo con sudor frío	cara, frío, risa, sudor
+1F606	cara sonriendo con los ojos cerrados	abierta, boca, cara, risa
+1F607	cara sonriendo con aureola	cara, halo, sonrisa, ángel
+1F608	cara sonriendo con cuernos	cara, cuernos, demonio, sonrisa
+1F609	cara guiñando el ojo	cara, guiño
+1F60A	cara feliz con ojos sonrientes	cara, ojo, rubor, sonrisa
+1F60B	cara saboreando comida	cara, delicioso, hambre, rico
+1F60C	cara de alivio	aliviado, cara
+1F60D	cara sonriendo con ojos de corazón	amor, cara, corazón, sonrisa
+1F60E	cara sonriendo con gafas de sol	cara, gafas, guay, sol
+1F60F	cara sonriendo con superioridad	cara, listillo, superioridad
+1F610	cara neutral	cara, inexpresivo, neutral
+1F611	cara sin expresión	cara, inexpresiva, inexpresivo, inexpresión
+1F612	cara de desaprobación	cara, insatisfacción, rechazo
+1F613	cara con sudor frío	cara, frío, sudor
+1F614	cara desanimada	alicaído, cara, desanimado, pensativo
+1F615	cara de confusión	cara, confuso
+1F616	cara de frustración	cara, frustrado
+1F617	cara besando	beso, cara
+1F618	cara lanzando un beso	beso, cara
+1F619	cara besando con ojos sonrientes	beso, cara, ojo, sonrisa
+1F61A	cara besando con los ojos cerrados	beso, cara, cerrado, ojo
+1F61B	cara sacando la lengua	cara, lengua
+1F61C	cara sacando la lengua y guiñando un ojo	cara, guiño, lengua, ojo
+1F61D	cara con ojos cerrados y lengua fuera	cara, lengua, ojo, sabor
+1F61E	cara decepcionada	cara, decepcionado, decepción
+1F61F	cara preocupada	cara, preocupación, preocupado
+1F620	cara enfadada	cara, enfadado, histérico
+1F621	cara cabreada	cabreo, cara, enfadado, furia
+1F622	cara llorando	cara, llorar, lágrima, triste
+1F623	cara desesperada	cara, desesperación, frustración
+1F624	cara resoplando	cabreo, cara, enfado
+1F625	cara triste pero aliviada	aliviado, cara, decepcionado, menos mal
+1F626	cara con el ceño fruncido y la boca abierta	boca abierta, cara, ceño fruncido con boca abierta
+1F627	cara angustiada	angustia, angustiado, cara
+1F628	cara asustada	asustado, cara, miedo, miedoso
+1F629	cara agotada	agotado, cansado, cara
+1F62A	cara de sueño	cara, dormir, sueño
+1F62B	cara cansada	cansado, cara
+1F62C	cara haciendo una mueca	cara, mueca
+1F62D	cara llorando fuerte	cara, llorar, lágrima, triste
+1F62E	cara con la boca abierta	boca, cara
+1F62E-200D-1F4A8	cara exhalando	alivio, bocanada, exhalar, jadear, resoplido, silbar
+1F62F	cara estupefacta	alucinado, cara, estupefacto, sorprendido
+1F630	cara con ansiedad y sudor	ansiedad, cara, frío, sudor
+1F631	cara gritando de miedo	asustado, cara, miedo, pánico
+1F632	cara asombrada	alucinado, asombrado, cara, pasmado
+1F633	cara sonrojada	cara, colorado, sonrojado
+1F634	cara durmiendo	cara, dormido, sueño, zzz
+1F635	cara mareada	cara, mareo
+1F635-200D-1F4AB	cara con ojos en espiral	espiral, hipnotizado, indispuesto, mareado, mareo, problema
+1F636	cara sin boca	boca, callado, cara, silencio
+1F636-200D-1F32B	cara entre las nubes	ausente, cabeza en las nubes, cara en la niebla, en las nubes
+1F637	cara con mascarilla médica	cara, enfermo, malo, máscara
+1F638	gato sonriendo con ojos sonrientes	cara, gato, ojos, sonriente, sonrisa
+1F639	gato llorando de risa	cara, gato, lágrima, risa
+1F63A	gato sonriendo	cara, feliz, gato alegre, gato feliz, sonrisa
+1F63B	gato sonriendo con ojos de corazón	cara, corazón, enamorado, gato
+1F63C	gato haciendo una mueca	cara, gato, irónico, sonrisa
+1F63D	gato besando	beso, cara, cariñoso, gato
+1F63E	gato enfadado	cara, enfadado, gato
+1F63F	gato llorando	cara, gato, lágrima, pena, triste
+1F640	gato asustado	cara, gato, preocupación, pánico, sorpresa
+1F641	cara con el ceño ligeramente fruncido	cara, ceño, fruncido
+1F642	cara sonriendo ligeramente	cara, sonrisa
+1F642-200D-2194	cabeza negando	cabeza moviéndose horizontalmente, negar, no
+1F642-200D-2195	cabeza asintiendo	asentir, cabeza moviéndose verticalmente, sí
+1F643	cara al revés	cara, revés
+1F644	cara con ojos en blanco	cara, frustración, ojos, vueltos
+1F645	persona haciendo el gesto de "no"	gesto, mano, no, prohibido
+1F645-200D-2640	mujer haciendo el gesto de "no"	gesto, mano, mujer, prohibido
+1F645-200D-2642	hombre haciendo el gesto de "no"	gesto, hombre, mano, prohibido
+1F646	persona haciendo el gesto de "de acuerdo"	gesto, mano, ok, vale
+1F646-200D-2640	mujer haciendo el gesto de "de acuerdo"	gesto, mano, ok, vale
+1F646-200D-2642	hombre haciendo el gesto de "de acuerdo"	gesto, mano, ok, vale
+1F647	persona haciendo una reverencia	disculpa, gesto, perdón, reverencia
+1F647-200D-2640	mujer haciendo una reverencia	disculpa, gesto, perdón, reverencia
+1F647-200D-2642	hombre haciendo una reverencia	disculpa, gesto, perdón, reverencia
+1F648	mono con los ojos tapados	cara, mal, mono, prohibido
+1F649	mono con los oídos tapados	cara, mal, mono, prohibido
+1F64A	mono con la boca tapada	cara, mal, mono, prohibido
+1F64B	persona con la mano levantada	feliz, gesto, levantar, mano
+1F64B-200D-2640	mujer con la mano levantada	gesto, levantar, mano, mujer
+1F64B-200D-2642	hombre con la mano levantada	gesto, hombre, levantar, mano
+1F64C	manos levantadas celebrando	celebración, gesto, hurra, mano
+1F64D	persona frunciendo el ceño	ceño, fruncido, gesto, persona
+1F64D-200D-2640	mujer frunciendo el ceño	ceño, fruncido, gesto, mujer
+1F64D-200D-2642	hombre frunciendo el ceño	ceño, fruncido, gesto, hombre
+1F64E	persona haciendo pucheros	gesto, persona, pucheros
+1F64E-200D-2640	mujer haciendo pucheros	gesto, mujer, pucheros
+1F64E-200D-2642	hombre haciendo pucheros	gesto, hombre, pucheros
+1F64F	manos en oración	gracias, mano, oración, orar, por favor, rezar
+1F680	cohete	espacio, vehículo
+1F681	helicóptero	aspas, rotores, vehículo, volar
+1F682	locomotora de vapor	locomotora, tren, vehículo
+1F683	vagón	ferrocarril, tranvía, tren eléctrico, vehículo
+1F684	tren de alta velocidad	ave, ferrocarril, rápido, tren, velocidad
+1F685	tren bala	bala, shinkansen, tren, vehículo, velocidad
+1F686	tren	ferrocarril, vehículo
+1F687	metro	subterráneo, suburbano, transporte
+1F688	tren ligero	ferrocarril, transporte, tren
+1F689	estación de tren	estación, tren
+1F68A	tranvía	transporte, trolebús
+1F68B	vagón de tranvía	tranvía, vagón, vehículo
+1F68C	autobús	bus, transporte
+1F68D	autobús próximo	autobús, próximo, vehículo
+1F68E	trolebús	transporte, tranvía
+1F68F	parada de autobús	autobús, parada
+1F690	minibús	autobús, bus, transporte
+1F691	ambulancia	asistencia médica, transporte, vehículo
+1F692	coche de bomberos	camión, camión de bomberos, fuego, vehículo
+1F693	coche de policía	coche patrulla, policía, vehículo
+1F694	coche de policía próximo	coche patrulla, policía, próximo, vehículo
+1F695	taxi	coche, vehículo
+1F696	taxi próximo	taxi, vehículo
+1F697	coche	automóvil, vehículo
+1F698	coche próximo	automóvil, coche, próximo, vehículo
+1F699	vehículo deportivo utilitario	camping, caravana, furgoneta, vacaciones, vehículo
+1F69A	camión de reparto	mercancías, reparto, transporte, vehículo
+1F69B	camión articulado	camión, tráiler, vehículo
+1F69C	tractor	agricultura, vehículo
+1F69D	monorraíl	ferrocarril, monocarril, transporte, tren
+1F69E	ferrocarril de montaña	ferrocarril, montaña, vehículo
+1F69F	ferrocarril de suspensión	ferrocarril, suspensión, vehículo
+1F6A0	teleférico de montaña	cable, funicular, montaña, teleférico, vehículo
+1F6A1	teleférico	aéreo, tranvía, vehículo
+1F6A2	barco	vehículo
+1F6A3	persona remando en un bote	barca, bote, remo
+1F6A3-200D-2640	mujer remando en un bote	barca, bote, mujer, remo
+1F6A3-200D-2642	hombre remando en un bote	barca, bote, hombre, remo
+1F6A4	lancha motora	barco, vehículo
+1F6A5	semáforo horizontal	luz, señales de tráfico, tráfico
+1F6A6	semáforo	luz, semáforo vertical, señales de tráfico, tráfico
+1F6A7	obras	construcción, señal, señal de obras
+1F6A8	luces de policía	coche de policía, luces, policía
+1F6A9	bandera triangular	bandera, bandera de localización triangular, bandera informativa de localización, localización
+1F6AA	puerta	puerta
+1F6AB	prohibido	entrar, no, pasar, prohibición
+1F6AC	cigarrillo	cigarro, fumar
+1F6AD	prohibido fumar	fumar, no, prohibido, señal
+1F6AE	señal de usar papelera	basura, papelera, señal, tirar la basura en la papelera
+1F6AF	prohibido tirar basura	basura, prohibido, señal, señal de no tirar basura
+1F6B0	agua potable	agua, potable
+1F6B1	agua no potable	agua, no potable
+1F6B2	bicicleta	bici, vehículo
+1F6B3	bicicletas prohibidas	bicicleta, prohibido, vehículo
+1F6B4	persona en bicicleta	bicicleta, ciclismo, ciclista
+1F6B4-200D-2640	mujer en bicicleta	bicicleta, ciclismo, ciclista, mujer
+1F6B4-200D-2642	hombre en bicicleta	bicicleta, ciclismo, ciclista, hombre
+1F6B5	persona en bicicleta de montaña	bicicleta, ciclista, montaña, mountain bike
+1F6B5-200D-2640	mujer en bicicleta de montaña	bicicleta, ciclista, montaña, mountain bike
+1F6B5-200D-2642	hombre en bicicleta de montaña	bicicleta, ciclista, montaña, mountain bike
+1F6B6	persona caminando	andar, caminando, caminar
+1F6B6-200D-2640	mujer caminando	andar, caminata, marcha, mujer
+1F6B6-200D-2640-200D-27A1	mujer caminando hacia la derecha	andar, caminata, marcha, mujer, mujer caminando
+1F6B6-200D-2642	hombre caminando	andar, caminata, hombre, marcha
+1F6B6-200D-2642-200D-27A1	hombre caminando hacia la derecha	andar, caminata, hombre, hombre caminando, marcha
+1F6B6-200D-27A1	persona caminando hacia la derecha	andar, caminando, caminar, persona caminando
+1F6B7	prohibido el paso de peatones	peatones, peatón, prohibido, señal
+1F6B8	niños cruzando	cruzando, niños, señal
+1F6B9	aseo para hombres	aseo de caballeros, baño, servicio, señal, señal con un hombre
+1F6BA	señal de aseo para mujeres	aseo de señoras, baño, servicio, señal, señal con una mujer
+1F6BB	señal de aseos	aseos, servicios, wc
+1F6BC	señal de bebé	bebé, cambiar, lactancia
+1F6BD	inodoro	baño, váter, wc
+1F6BE	aseos	lavabo, servicios, wc
+1F6BF	ducha	agua, baño
+1F6C0	persona en la bañera	bañera, baño, persona
+1F6C1	bañera	baño
+1F6C2	control de pasaportes	control, pasaportes
+1F6C3	aduana	aduana
+1F6C4	recogida de equipajes	equipaje, maleta
+1F6C5	consigna	depósito, equipaje, servicio de equipaje en depósito
+1F6CB	sofá y lámpara	hotel, lámpara, sofá
+1F6CC	persona en la cama	dormir, hotel
+1F6CD	bolsas de compras	bolsa, compra
+1F6CE	timbre de hotel	botones, campanilla, hotel, timbre
+1F6CF	cama	dormir, hotel
+1F6D0	lugar de culto	culto, religión
+1F6D1	señal de stop	octágono, parada, señal, stop
+1F6D2	carrito de la compra	carrito, carro, compra, supermercado
+1F6D5	templo hindú	hindú, templo
+1F6D6	cabaña	casa, yurta
+1F6D7	ascensor	accesibilidad, elevador, montacargas
+1F6DC	wifi	conexión, inalámbrica, internet, red, wi-fi
+1F6DD	tobogán	jugar, parque, parque de atracciones
+1F6DE	rueda	círculo, girar, neumático, rodar
+1F6DF	salvavidas	flotador, rescate, seguridad, socorrista
+1F6E0	martillo y llave inglesa	herramienta, llave inglesa, martillo
+1F6E1	escudo	defensa
+1F6E2	barril de petróleo	barril, bidón, petróleo
+1F6E3	autopista	carretera
+1F6E4	vía de tren	tren, vía
+1F6E5	barco a motor	barco, motor, vehículo
+1F6E9	avioneta	avión
+1F6EB	avión despegando	aeroplano, avión, salida
+1F6EC	avión aterrizando	aeroplano, avión, llegada
+1F6F0	satélite	espacio, vehículo
+1F6F3	barco de pasajeros	barco, pasajeros, vehículo
+1F6F4	patinete	patinete
+1F6F5	scooter	escúter, moto
+1F6F6	canoa	barca, barco, piragua
+1F6F7	trineo	trineo
+1F6F8	platillo volante	ovni
+1F6F9	monopatín	skateboard, tabla
+1F6FA	mototaxi	rickshaw, tuk tuk
+1F6FB	camioneta	pickup, ranchera
+1F6FC	patines	patín, patín de 4 ruedas, patín de cuatro ruedas
+1F7E0	círculo naranja	círculo, naranja
+1F7E1	círculo amarillo	amarillo, círculo
+1F7E2	círculo verde	círculo, verde
+1F7E3	círculo morado	círculo, lila, morado, púrpura
+1F7E4	círculo marrón	círculo, marrón
+1F7E5	cuadrado rojo	cuadrado, rojo
+1F7E6	cuadrado azul	azul, cuadrado
+1F7E7	cuadrado naranja	cuadrado, naranja
+1F7E8	cuadrado amarillo	amarillo, cuadrado
+1F7E9	cuadrado verde	cuadrado, verde
+1F7EA	cuadrado morado	cuadrado, lila, morado, púrpura
+1F7EB	cuadrado marrón	cuadrado, marrón
+1F7F0	signo igual grueso	equivalencia, igualdad, matemáticas, mates
+1F90C	dedos juntos apuntando hacia arriba	dedos, gesto, italia, italiano, mano, sarcasmo
+1F90D	corazón blanco	blanco, corazón, emoción
+1F90E	corazón marrón	corazón, emoción, marrón
+1F90F	mano pellizcando	pellizco, poco, poquito
+1F910	cara con la boca cerrada con cremallera	boca, cara, cremallera
+1F911	cara con lengua de dinero	boca, cara, dinero
+1F912	cara con termómetro	cara, enfermo, malo, termómetro
+1F913	cara de empollón	cara, empollón, friki, friqui
+1F914	cara pensativa	cara, duda, pensando
+1F915	cara con la cabeza vendada	cara, dolor, herida, venda
+1F916	robot	cara, monstruo
+1F917	cara con manos abrazando	abrazo, cara, sonrisa
+1F918	mano haciendo el signo de cuernos	cuernos, dedo, mano, rock
+1F919	mano haciendo el gesto de llamar	llamar, mano, meñique, pulgar
+1F91A	dorso de la mano	dorso, levantado, mano
+1F91B	puño hacia la izquierda	izquierda, puño
+1F91C	puño hacia la derecha	derecha, puño
+1F91D	apretón de manos	acuerdo, apretón, manos
+1F91E	dedos cruzados	cruzar, dedos, mano, suerte
+1F91F	gesto de te quiero	mano, quiero
+1F920	cara con sombrero de vaquero	cara, sombrero, vaquera, vaquero
+1F921	cara de payaso	cara, payaso
+1F922	cara de náuseas	cara, náuseas, vomitar
+1F923	cara revolviéndose de la risa	cara, carcajada, ojos cerrados, risa
+1F924	cara babeando	baba, babeando, cara
+1F925	cara de mentiroso	cara, mentiroso, nariz, pinocho
+1F926	persona con la mano en la frente	facepalm, frente, incredulidad, mano
+1F926-200D-2640	mujer con la mano en la frente	facepalm, frente, incredulidad, mano
+1F926-200D-2642	hombre con la mano en la frente	facepalm, frente, incredulidad, mano
+1F927	cara estornudando	cara, estornudar, estornudo, pañuelo
+1F928	cara con ceja alzada	desconfiado, escéptico
+1F929	cara sonriendo con estrellas	cara, estrellas, sonrisa
+1F92A	cara de loco	grande, ojo, pequeño
+1F92B	cara pidiendo silencio	callado, silencio
+1F92C	cara con símbolos en la boca	maldecir, palabrota, símbolo
+1F92D	cara con mano sobre la boca	ostras, uy, vaya
+1F92E	cara vomitando	enfermo, malo, vomitar
+1F92F	cabeza explotando	cabeza, explosión
+1F930	mujer embarazada	embarazada, mujer
+1F931	lactancia materna	amamantar, bebé, dar pecho, pecho
+1F932	palmas hacia arriba juntas	oración
+1F933	selfi	autofoto, cámara, selfie, teléfono
+1F934	príncipe	corona
+1F935	persona con esmoquin	esmoquin, novio, persona
+1F935-200D-2640	mujer con esmoquin	esmoquin, mujer
+1F935-200D-2642	hombre con esmoquin	esmoquin, hombre
+1F936	Mamá Noel	celebración, claus, cuento, fantasía, feliz, fiestas, madre, mamá noel, navidad, santa
+1F937	persona encogida de hombros	duda, encogerse, hombros, indiferencia
+1F937-200D-2640	mujer encogida de hombros	duda, encogerse, hombros, indiferencia
+1F937-200D-2642	hombre encogido de hombros	duda, encogerse, hombros, indiferencia
+1F938	persona haciendo voltereta lateral	acrobacia, gimnasia, pirueta, rueda, voltereta
+1F938-200D-2640	mujer dando una voltereta lateral	deporte, gimnasia, mujer, rueda, voltereta
+1F938-200D-2642	hombre dando una voltereta lateral	deporte, gimnasia, hombre, rueda, voltereta
+1F939	persona haciendo malabares	equilibrio, malabares, malabarismo, malabarista
+1F939-200D-2640	mujer haciendo malabares	malabares, malabarismo, malabarista, mujer
+1F939-200D-2642	hombre haciendo malabares	hombre, malabares, malabarismo, malabarista
+1F93A	persona haciendo esgrima	esgrima, esgrimista, espada
+1F93C	personas luchando	lucha, luchador
+1F93C-200D-2640	mujeres luchando	deporte, lucha, luchadora, mujer
+1F93C-200D-2642	hombres luchando	deporte, hombre, lucha, luchador
+1F93D	persona jugando al waterpolo	waterpolista, waterpolo
+1F93D-200D-2640	mujer jugando al waterpolo	agua, deporte, waterpolista, waterpolo
+1F93D-200D-2642	hombre jugando al waterpolo	agua, deporte, waterpolista, waterpolo
+1F93E	persona jugando al balonmano	balonmanista, balonmano
+1F93E-200D-2640	mujer jugando al balonmano	balonmanista, balonmano, deporte, mujer
+1F93E-200D-2642	hombre jugando al balonmano	balonmanista, balonmano, deporte, hombre
+1F93F	máscara de buceo	bucear, buzo, esnórquel, máscara, tubo
+1F940	flor marchita	flor, marchita, marchitada, marchitarse
+1F941	tambor	baquetas, música
+1F942	copas brindando	bebida, brindar, brindis, celebración, copa
+1F943	vaso de whisky	chupito, copa, licor, vaso, whisky
+1F944	cuchara	cubiertos, cucharilla
+1F945	portería	deporte, red
+1F947	medalla de oro	medalla, oro, primero
+1F948	medalla de plata	medalla, plata, segundo
+1F949	medalla de bronce	bronce, medalla, tercero
+1F94A	guante de boxeo	boxeo, deporte, guante
+1F94B	uniforme de artes marciales	artes marciales, judo, kárate, taekwondo
+1F94C	piedra de curling	juego, roca
+1F94D	lacrosse	bola, palo, pelota, raqueta
+1F94E	pelota de softball	bola, pelota, softball
+1F94F	disco volador	disco, frisbee
+1F950	cruasán	bollo, comida, croissant, francés
+1F951	aguacate	comida, fruta
+1F952	pepino	comida, pepinillo, verdura
+1F953	beicon	bacon, carne, comida, panceta
+1F954	patata	comida, papa, verdura
+1F955	zanahoria	comida, verdura
+1F956	baguete	baguette, barra, comida, francés, pan
+1F957	ensalada	bol, comida, verde
+1F958	paella	arroz, comida
+1F959	pan relleno	comida, durum, falafel, kebab, pan de pita
+1F95A	huevo	comida
+1F95B	vaso de leche	bebida, leche, vaso
+1F95C	cacahuetes	cacahuete, comida, fruto seco, verdura
+1F95D	kiwi	comida, fruta
+1F95E	tortitas	comida, dulce, pancakes, postre, tortita
+1F95F	dumpling	comida, gyōza, jiaozi, masa
+1F960	galleta de la fortuna	adivinación, profecía, superstición
+1F961	caja para llevar	recipiente para llevar, restaurante
+1F962	palillos	cubiertos, hashi
+1F963	cuenco con cuchara	cereal, desayuno
+1F964	vaso con pajita	refresco, zumo
+1F965	coco	palmera, piña colada
+1F966	brócoli	col, repollo
+1F967	pastel	masa, relleno
+1F968	bretzel	galleta salada, pretzel
+1F969	corte de carne	carne, chuleta, filete
+1F96A	sándwich	bocadillo, bocata, emparedado
+1F96B	comida enlatada	conserva, lata
+1F96C	verdura de hoja verde	bok choy, col, kale, lechuga, pak choi
+1F96D	mango	fruta, tropical
+1F96E	pastel de luna	festival, luna, otoño, yuebing
+1F96F	bagel	bocadillo, pan, panadería
+1F970	cara sonriendo con corazones	adorar, amor, corazones, enamorada, enamorado
+1F971	cara de bostezo	aburrido, bostezo, cansado, dormido, sueño
+1F972	cara sonriente con lágrima	agradecido, aliviado, emocionado, lágrima, orgulloso, sonrisa
+1F973	cara de fiesta	capirote, celebración, fiesta, gorro, matasuegras
+1F974	cara de grogui	atontado, entonado, grogui, intoxicado, mareado
+1F975	cara con calor	calor, cara roja, fiebre, golpe de calor, sudor
+1F976	cara con frío	cara congelada, congelado, frío, helado
+1F977	ninja	furtivo, guerrero, luchador, oculto, sigilo
+1F978	cara disfrazada	careta, disfraz, disimulo, gafas, incógnito, nariz
+1F979	cara aguantándose las lágrimas	emocionado, emoción, llorar, orgulloso, resistir, triste
+1F97A	cara suplicante	implorar, ojos adorables, piedad, por favor
+1F97B	sari	prenda, ropa, vestido
+1F97C	bata de laboratorio	científico, doctor, experimento, médico
+1F97D	gafas de protección	gafas, nadar, protección ocular, soldar
+1F97E	bota de senderismo	bota, camping, mochilero, senderismo
+1F97F	bailarina	calzado, zapato
+1F980	cangrejo	animal, cáncer, zodiaco
+1F981	león	cara, leo, zodiaco
+1F982	escorpión	escorpio, zodiaco
+1F983	pavo	ave
+1F984	unicornio	cara
+1F985	águila	ave
+1F986	pato	ave
+1F987	murciélago	vampiro
+1F988	tiburón	pez
+1F989	búho	ave, lechuza, pájaro
+1F98A	zorro	cara
+1F98B	mariposa	bonito, insecto
+1F98C	ciervo	bambi, cervatillo
+1F98D	gorila	primate, simio
+1F98E	lagarto	lagartija, reptil
+1F98F	rinoceronte	paquidermo
+1F990	gamba	camarón, comida, langostino, marisco
+1F991	calamar	comida, molusco
+1F992	jirafa	manchas
+1F993	cebra	raya
+1F994	erizo	espinas, púas
+1F995	saurópodo	braquiosaurio, brontosaurio, diplodocus
+1F996	t-rex	tiranosaurio, tiranosaurio rex
+1F997	grillo	saltamontes
+1F998	canguro	marsupial, saltar, salto
+1F999	llama	alpaca, guanaco, lana, vicuña
+1F99A	pavo real	ave, orgulloso, pavo, plumas
+1F99B	hipopótamo	paquidermo
+1F99C	loro	ave, hablar, papagayo, pirata
+1F99D	mapache	astuto, curioso, ladino, maquillaje, ojeras
+1F99E	bogavante	langosta, marisco, pinzas
+1F99F	mosquito	fiebre, insecto, malaria, virus
+1F9A0	microbio	ameba, bacteria, germen, virus
+1F9A1	tejón	ratel, tejón de la miel, tejón melero
+1F9A2	cisne	ave, patito feo
+1F9A3	mamut	colmillo, extinguido, lanudo
+1F9A4	dodo	ave, dronte, extinguido, mauricio, pájaro
+1F9A5	perezoso	gandul, lento, vago
+1F9A6	nutria	bromista, juguetón, pesca
+1F9A7	orangután	mono, primate, simio
+1F9A8	mofeta	apestar, hedor, mal olor, peste, tufo
+1F9A9	flamenco	extravangante, ostentoso, tropical
+1F9AA	ostra	buceo, perla
+1F9AB	castor	roedor
+1F9AC	bisonte	búfalo, cíbolo
+1F9AD	foca	león marino
+1F9AE	perro guía	accesibilidad, ciego, guía, invidente, lazarillo
+1F9AF	bastón	accesibilidad, ceguera, ciega, ciego, invidente
+1F9B0	pelo pelirrojo	pelirrojo, pelo, rojizo, rojo
+1F9B1	pelo rizado	afro, bucle, rizado, rizo, tirabuzón
+1F9B2	sin pelo	afeitado, bola de billar, calvo, quimioterapia
+1F9B3	pelo blanco	blanco, cana, gris, pelo, viejo
+1F9B4	hueso	esqueleto
+1F9B5	pierna	extremidad, patada
+1F9B6	pie	patada, pisotón
+1F9B7	diente	dentista, molar, muela
+1F9B8	personaje de superhéroe	bien, heroína, héroe, superheroína, superhéroe, superpoder
+1F9B8-200D-2640	superheroína	bondad, heroína, héroe, mujer, superhéroe, superpoder
+1F9B8-200D-2642	superhéroe	bueno, hombre, héroe, superhombre, superpoder
+1F9B9	personaje de supervillano	mal, superpoder, supervillana, supervillano, villana, villano
+1F9B9-200D-2640	supervillana	mal, malvada, mujer, villana
+1F9B9-200D-2642	supervillano	hombre, mal, malvado, villano
+1F9BA	chaleco de seguridad	chaleco, emergencia, seguridad
+1F9BB	oreja con audífono	accesibilidad, audífono, prótesis auditiva, sordo
+1F9BC	silla de ruedas eléctrica	accesibilidad
+1F9BD	silla de ruedas manual	accesibilidad
+1F9BE	brazo mecánico	accesibilidad, ortopedia, prótesis
+1F9BF	pierna mecánica	accesibilidad, ortopedia, prótesis
+1F9C0	cuña de queso	cuña, queso, trozo
+1F9C1	magdalena	cupcake, dulce, repostería
+1F9C2	sal	condimento, salero
+1F9C3	tetrabrik	brick, cartón, envase, zumo
+1F9C4	ajo	condimento, vampiro
+1F9C5	cebolla	condimento, llorar
+1F9C6	falafel	albóndiga, garbanzo
+1F9C7	gofre	waffle
+1F9C8	mantequilla	lácteo
+1F9C9	mate	bebida, infusión
+1F9CA	cubito de hielo	frío, iceberg
+1F9CB	té de burbujas	boba, bubble tea, burbuja, leche, perla, té
+1F9CC	trol	cuento de hadas, fantasía, monstruo
+1F9CD	persona de pie	de pie, levantada, levantado, levantarse
+1F9CD-200D-2640	mujer de pie	de pie, levantada, levantarse, mujer
+1F9CD-200D-2642	hombre de pie	de pie, hombre, levantado, levantarse
+1F9CE	persona de rodillas	arrodillada, arrodillado, arrodillarse, de rodillas
+1F9CE-200D-2640	mujer de rodillas	arrodillada, arrodillarse, de rodillas, mujer
+1F9CE-200D-2640-200D-27A1	mujer de rodillas hacia la derecha	arrodillada, arrodillarse, de rodillas, mujer, mujer de rodillas
+1F9CE-200D-2642	hombre de rodillas	arrodillado, arrodillarse, de rodillas, hombre
+1F9CE-200D-2642-200D-27A1	hombre de rodillas hacia la derecha	arrodillado, arrodillarse, de rodillas, hombre, hombre de rodillas
+1F9CE-200D-27A1	persona de rodillas hacia la derecha	arrodillada, arrodillado, arrodillarse, de rodillas, persona de rodillas
+1F9CF	persona sorda	accesibilidad, escuchar, oído, oír, sordera
+1F9CF-200D-2640	mujer sorda	mujer, sorda, sordera
+1F9CF-200D-2642	hombre sordo	hombre, sordera, sordo
+1F9D0	cara con monóculo	aristocrático, estirado
+1F9D1	persona adulta	género, neutro
+1F9D1-200D-1F33E	profesional de la agricultura	agricultor, cultivador, granjero, jardinero, labrador
+1F9D1-200D-1F373	chef	cocinero, cocinillas, guisandero, pinche
+1F9D1-200D-1F37C	persona alimentando a bebé	alimentar, amamantar, bebé, lactancia, persona
+1F9D1-200D-1F384	Noel	celebración, claus, cuento, fantasía, feliz, fiestas, navidad, noel, santa
+1F9D1-200D-1F393	estudiante	graduado, licenciado, universitario
+1F9D1-200D-1F3A4	cantante	artista, estrella, rock
+1F9D1-200D-1F3A8	artista	paleta, pintor, pinturas
+1F9D1-200D-1F3EB	docente	educador, enseñanza, instructor, maestro, profesor
+1F9D1-200D-1F3ED	profesional industrial	fábrica, montaje, obrero, operario, trabajador
+1F9D1-200D-1F4BB	profesional de la tecnología	desarrollador, informático, programador, software, tecnólogo
+1F9D1-200D-1F4BC	oficinista	arquitecto, director, ejecutivo, empresa
+1F9D1-200D-1F527	profesional de la mecánica	electricista, fontanero, mecánico, operario, técnico
+1F9D1-200D-1F52C	profesional de la ciencia	biólogo, científico, físico, investigador, químico
+1F9D1-200D-1F680	astronauta	cohete, espacio
+1F9D1-200D-1F692	bombero	camión, manguera
+1F9D1-200D-1F91D-200D-1F9D1	dos personas de la mano	mano, pareja, persona
+1F9D1-200D-1F9AF	persona con bastón	accesibilidad, ciego, invidente
+1F9D1-200D-1F9AF-200D-27A1	persona con bastón hacia la derecha	accesibilidad, ciego, invidente, persona con bastón
+1F9D1-200D-1F9B0	persona adulta: pelo pelirrojo	género, neutro, pelo pelirrojo, persona adulta
+1F9D1-200D-1F9B1	persona adulta: pelo rizado	género, neutro, pelo rizado, persona adulta
+1F9D1-200D-1F9B2	persona adulta: sin pelo	género, neutro, persona adulta, sin pelo
+1F9D1-200D-1F9B3	persona adulta: pelo blanco	género, neutro, pelo blanco, persona adulta
+1F9D1-200D-1F9BC	persona en silla de ruedas eléctrica	accesibilidad, silla de ruedas
+1F9D1-200D-1F9BC-200D-27A1	persona en silla de ruedas eléctrica hacia la derecha	accesibilidad, persona en silla de ruedas eléctrica, silla de ruedas
+1F9D1-200D-1F9BD	persona en silla de ruedas manual	accesibilidad, silla de ruedas
+1F9D1-200D-1F9BD-200D-27A1	persona en silla de ruedas manual hacia la derecha	accesibilidad, persona en silla de ruedas manual, silla de ruedas
+1F9D1-200D-1F9D1-200D-1F9D2	familia: adulto, adulto, niño	adulto, familia, niño
+1F9D1-200D-1F9D1-200D-1F9D2-200D-1F9D2	familia: adulto, adulto, niño, niño	adulto, familia, niño
+1F9D1-200D-1F9D2	familia: adulto, niño	adulto, familia, niño
+1F9D1-200D-1F9D2-200D-1F9D2	familia: adulto, niño, niño	adulto, familia, niño
+1F9D1-200D-2695	profesional sanitario	doctor, enfermero, médico, salud, terapeuta
+1F9D1-200D-2696	fiscal	juez, juicio, magistrado
+1F9D1-200D-2708	piloto	avión, capitán, vuelo
+1F9D2	infante	crío, género, joven, neutro
+1F9D3	persona mayor	adulto, género neutro, género no especificado, maduro, mayor
+1F9D4	persona con barba	barbas, barbudo, persona
+1F9D4-200D-2640	mujer: barba	barba, mujer
+1F9D4-200D-2642	hombre: barba	barba, hombre
+1F9D5	mujer con hiyab	hiyab, pañuelo
+1F9D6	persona en una sauna	sauna, vapor
+1F9D6-200D-2640	mujer en una sauna	sauna, vapor
+1F9D6-200D-2642	hombre en una sauna	sauna, vapor
+1F9D7	persona escalando	alpinista, escalador
+1F9D7-200D-2640	mujer escalando	alpinista, escaladora
+1F9D7-200D-2642	hombre escalando	alpinista, escalador
+1F9D8	persona en posición de loto	meditación, yoga
+1F9D8-200D-2640	mujer en posición de loto	meditación, yoga
+1F9D8-200D-2642	hombre en posición de loto	meditación, yoga
+1F9D9	persona maga	bruja, brujo, hechicera, hechicero
+1F9D9-200D-2640	maga	bruja, hechicera
+1F9D9-200D-2642	mago	brujo, hechicero
+1F9DA	hada	campanilla, oberón, puck, titania
+1F9DA-200D-2640	hada mujer	campanilla, hada, titania
+1F9DA-200D-2642	hada hombre	hada, oberón, puck
+1F9DB	vampiro	drácula, muerto viviente, no muerto
+1F9DB-200D-2640	vampiresa	muerta viviente, no muerta
+1F9DB-200D-2642	vampiro hombre	drácula, muerto viviente, no muerto
+1F9DC	persona sirena	sirena, tritón
+1F9DC-200D-2640	sirena	sirena
+1F9DC-200D-2642	sirena hombre	sirena, tritón
+1F9DD	elfo	mágico
+1F9DD-200D-2640	elfa	mujer, mágico
+1F9DD-200D-2642	elfo hombre	elfo, mágico
+1F9DE	genio	lámpara
+1F9DE-200D-2640	genio mujer	genio, lámpara
+1F9DE-200D-2642	genio hombre	djinn, genio, lámpara
+1F9DF	zombi	muerto viviente, no muerto
+1F9DF-200D-2640	zombi mujer	caminante, muerta viviente, no muerta
+1F9DF-200D-2642	zombi hombre	caminante, muerto viviente, no muerto
+1F9E0	cerebro	inteligente
+1F9E1	corazón naranja	corazón, emoción, naranja
+1F9E2	gorra con visera	béisbol, gorra, visera
+1F9E3	bufanda	abrigo, cuello
+1F9E4	guantes	mano
+1F9E5	abrigo	chaquetón
+1F9E6	calcetines	pies, ropa
+1F9E7	sobre rojo	buena suerte, hóngbāo, lai see, regalo
+1F9E8	petardo	dinamita, explosivo, fuegos artificiales
+1F9E9	pieza de puzle	conectar, pieza, pista, puzle, rompecabezas
+1F9EA	tubo de ensayo	ciencia, experimento, laboratorio, química, químico
+1F9EB	placa de petri	bacterias, biología, biólogo, cultivo, laboratorio
+1F9EC	adn	biólogo, evolución, gen, genética, vida
+1F9ED	brújula	compás, magnético, navegación, orientación
+1F9EE	ábaco	contar, cálculo, matemáticas
+1F9EF	extintor	apagar, extinguir, incendio
+1F9F0	caja de herramientas	armario, herramienta, mecánico
+1F9F1	ladrillo	arcilla, cemento, muro, pared
+1F9F2	imán	atracción, herradura, magnético
+1F9F3	equipaje	maleta, viajar
+1F9F4	bote de crema	champú, crema, hidratante, protector solar
+1F9F5	hilo	aguja, carrete, coser, costura
+1F9F6	ovillo	bola, croché, punto, tejer
+1F9F7	imperdible	pañal, punk rock
+1F9F8	osito de peluche	juguete, oso, peluche
+1F9F9	escoba	barrer, bruja, fregar
+1F9FA	cesta	colada, cosecha, pícnic
+1F9FB	rollo de papel	papel absorbente, papel higiénico
+1F9FC	jabón	bañarse, enjabonarse, jabonera, lavarse, pastilla
+1F9FD	esponja	absorbente, limpiar, poroso
+1F9FE	recibo	contabilidad, prueba, teneduría de libros, testimonio
+1F9FF	ojo turco	amuleto, mal de ojo, nazar, talismán
+1FA70	zapatillas de ballet	bailar, ballet, balé, danza
+1FA71	traje de baño de una pieza	bañador
+1FA72	ropa interior	bañador, bragas, braguitas, calzoncillos, slip
+1FA73	pantalones cortos	bañador, bermudas, calzoncillos, ropa interior, shorts
+1FA74	chancla	chancla de dedo, chancleta, chinela, sandalia
+1FA75	corazón azul claro	azul, celeste, cián, claro, corazón
+1FA76	corazón gris	corazón, gris, pizarra, plata
+1FA77	corazón rosa	amor, bonito, corazón, gustar, rosa
+1FA78	gota de sangre	donación de sangre, donar sangre, herida, medicina, sangre
+1FA79	tirita	apósito
+1FA7A	estetoscopio	corazón, doctor, fonendoscopio, latido, medicina, médico
+1FA7B	radiografía	doctor, doctora, esqueleto, huesos, médico, rayos
+1FA7C	muleta	ayuda para la movilidad, bastón, discapacidad, lesión, palo
+1FA80	yoyó	dieta, efecto, fluctuar, juguete
+1FA81	cometa	juguete, planear, viento, volar
+1FA82	paracaídas	ala delta, paracaidismo, paravela, volar
+1FA83	bumerán	boomerang, rebotar
+1FA84	varita mágica	bruja, hechicero, magia, mago, prestidigitación, varita
+1FA85	piñata	caballito, celebración, fiesta
+1FA86	muñeca rusa	babushka, mamushka, matrioska, rusia
+1FA87	maracas	agitar, brasil, instrumento, movimiento, música, percusión
+1FA88	flauta	flautín, instrumento, instrumento de viento madera, música
+1FA89	arpa	amor, cupido, harpa, instrumento, música, orquesta
+1FA8F	pala	agujero, cavar, enterrar, excavar, hoyo, huerto, nieve, planta
+1FA90	planeta con anillos	saturnino, saturno
+1FA91	silla	asiento, sentarse
+1FA92	cuchilla de afeitar	afeitado, afeitar, afilado, barbero, navaja
+1FA93	hacha	cortar, dividir, hachuela, madera, talar
+1FA94	lámpara de aceite	aceite, diya, lámpara
+1FA95	banjo	banyo, cuerda, instrumento, música
+1FA96	casco militar	casco, ejército, guerra, guerrero, soldado
+1FA97	acordeón	concertina
+1FA98	tamboril	conga, ritmo, tambor
+1FA99	moneda	dinero, metal, oro, plata, tesoro
+1FA9A	sierra de carpintería	carpintero, carpintería, herramienta, sierra, talar
+1FA9B	destornillador	atornillador, herramienta, tornillo
+1FA9C	escalera	escalar, escalerilla, escalón, peldaño
+1FA9D	gancho	agarrar, anzuelo, atrapar, garfio
+1FA9E	espejo	espéculo, reflector, reflejo
+1FA9F	ventana	abertura, apertura, cristal, marco, transparente, vista
+1FAA0	desatascador	fontanero, retrete, servicio, succión
+1FAA1	aguja de coser	aguja, bordado, coser, hilar, punto, tejer
+1FAA2	nudo	anudar, atar, enredar, trenzar
+1FAA3	cubo	balde, barreño, cuba, cubeta
+1FAA4	trampa de ratones	cebo, cepo, engañar, ratonera, ratón, trampa
+1FAA5	cepillo de dientes	cepillo, dental, higiene, limpio, servicio
+1FAA6	lápida	cementario, estela, sepulcro, tumba
+1FAA7	letrero	anuncio, aviso, cartel, pancarta, poste
+1FAA8	piedra	pedrusco, peña, peñasco, roca
+1FAA9	bola de espejos	bailar, brillar, disco, discoteca, fiesta
+1FAAA	carné de identidad	carné de conducir, credenciales, identificación, permiso, seguridad
+1FAAB	batería baja	batería, carga baja, electrónico, energía baja, pila
+1FAAC	hamsa	amuleto, fátima, jamsa, mano, maría, miriam
+1FAAD	abanico abierto	abanico, airear, bailar, calor, feria, flamenco
+1FAAE	peineta	afro, peine, pelo
+1FAAF	khanda	religión, sij, sijismo, sikh
+1FAB0	mosca	basura, bicho, mal olor, podrido
+1FAB1	gusano	lombriz, oruga, parásito
+1FAB2	escarabajo	bicho, insecto
+1FAB3	cucaracha	alimaña, bicho, insecto, plaga
+1FAB4	planta de maceta	crecer, maceta, planta, tiesto
+1FAB5	madera	hoguera, leña, madero, palos, tronco
+1FAB6	pluma	ave, ligero, plumaje, pájaro
+1FAB7	loto	budismo, flor, hinduismo, pureza
+1FAB8	coral	arrecife, océano
+1FAB9	nido vacío	anidación, anidamiento, anidar
+1FABA	nido con huevos	anidación, anidamiento, anidar
+1FABB	campanilla	boca de dragón, flor, jacinto, lavanda, lila, lupino
+1FABC	medusa	invertebrado, marino, picadura, picar
+1FABD	ala	angelical, ave, mitología, pájaro, volar, ángel
+1FABE	árbol sin hojas	deshojado, estéril, invierno, madera, muerto, ramas, sequía, sin hojas, tronco, árbol
+1FABF	oca	ave, ganso, graznar, pájaro
+1FAC0	corazón humano	anatomía, cardiología, corazón, latido, pulso, órgano
+1FAC1	pulmones	exhalar, inhalar, respiración, respirar, órgano
+1FAC2	personas abrazándose	abrazo, adiós, despedida, gracias, saludo
+1FAC3	hombre embarazado	barriga, embarazado, hinchado, hinchazón, inflado, lleno
+1FAC4	persona embarazada	barriga, embarazo, gestación, hinchazón
+1FAC5	persona con corona	majestad, monarca, monarquía, noble, real, realeza
+1FAC6	huella dactilar	delito, detective, forense, huella, huella digital, identidad, misterio, rastro, seguridad
+1FACE	alce	animal, asta, ciervo canadiense, cuernos, mamífero, uapití
+1FACF	burro	animal, asno, borrico, mamífero, mula, terco
+1FAD0	arándanos	arándano, azul, baya, frutos del bosque, mirtilo
+1FAD1	pimiento	ají, chile, morrón, rojo, verdura
+1FAD2	aceituna	aperitivo, comida, oliva
+1FAD3	pan sin levadura	arepa, naan, pita, tortilla
+1FAD4	tamal	mejicano, mexicano, wrap
+1FAD5	fondue	chocolate, olla, queso, suizo
+1FAD6	tetera	bebida, infusión, té
+1FAD7	líquido derramándose	bebida, derramar, vacío, vaso, verter
+1FAD8	alubias	comida, habichuela roja, habichuelas, judía roja, judías, legumbre
+1FAD9	tarro	almacenar, condimento, frasco, recipiente, salsa, vacío
+1FADA	raíz de jengibre	cerveza, especia, garganta, raíz
+1FADB	vaina	edamame, guisante, judías, legumbre, soja, verdura
+1FADC	túberculo comestible	chirivía, comida, ensalada, huerto, nabo, raíz, remolacha, rábano, vegetariano, verdura
+1FADF	salpicadura	gotear, líquido, mancha, manchar, pintura, salpicar, tinta
+1FAE0	cara derritiéndose	calor, derretido, derretirse, desaparecer, fundirse, líquido
+1FAE1	cara saludando	ejército, orden, saludo, sol, sí, vale
+1FAE2	cara con ojos abiertos y boca tapada	alucinar, asombro, increíble, sorpresa, vergüenza
+1FAE3	cara tapada con ojo espiando	espiar, fascinado, mirar, vistazo
+1FAE4	cara con boca diagonal	decepcionado, decepción, escéptico, inseguro, jo, vaya
+1FAE5	cara con línea de puntos	depresivo, deprimido, desaparecer, esconderse, introvertido, invisible
+1FAE6	labio mordido	ansioso, incómodo, ligar, miedo, nervioso, preocupado
+1FAE7	burbujas	bajo el agua, eructar, jabón, limpiar
+1FAE8	cara temblorosa	shock, temblar, terremoto, vibrar
+1FAE9	cara con ojeras	agotado, agotamiento, cansado, cansancio, cara, extenuación, extenuado, ojeras, ojos, sueño
+1FAF0	mano con dedo índice y pulgar cruzados	amor, caro, chasquido, corazón, dinero
+1FAF1	mano hacia la derecha	a la derecha, derecha, mano
+1FAF2	mano hacia la izquierda	a la izquierda, izquierda, mano
+1FAF3	mano con la palma hacia abajo	bajar, descartar, fuera, no, quita, rechazar
+1FAF4	mano con la palma hacia arriba	acércate, dame, ofrecer, trae, ven
+1FAF5	dedo índice apuntándote a ti	apuntar, ti, tú
+1FAF6	manos formando un corazón	amor
+1FAF7	mano empujando hacia la izquierda	a la izquierda, choca esos cinco, detener, empujar, rechazar, stop
+1FAF8	mano empujando hacia la derecha	a la derecha, choca esos cinco, detener, empujar, rechazar, stop
+203C	exclamación doble	!!, exclamación, puntuación, sorpresa
+2049	exclamación e interrogación	!, !?, ?, exclamación, interrogación
+2122	símbolo de marca comercial	marca comercial
+2139	información	i
+2194	flecha izquierda y derecha	derecha, dirección, flecha, izquierda
+2195	flecha arriba y abajo	abajo, arriba, dirección, flecha
+2196	flecha hacia la esquina superior izquierda	arriba, dirección, flecha, izquierda, noroeste
+2197	flecha hacia la esquina superior derecha	arriba, derecha, dirección, flecha, noreste
+2198	flecha hacia la esquina inferior derecha	abajo, derecha, dirección, flecha, sudeste
+2199	flecha hacia la esquina inferior izquierda	abajo, dirección, flecha, izquierda, suroeste
+21A9	flecha derecha curvándose a la izquierda	curva, dirección, flecha, izquierda
+21AA	flecha izquierda curvándose a la derecha	curva, derecha, dirección, flecha
+231A	reloj	reloj
+231B	reloj de arena sin tiempo	arena, reloj, temporizador
+2328	teclado	ordenador
+23CF	expulsar	botón
+23E9	avance rápido	avanzar, doble, flecha
+23EA	retroceso rápido	flecha, flecha doble a la izquierda, izquierda, rebobinado, rebobinar
+23EB	triángulo doble hacia arriba	arriba, flecha
+23EC	triángulo doble hacia abajo	triángulo, triángulo doble abajo
+23ED	pista siguiente	raya vertical, siguiente, triángulos
+23EE	pista anterior	atrás, escena anterior, triángulo
+23EF	reproducir o pausa	pausa, reproducir, triángulo
+23F0	reloj despertador	alarma, despertador, reloj
+23F1	cronómetro	reloj
+23F2	temporizador	reloj
+23F3	reloj de arena con tiempo	reloj con arena cayendo, temporizador
+23F8	pausa	barras, botón, vertical
+23F9	detener	botón, cuadrado, parar
+23FA	grabar	botón, círculo
+24C2	m en círculo	círculo, m
+25AA	cuadrado negro pequeño	cuadrado, geometría, negro
+25AB	cuadrado blanco pequeño	blanco, cuadrado, geometría
+25B6	reproducir	botón de reproducción, flecha, triángulo
+25C0	retroceso	izquierda, triángulo
+25FB	cuadrado blanco mediano	blanco, cuadrado, geometría
+25FC	cuadrado negro mediano	cuadrado, geometría, negro
+25FD	cuadrado blanco mediano-pequeño	blanco, cuadrado, geometría
+25FE	cuadrado negro mediano-pequeño	cuadrado, geometría, negro
+2600	sol	espacio, rayos, soleado
+2601	nube	tiempo
+2602	paraguas	lluvia, paraguas abierto
+2603	muñeco de nieve con nieve	nieve
+2604	meteorito	cometa, espacio
+260E	teléfono	teléfono
+2611	casilla con marca de verificación	casilla, marca, selección, verificación, ✓
+2614	paraguas con gotas de lluvia	gotas, lluvia, paraguas
+2615	bebida caliente	bebida, café, caliente, té
+2618	trébol	planta
+261D	dedo índice hacia arriba	apuntar, arriba, dedo, mano
+2620	calavera y huesos cruzados	calavera, cara, huesos, muerte
+2622	radiactivo	radiactividad, radioactividad, radioactivo, señal
+2623	riesgo biológico	peligro, señal
+2626	cruz ortodoxa	cruz, religión
+262A	media luna y estrella	estrella, islam, luna, religión
+262E	símbolo de la paz	paz
+262F	yin yang	religión, taoísmo, yang, yin
+2638	rueda del dharma	budismo, dharma, religión, rueda
+2639	cara con el ceño fruncido	cara, ceño, fruncido
+263A	cara sonriente	cara, contorno, relajado, sonrisa
+2640	signo femenino	mujer, signo, símbolo
+2642	signo masculino	hombre, signo, símbolo
+2648	Aries	aries, carnero, horóscopo, zodiaco
+2649	Tauro	buey, horóscopo, tauro, toro, zodiaco
+264A	Géminis	gemelos, géminis, horóscopo, zodiaco
+264B	Cáncer	cangrejo, cáncer, horóscopo, zodiaco
+264C	Leo	horóscopo, leo, león, zodiaco
+264D	Virgo	horóscopo, virgo, zodiaco
+264E	Libra	balanza, escala, horóscopo, justicia, libra, zodiaco
+264F	Escorpio	escorpio, escorpión, horóscopo, zodiaco
+2650	Sagitario	arquero, horóscopo, sagitario, zodiaco
+2651	Capricornio	cabra, capricornio, horóscopo, zodiaco
+2652	Acuario	acuario, agua, horóscopo, zodiaco
+2653	Piscis	horóscopo, pescado, pez, piscis, zodiaco
+265F	peón de ajedrez	ajedrez, peón
+2660	palo de picas	carta, juego, palo, picas
+2663	palo de tréboles	carta, juego, palo, tréboles
+2665	palo de corazones	carta, corazones, juego, palo
+2666	palo de diamantes	carta, diamantes, juego, palo
+2668	aguas termales	termas, vapor
+267B	símbolo de reciclaje	reciclaje, reciclar, señal, símbolo universal de reciclaje sólido, universal
+267E	infinito	ilimitado, siempre, universal
+267F	símbolo de silla de ruedas	acceso, señal, silla, silla de ruedas, símbolo
+2692	martillo y pico	herramienta, martillo, pico
+2693	ancla	barco, gancho
+2694	espadas cruzadas	arma, cruzadas, espadas
+2695	símbolo de medicina	asclepio, esculapio, medicina, serpiente
+2696	balanza	justicia, libra, peso, zodiaco
+2697	alambique	herramienta, química
+2699	engranaje	herramienta
+269B	símbolo de átomo	símbolo, átomo
+269C	flor de lis	flor, lis
+26A0	advertencia	cuidado, señal
+26A1	alto voltaje	electricidad, peligro, peligro de alto voltaje, señal de alto voltaje, voltaje
+26A7	símbolo de transgénero	transgénero
+26AA	círculo blanco	círculo, geometría
+26AB	círculo negro	círculo, geometría
+26B0	ataúd	muerte
+26B1	urna funeraria	funeraria, muerte, urna
+26BD	balón de fútbol	balón, fútbol
+26BE	béisbol	balón, baseball, pelota
+26C4	muñeco de nieve	muñeco de nieve sin nieve, nieve
+26C5	sol detrás de una nube	nube, sol, sol con nubes
+26C8	nube con rayo y lluvia	lluvia, nube, trueno
+26CE	Ofiuco	horóscopo, ofiuco, portador, serpiente, zodiaco
+26CF	pico	herramienta, mina
+26D1	casco con una cruz blanca	ayuda, cara, casco, cruz
+26D3	cadenas	cadena
+26D3-200D-1F4A5	cadena rota	cadena, esposas, libertad, romper, rotura
+26D4	dirección prohibida	no, prohibido, señal, señal de dirección prohibida
+26E9	santuario sintoísta	japón, religión, santuario, sintoísmo
+26EA	iglesia	cristianismo, cruz, edificio, religión
+26F0	montaña	monte
+26F1	sombrilla en la arena	arena, sol, sombrilla
+26F2	fuente	fuente
+26F3	banderín en hoyo	banderín, golf, hoyo
+26F4	ferri	barco, ferry
+26F5	velero	barco, barco de vela, yate
+26F7	persona esquiando	esquiador, esquí, nieve
+26F8	patín de hielo	hielo, patín
+26F9	persona botando un balón	balón, botar, pelota
+26F9-200D-2640	mujer botando un balón	balón, botar, mujer, pelota
+26F9-200D-2642	hombre botando un balón	balón, botar, hombre, pelota
+26FA	tienda de campaña	campaña, camping, tienda, vacaciones
+26FD	surtidor de gasolina	bomba de gasolina, combustible, gasolina, surtidor
+2702	tijeras	cortar, herramienta
+2705	botón de marca de verificación	botón, marca, selección, verificación, ✓
+2708	avión	aeroplano
+2709	sobre	carta, correo
+270A	puño en alto	cerrado, mano, puñetazo, puño
+270B	mano levantada	choca esos cinco, levantada, mano
+270C	mano con señal de victoria	mano, señal de victoria, victoria
+270D	mano escribiendo	escribir, lápiz, mano
+270F	lápiz	escolar, escribir, lapicero
+2712	pluma negra	bolígrafo, escribir, pluma, tinta
+2714	marca de verificación	marca, selección, verificación, ✓
+2716	multiplicación	cancelar, marca, prohibido, signo de multiplicación, x, ×
+271D	cruz latina	cristianismo, cruz, religión
+2721	estrella de David	david, estrella, judaísmo, judío, religión
+2728	chispas	*, bengala, estrellas
+2733	asterisco de ocho puntas	*, asterisco
+2734	estrella de ocho puntas	*, estrella
+2744	copo de nieve	frío, nieve
+2747	chispa	*
+274C	marca de cruz	cancelar, cruz, marca de tachado, tachar, x, ×
+274E	botón con marca de cruz	casilla, cruz, marca, x, ×
+2753	interrogación roja	?, interrogación, pregunta, puntuación, signo de interrogación
+2754	interrogación blanca	?, interrogación, pregunta, puntuación
+2755	exclamación blanca	!, exclamación, puntuación
+2757	exclamación roja	!, exclamación, puntuación, signo de exclamación
+2763	exclamación de corazón	corazón, exclamación, puntuación
+2764	corazón rojo	corazón, emoción, rojo
+2764-200D-1F525	corazón en llamas	amor, corazón, fuego, llamas, lujuria, pasión
+2764-200D-1FA79	corazón vendado	bien, curarse, mejor, mejorar, recuperación, salud
+2795	más	+, signo, suma
+2796	menos	-, resta, signo, −
+2797	división	signo, signo de división, ÷
+27A1	flecha hacia la derecha	derecha, dirección, este, flecha
+27B0	bucle	giro, tirabuzón
+27BF	bucle doble	bucle, doble
+2934	flecha derecha curvándose hacia arriba	arriba, curva, dirección, flecha
+2935	flecha derecha curvándose hacia abajo	abajo, curva, dirección, flecha
+2B05	flecha hacia la izquierda	flecha, izquierda, oeste
+2B06	flecha hacia arriba	dirección, flecha, flecha arriba, norte
+2B07	flecha hacia abajo	abajo, dirección, flecha, sur
+2B1B	cuadrado negro grande	cuadrado, geometría, negro
+2B1C	cuadrado blanco grande	blanco, cuadrado, geometría
+2B50	estrella	estelar
+2B55	círculo rojo hueco	aro, círculo, o, rojo
+3030	guion ondulado	guion, marca de sonido largo, ondulado
+303D	marca de alternancia	alternancia, marca
+3297	ideograma japonés para "enhorabuena"	enhorabuena, ideograma, japonés, kanji
+3299	ideograma japonés para "secreto"	ideograma, japonés, kanji, secreto

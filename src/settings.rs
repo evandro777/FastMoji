@@ -24,6 +24,8 @@ pub struct Settings {
     pub keep_resident: bool,
     /// e.g. "Ctrl+Alt+.". Also editable in Preferences.
     pub shortcut: String,
+    /// "" follows the system locale; otherwise a code from `emojis::language_codes()` or "en".
+    pub language: String,
     pub width: u32,
     pub height: u32,
 }
@@ -37,6 +39,7 @@ impl Default for Settings {
             auto_paste: true,
             keep_resident: true,
             shortcut: "Ctrl+Alt+.".into(),
+            language: String::new(),
             width: 515,
             height: 500,
         }
@@ -157,6 +160,14 @@ mod tests {
         let parsed: Settings = toml::from_str("auto_paste = false").unwrap();
         assert!(parsed.keep_resident);
         assert!(!parsed.auto_paste);
+    }
+
+    #[test]
+    fn language_defaults_to_system_for_old_files() {
+        let parsed: Settings = toml::from_str("auto_paste = false").unwrap();
+        assert_eq!(parsed.language, "");
+        let parsed: Settings = toml::from_str("language = \"fr\"").unwrap();
+        assert_eq!(parsed.language, "fr");
     }
 
     #[test]

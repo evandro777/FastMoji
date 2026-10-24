@@ -1,0 +1,156 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+
+msgctxt "Main"
+msgid "Search emoji"
+msgstr "Buscar emoji"
+
+msgctxt "Main"
+msgid "Settings"
+msgstr "Ajustes"
+
+msgctxt "Main"
+msgid "Preferences"
+msgstr "Preferencias"
+
+msgctxt "Main"
+msgid "Skin tone"
+msgstr "Tono de piel"
+
+msgctxt "Main"
+msgid "Emoji size"
+msgstr "Tamaño del emoji"
+
+msgctxt "Main"
+msgid "Small ({} px)"
+msgstr "Pequeño ({} px)"
+
+msgctxt "Main"
+msgid "Compact ({} px)"
+msgstr "Compacto ({} px)"
+
+msgctxt "Main"
+msgid "Default ({} px)"
+msgstr "Predeterminado ({} px)"
+
+msgctxt "Main"
+msgid "Large ({} px)"
+msgstr "Grande ({} px)"
+
+msgctxt "Main"
+msgid "Extra large ({} px)"
+msgstr "Extra grande ({} px)"
+
+msgctxt "Main"
+msgid "Language"
+msgstr "Idioma"
+
+msgctxt "Main"
+msgid "System default"
+msgstr "Predeterminado del sistema"
+
+msgctxt "Main"
+msgid "Automatic paste"
+msgstr "Pegar automáticamente"
+
+msgctxt "Main"
+msgid "Keep FastMoji in memory"
+msgstr "Mantener FastMoji en memoria"
+
+msgctxt "Main"
+msgid "Shortcut"
+msgstr "Atajo"
+
+msgctxt "Main"
+msgid "Always on in this session (the clipboard needs it)."
+msgstr "Siempre activo en esta sesión (el portapapeles lo necesita)."
+
+msgctxt "Main"
+msgid "Required for the {} shortcut. Opens instantly and uses a little memory."
+msgstr "Necesario para el atajo {}. Se abre al instante y usa un poco de memoria."
+
+msgctxt "Main"
+msgid "Warning: {} is disabled while this is off. Open FastMoji with your own shortcut that runs `fastmoji`."
+msgstr "Aviso: {} queda desactivado mientras esto esté apagado. Abre FastMoji con tu propio atajo que ejecute `fastmoji`."
+
+msgctxt "Main"
+msgid "Quit FastMoji"
+msgstr "Salir de FastMoji"
+
+msgctxt "Main"
+msgid "About"
+msgstr "Acerca de"
+
+msgctxt "Main"
+msgid "Close"
+msgstr "Cerrar"
+
+msgctxt "Main"
+msgid "Version {}"
+msgstr "Versión {}"
+
+msgctxt "Main"
+msgid "Light and fast emoji picker for Linux."
+msgstr "Selector de emojis ligero y rápido para Linux."
+
+msgctxt "Main"
+msgid "Author: {}"
+msgstr "Autor: {}"
+
+msgctxt "Main"
+msgid "License: {}"
+msgstr "Licencia: {}"
+
+msgctxt "Tr"
+msgid "Recently Used"
+msgstr "Usados recientemente"
+
+msgctxt "Tr"
+msgid "Smileys & People"
+msgstr "Emoticonos y personas"
+
+msgctxt "Tr"
+msgid "Animals & Nature"
+msgstr "Animales y naturaleza"
+
+msgctxt "Tr"
+msgid "Food & Drink"
+msgstr "Comida y bebida"
+
+msgctxt "Tr"
+msgid "Activities"
+msgstr "Actividades"
+
+msgctxt "Tr"
+msgid "Travel & Places"
+msgstr "Viajes y lugares"
+
+msgctxt "Tr"
+msgid "Objects"
+msgstr "Objetos"
+
+msgctxt "Tr"
+msgid "Symbols"
+msgstr "Símbolos"
+
+msgctxt "Tr"
+msgid "Flags"
+msgstr "Banderas"
+
+msgctxt "Tr"
+msgid "No matches for “{}”"
+msgstr "Sin resultados para “{}”"
+
+msgctxt "Tr"
+msgid "Results for “{}”"
+msgstr "Resultados para “{}”"
+
+msgctxt "Tr"
+msgid "Shortcut unavailable: {}"
+msgstr "Atajo no disponible: {}"
+
+msgctxt "Tr"
+msgid "Cannot parse {}. Example: Ctrl+Alt+."
+msgstr "No se puede interpretar {}. Ejemplo: Ctrl+Alt+."

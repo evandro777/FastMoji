@@ -1,0 +1,156 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: it\n"
+
+msgctxt "Main"
+msgid "Search emoji"
+msgstr "Cerca emoji"
+
+msgctxt "Main"
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgctxt "Main"
+msgid "Preferences"
+msgstr "Preferenze"
+
+msgctxt "Main"
+msgid "Skin tone"
+msgstr "Tono della pelle"
+
+msgctxt "Main"
+msgid "Emoji size"
+msgstr "Dimensione emoji"
+
+msgctxt "Main"
+msgid "Small ({} px)"
+msgstr "Piccolo ({} px)"
+
+msgctxt "Main"
+msgid "Compact ({} px)"
+msgstr "Compatto ({} px)"
+
+msgctxt "Main"
+msgid "Default ({} px)"
+msgstr "Predefinito ({} px)"
+
+msgctxt "Main"
+msgid "Large ({} px)"
+msgstr "Grande ({} px)"
+
+msgctxt "Main"
+msgid "Extra large ({} px)"
+msgstr "Molto grande ({} px)"
+
+msgctxt "Main"
+msgid "Language"
+msgstr "Lingua"
+
+msgctxt "Main"
+msgid "System default"
+msgstr "Predefinito di sistema"
+
+msgctxt "Main"
+msgid "Automatic paste"
+msgstr "Incolla automaticamente"
+
+msgctxt "Main"
+msgid "Keep FastMoji in memory"
+msgstr "Mantieni FastMoji in memoria"
+
+msgctxt "Main"
+msgid "Shortcut"
+msgstr "Scorciatoia"
+
+msgctxt "Main"
+msgid "Always on in this session (the clipboard needs it)."
+msgstr "Sempre attivo in questa sessione (gli appunti ne hanno bisogno)."
+
+msgctxt "Main"
+msgid "Required for the {} shortcut. Opens instantly and uses a little memory."
+msgstr "Necessario per la scorciatoia {}. Si apre subito e usa un po’ di memoria."
+
+msgctxt "Main"
+msgid "Warning: {} is disabled while this is off. Open FastMoji with your own shortcut that runs `fastmoji`."
+msgstr "Attenzione: {} è disattivato finché questa opzione è spenta. Apri FastMoji con una tua scorciatoia che esegua `fastmoji`."
+
+msgctxt "Main"
+msgid "Quit FastMoji"
+msgstr "Esci da FastMoji"
+
+msgctxt "Main"
+msgid "About"
+msgstr "Informazioni"
+
+msgctxt "Main"
+msgid "Close"
+msgstr "Chiudi"
+
+msgctxt "Main"
+msgid "Version {}"
+msgstr "Versione {}"
+
+msgctxt "Main"
+msgid "Light and fast emoji picker for Linux."
+msgstr "Selettore di emoji leggero e veloce per Linux."
+
+msgctxt "Main"
+msgid "Author: {}"
+msgstr "Autore: {}"
+
+msgctxt "Main"
+msgid "License: {}"
+msgstr "Licenza: {}"
+
+msgctxt "Tr"
+msgid "Recently Used"
+msgstr "Usate di recente"
+
+msgctxt "Tr"
+msgid "Smileys & People"
+msgstr "Faccine e persone"
+
+msgctxt "Tr"
+msgid "Animals & Nature"
+msgstr "Animali e natura"
+
+msgctxt "Tr"
+msgid "Food & Drink"
+msgstr "Cibo e bevande"
+
+msgctxt "Tr"
+msgid "Activities"
+msgstr "Attività"
+
+msgctxt "Tr"
+msgid "Travel & Places"
+msgstr "Viaggi e luoghi"
+
+msgctxt "Tr"
+msgid "Objects"
+msgstr "Oggetti"
+
+msgctxt "Tr"
+msgid "Symbols"
+msgstr "Simboli"
+
+msgctxt "Tr"
+msgid "Flags"
+msgstr "Bandiere"
+
+msgctxt "Tr"
+msgid "No matches for “{}”"
+msgstr "Nessun risultato per “{}”"
+
+msgctxt "Tr"
+msgid "Results for “{}”"
+msgstr "Risultati per “{}”"
+
+msgctxt "Tr"
+msgid "Shortcut unavailable: {}"
+msgstr "Scorciatoia non disponibile: {}"
+
+msgctxt "Tr"
+msgid "Cannot parse {}. Example: Ctrl+Alt+."
+msgstr "Impossibile interpretare {}. Esempio: Ctrl+Alt+."
