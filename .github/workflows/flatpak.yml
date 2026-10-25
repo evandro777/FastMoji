@@ -46,6 +46,16 @@ jobs:
           flatpak install --system -y flathub org.freedesktop.Sdk.Extension.rust-stable//25.08
           echo /var/lib/flatpak/runtime/org.freedesktop.Sdk.Extension.rust-stable/x86_64/25.08/active/files/bin >> "$GITHUB_PATH"
 
+      # Secrets are not available to PRs, so only tags sign.
+      - name: Import signing key
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.FLATPAK_GPG_PRIVATE_KEY }}
+        run: |
+          [ -n "$GPG_PRIVATE_KEY" ] || { echo "secret FLATPAK_GPG_PRIVATE_KEY is not set"; exit 1; }
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+          echo "FLATPAK_GPG_KEY=$(cat flatpak/signing-key.b64 | base64 -d | gpg --show-keys --with-colons | awk -F: '/^fpr/ {print $10; exit}')" >> "$GITHUB_ENV"
+
       - name: Build
         run: flatpak/build.sh --bundle
 
@@ -69,7 +79,8 @@ jobs:
             FastMoji-*.flatpak
 
   # Own Flatpak remote on GitHub Pages (until Flathub accepts the app): `flatpak update` then works.
-  # One-time setup: Settings -> Pages -> Source: GitHub Actions. The repo is unsigned (no GPGKey in the .flatpakrepo).
+  # One-time setup: Settings -> Pages -> Source: GitHub Actions. The repo is signed with the key in flatpak/signing-key.b64
+  # (private half: secret FLATPAK_GPG_PRIVATE_KEY), so system-wide installs, which Mint's Update Manager needs, work.
   pages:
     name: Publish Flatpak remote
     needs: bundle
@@ -96,6 +107,7 @@ jobs:
           Homepage=https://github.com/${GITHUB_REPOSITORY}
           Comment=Fast, light emoji picker
           RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
+          GPGKey=$(cat flatpak/signing-key.b64)
           EOF
           sed -i 's/^ *//' site/fastmoji.flatpakrepo
           # The landing page and its screenshots live in the repo.

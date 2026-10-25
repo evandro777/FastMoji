@@ -45,12 +45,13 @@ Early pilot. Works on **X11** (tested on Cinnamon): global shortcut, clipboard a
 Until FastMoji is on Flathub, every release is also published as a Flatpak remote, so `flatpak update` (or your software centre) keeps it current. A bundle downloaded from Releases does **not** update by itself; you would install the next one over it.
 
 ```bash
-flatpak remote-add --user --if-not-exists fastmoji https://evandro777.github.io/FastMoji/fastmoji.flatpakrepo
-flatpak install --user fastmoji io.github.evandro777.FastMoji
-flatpak update --user
+flatpak remote-add --system --if-not-exists fastmoji https://evandro777.github.io/FastMoji/fastmoji.flatpakrepo
+flatpak install --system fastmoji io.github.evandro777.FastMoji
 ```
 
-The remote is not GPG-signed, so it is only as trustworthy as the GitHub repository it is built from. It needs the Flathub remote for the runtime (`flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo`).
+**`--system` vs `--user` matters for updates.** Linux Mint's Update Manager (and probably other software centres) only looks at *system-wide* Flatpaks; a `--user` install never appears there. With `--user`, update by hand: `flatpak update --user` (a plain `flatpak update` only checks the system installation).
+
+The remote is GPG-signed (system-wide installs refuse unsigned remotes), but the key lives in this same repository, so it is only as trustworthy as the repository it is built from. It needs the Flathub remote for the runtime (`flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo`, with `--system` or `--user` to match).
 
 ### AppImage (with delta updates)
 

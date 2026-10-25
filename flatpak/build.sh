@@ -37,7 +37,9 @@ flatpak-builder $installation --install --force-clean $opts \
   --state-dir=.flatpak-builder build-dir "$manifest"
 
 if [ "$bundle" = 1 ]; then
-  flatpak-builder $installation $opts --force-clean --repo=repo --state-dir=.flatpak-builder build-dir "$manifest"
+  # FLATPAK_GPG_KEY (CI, tags only): sign commits and summary; system-wide installs refuse unsigned remotes.
+  flatpak-builder $installation $opts --force-clean --repo=repo ${FLATPAK_GPG_KEY:+--gpg-sign=$FLATPAK_GPG_KEY} \
+    --state-dir=.flatpak-builder build-dir "$manifest"
   flatpak build-bundle repo fastmoji.flatpak "$app"
   echo ">> wrote flatpak/fastmoji.flatpak"
 fi
