@@ -56,9 +56,10 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
-    <release version="0.1.1" date="2026-10-21">
+    <release version="0.2.0" date="2026-10-25">
       <description>
-        <p>First release.</p>
+        <p>AppImage builds</p>
+        <p>Language support: Português (Brasil), Français, Deutsch, Español, Italiano, 日本語 and 中文.</p>
       </description>
     </release>
   </releases>

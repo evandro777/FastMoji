@@ -22,3 +22,8 @@ __pycache__/
 /dev/*.png
 /dev/*.log
 /dev/*.pid
+
+# AppImage build output
+/appimage/AppDir/
+/FastMoji-*.AppImage*
+/squashfs-root/

@@ -24,6 +24,7 @@ src/glyphs.rs             emoji -> slint::Image (rustybuzz + ttf-parser + png)
 src/x11.rs                hotkey (XGrabKey), paste (XTEST), focus (EWMH), ClipboardOwner
 src/instance.rs           single instance over a Unix socket
 flatpak/                  manifest, desktop file, metainfo, icon, build.sh
+appimage/build.sh         AppImage + .zsync (host libs, not bundled); CI: appimage.yml. Untested until the first run
 dev/                      manual test harness (python-xlib), NOT shipped
 README.md, CONTRIBUTING.md, RELEASING.md, THIRD_PARTY.md, LICENSE
 docs/                     screenshots (used by the metainfo)

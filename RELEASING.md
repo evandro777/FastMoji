@@ -13,11 +13,12 @@ Releases are Git tags. CI builds the Flatpak bundle and attaches it to the GitHu
 4. Tag and push:
 
    ```bash
-   git tag -s v0.2.0 -m "FastMoji 0.2.0"    # or without -s
+   git tag v0.2.0 -m "FastMoji 0.2.0"    # signed add parameter: -s
    git push origin v0.2.0
    ```
 
-5. The `Flatpak` workflow checks that the tag equals the `Cargo.toml` version and that the metainfo has the `<release>` entry, builds the bundle, and publishes `FastMoji-0.2.0-x86_64.flatpak` plus its `.sha256` on the release page.
+5. The `Flatpak` workflow checks that the tag equals the `Cargo.toml` version and that the metainfo has the `<release>` entry, builds the bundle, and publishes `FastMoji-0.2.0-x86_64.flatpak` on the release page.
+   - The `AppImage` workflow adds `FastMoji-0.2.0-x86_64.AppImage`, and its `.zsync` (delta updates) to the same release (it waits up to 30 min for the release to exist).
 
 6. Smoke-test the downloaded bundle: `flatpak install --user ./FastMoji-0.2.0-x86_64.flatpak`, press the shortcut, paste an emoji.
 
