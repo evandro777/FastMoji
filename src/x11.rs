@@ -106,15 +106,27 @@ pub fn base_key(c: char) -> Option<char> {
     char::from_u32(first).filter(char::is_ascii_graphic)
 }
 
-/// A grabbed shortcut. `release` frees the key combination; the idle listener thread stays blocked on its socket.
+/// Presses closer together than this are key auto-repeat (the shortcut held down), not new presses.
+const REPEAT_MS: u32 = 100;
+
+/// True when a press at `time` (server ms, wraps) follows the previous one so closely that it is auto-repeat.
+fn is_repeat(last: Option<u32>, time: u32) -> bool {
+    last.is_some_and(|t| time.wrapping_sub(t) < REPEAT_MS)
+}
+
+/// A grabbed shortcut. `release` frees the key combination and stops the listener thread.
 pub struct Hotkey {
     conn: Arc<RustConnection>,
     root: u32,
+    /// Our own window: an event sent to it with an empty mask reaches this client, waking the listener.
+    wake: u32,
 }
 
 impl Hotkey {
     pub fn release(&self) {
         let _ = self.conn.ungrab_key(0, self.root, ModMask::ANY);
+        let quit = ClientMessageEvent::new(32, self.wake, AtomEnum::CARDINAL, [0; 5]);
+        let _ = self.conn.send_event(false, self.wake, EventMask::NO_EVENT, quit);
         let _ = self.conn.flush();
     }
 }
@@ -140,17 +152,40 @@ pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> 
             .check()
             .map_err(|_| format!("{shortcut} is already used by another application."))?;
     }
+    let wake = conn.generate_id().map_err(|e| e.to_string())?;
+    conn.create_window(
+        0,
+        wake,
+        root,
+        0,
+        0,
+        1,
+        1,
+        0,
+        WindowClass::INPUT_ONLY,
+        0,
+        &CreateWindowAux::new(),
+    )
+    .map_err(|e| e.to_string())?;
     conn.flush().map_err(|e| e.to_string())?;
     let conn = Arc::new(conn);
     let listener = conn.clone();
     std::thread::spawn(move || {
+        let mut last = None::<u32>;
         while let Ok(event) = listener.wait_for_event() {
-            if let Event::KeyPress(ev) = event {
-                on_press(ev.time);
+            match event {
+                Event::KeyPress(ev) => {
+                    if !is_repeat(last, ev.time) {
+                        on_press(ev.time);
+                    }
+                    last = Some(ev.time);
+                }
+                Event::ClientMessage(_) => break,
+                _ => {}
             }
         }
     });
-    Ok(Hotkey { conn, root })
+    Ok(Hotkey { conn, root, wake })
 }
 
 /// Terminals that paste with Ctrl+Shift+V (plain Ctrl+V reaches the shell as a control character).
@@ -396,6 +431,11 @@ impl ClipboardOwner {
     }
 }
 
+/// The text as Latin-1 bytes, or None if any character (such as an emoji) cannot be expressed.
+fn latin1(text: &str) -> Option<Vec<u8>> {
+    text.chars().map(|c| u8::try_from(c as u32).ok()).collect()
+}
+
 /// Answer one request. Returns true when the clipboard text itself was delivered.
 fn serve(conn: &RustConnection, atoms: &ClipboardAtoms, request: &SelectionRequestEvent, text: &str) -> Result<bool> {
     let property = if request.property == 0 {
@@ -427,16 +467,14 @@ fn serve(conn: &RustConnection, atoms: &ClipboardAtoms, request: &SelectionReque
         conn.change_property8(PropMode::REPLACE, request.requestor, property, kind, text.as_bytes())?;
         delivered_text = true;
     } else if target == Atom::from(AtomEnum::STRING) {
-        // Legacy Latin-1 clients; anything outside Latin-1 (such as emoji) cannot be expressed.
-        let latin1: Vec<u8> = text.chars().map(|c| u8::try_from(c as u32).unwrap_or(b'?')).collect();
-        conn.change_property8(
-            PropMode::REPLACE,
-            request.requestor,
-            property,
-            AtomEnum::STRING,
-            &latin1,
-        )?;
-        delivered_text = true;
+        // Legacy Latin-1 clients. Refusing (instead of sending '?') lets them ask for UTF8_STRING.
+        match latin1(text) {
+            Some(bytes) => {
+                conn.change_property8(PropMode::REPLACE, request.requestor, property, AtomEnum::STRING, &bytes)?;
+                delivered_text = true;
+            }
+            None => answered = false,
+        }
     } else {
         answered = false;
     }
@@ -465,6 +503,20 @@ mod tests {
         assert!(is_terminal_class("konsole\0konsole\0"));
         assert!(!is_terminal_class("xed\0Xed\0"));
         assert!(!is_terminal_class("firefox\0firefox\0"));
+    }
+
+    #[test]
+    fn string_target_is_refused_for_non_latin1() {
+        assert_eq!(latin1("café"), Some(vec![b'c', b'a', b'f', 0xe9]));
+        assert_eq!(latin1("a😀"), None);
+    }
+
+    #[test]
+    fn held_key_repeats_are_ignored() {
+        assert!(!is_repeat(None, 5), "first press");
+        assert!(is_repeat(Some(1000), 1030), "auto-repeat");
+        assert!(!is_repeat(Some(1000), 1000 + REPEAT_MS), "a real second press");
+        assert!(is_repeat(Some(u32::MAX - 10), 20), "across the timestamp wrap");
     }
 
     #[test]

@@ -636,23 +636,31 @@ impl App {
 
     // ---- copy / paste ---------------------------------------------------------------------
 
-    fn copy(&self, text: &str) {
+    /// False when the text did not reach the clipboard; the caller must not paste then.
+    fn copy(&self, text: &str) -> bool {
         if let Some(owner) = &self.x11_clipboard {
-            if let Err(e) = owner.set(text) {
+            let result = owner.set(text);
+            if let Err(e) = &result {
                 eprintln!("clipboard error: {e}");
             }
             self.copied_at.set(Instant::now());
             self.hold_read_at.set(None);
-            return;
+            return result.is_ok();
         }
         let mut clipboard = self.clipboard.borrow_mut();
         if clipboard.is_none() {
             *clipboard = arboard::Clipboard::new().ok();
         }
         match clipboard.as_mut().map(|c| c.set_text(text.to_string())) {
-            Some(Ok(())) => {}
-            Some(Err(e)) => eprintln!("clipboard error: {e}"),
-            None => eprintln!("clipboard unavailable"),
+            Some(Ok(())) => true,
+            Some(Err(e)) => {
+                eprintln!("clipboard error: {e}");
+                false
+            }
+            None => {
+                eprintln!("clipboard unavailable");
+                false
+            }
         }
     }
 
@@ -687,8 +695,8 @@ impl App {
             st.settings.save();
             (text, st.settings.auto_paste)
         };
-        self.copy(&text);
-        let will_paste = paste && self.x11;
+        let copied = self.copy(&text);
+        let will_paste = paste && self.x11 && copied;
         // Must be set before hide(): a non-resident FastMoji may only exit after the paste is sent.
         self.paste_pending.set(will_paste);
         self.hide();
@@ -927,6 +935,9 @@ impl App {
 
     fn open(&self, time: u32) {
         debug(|| format!("open time={time}"));
+        // A paste still waiting for the previous window would hit whatever is active now.
+        self.paste_timer.stop();
+        self.paste_pending.set(false);
         if self.x11 && !self.ui().window().is_visible() {
             self.previous_window.set(self.active_window());
         }
@@ -963,7 +974,6 @@ impl App {
     fn hide(&self) {
         debug(|| "hide".into());
         let ui = self.ui();
-        ui.set_recording_shortcut(false);
         ui.set_recording_shortcut(false);
         let window = ui.window();
         if window.is_visible() {

@@ -11,14 +11,12 @@ const MAX_COMMAND: u64 = 64;
 /// None without `XDG_RUNTIME_DIR`: a shared directory such as `/tmp` would let other users block the
 /// socket or send commands to it.
 fn socket_path() -> Option<PathBuf> {
-    Some(match std::env::var_os("XDG_RUNTIME_DIR")? {
-        // Every `flatpak run` gets its own sandbox, and only this per-app directory is shared
-        // between them (the rest of the runtime dir is a private tmpfs).
-        dir if std::env::var_os("FLATPAK_ID").is_some() => {
-            let app = std::env::var("FLATPAK_ID").unwrap_or_default();
-            PathBuf::from(dir).join("app").join(app).join("fastmoji.sock")
-        }
-        dir => PathBuf::from(dir).join("fastmoji.sock"),
+    let dir = PathBuf::from(std::env::var_os("XDG_RUNTIME_DIR")?);
+    // Every `flatpak run` gets its own sandbox, and only this per-app directory is shared
+    // between them (the rest of the runtime dir is a private tmpfs).
+    Some(match std::env::var("FLATPAK_ID") {
+        Ok(app) => dir.join("app").join(app).join("fastmoji.sock"),
+        Err(_) => dir.join("fastmoji.sock"),
     })
 }
 
@@ -43,6 +41,9 @@ pub fn listen(on_command: impl Fn(String) + Send + 'static) -> std::io::Result<(
 }
 
 fn listen_at(path: &Path, on_command: impl Fn(String) + Send + 'static) -> std::io::Result<()> {
+    // Held until the bind is settled: without it, a second start could delete the socket a first one just bound.
+    let lock = std::fs::File::create(path.with_extension("lock"))?;
+    lock.lock()?;
     let listener = match UnixListener::bind(path) {
         Err(e) if e.kind() == ErrorKind::AddrInUse => {
             if UnixStream::connect(path).is_ok() {
@@ -55,6 +56,7 @@ fn listen_at(path: &Path, on_command: impl Fn(String) + Send + 'static) -> std::
         }
         other => other?,
     };
+    drop(lock);
     std::thread::spawn(move || {
         for stream in listener.incoming().flatten() {
             // One slow or silent client must not block the others (a hung `--toggle` is useless);
@@ -90,6 +92,28 @@ mod tests {
         assert_eq!(second.unwrap_err().kind(), ErrorKind::AddrInUse);
         assert!(send_to(&path, "toggle"));
         assert_eq!(rx.recv_timeout(Duration::from_secs(2)).unwrap(), "toggle");
+    }
+
+    #[test]
+    fn simultaneous_starts_after_a_crash_leave_one_live_instance() {
+        let path = temp_socket("race");
+        drop(UnixListener::bind(&path).unwrap()); // stale file
+        let barrier = std::sync::Arc::new(std::sync::Barrier::new(8));
+        let starts: Vec<_> = (0..8)
+            .map(|_| {
+                let (path, barrier) = (path.clone(), barrier.clone());
+                std::thread::spawn(move || {
+                    barrier.wait();
+                    listen_at(&path, |_| {})
+                })
+            })
+            .collect();
+        let results: Vec<_> = starts.into_iter().map(|t| t.join().unwrap()).collect();
+        assert_eq!(results.iter().filter(|r| r.is_ok()).count(), 1, "{results:?}");
+        assert!(
+            results.iter().flatten().count() == 1 && send_to(&path, "show"),
+            "the winner must stay reachable"
+        );
     }
 
     #[test]

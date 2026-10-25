@@ -1,6 +1,6 @@
 [package]
 name = "fastmoji"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2024"
 description = "Light and fast emoji picker built in Rust with Slint."
 license = "GPL-3.0-or-later"
