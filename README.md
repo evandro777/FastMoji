@@ -3,6 +3,7 @@
 [![CI](https://github.com/evandro777/FastMoji/actions/workflows/ci.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/ci.yml)
 [![Flatpak](https://github.com/evandro777/FastMoji/actions/workflows/flatpak.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/flatpak.yml)
 [![AppImage](https://github.com/evandro777/FastMoji/actions/workflows/appimage.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/appimage.yml)
+[![VirusTotal](https://github.com/evandro777/FastMoji/actions/workflows/virustotal.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/virustotal.yml)
 [![made-for-linux](https://img.shields.io/badge/Linux-1f425f?logo=linux)](https://www.linux.org/)
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-orange)](https://opensource.org/licenses/GPL-3.0)
 
