@@ -313,6 +313,43 @@ impl Session {
         Ok(())
     }
 
+    /// Tells the WM where to map `window` (USPosition/PPosition in WM_NORMAL_HINTS). A WM places a new window
+    /// itself unless the position is a hint set before mapping; moving it afterwards shows it at the WM's spot first.
+    pub fn set_position_hint(&self, window: u32, x: i32, y: i32) {
+        // WM_SIZE_HINTS is 18 CARD32; keep what the toolkit already put there.
+        let mut hints: Vec<u32> = self
+            .conn
+            .get_property(false, window, AtomEnum::WM_NORMAL_HINTS, AtomEnum::WM_SIZE_HINTS, 0, 18)
+            .ok()
+            .and_then(|c| c.reply().ok())
+            .and_then(|r| r.value32().map(Iterator::collect))
+            .unwrap_or_default();
+        hints.resize(18, 0);
+        hints[0] |= 1 | 4; // USPosition | PPosition
+        hints[1] = x as u32;
+        hints[2] = y as u32;
+        let _ = self.conn.change_property32(
+            PropMode::REPLACE,
+            window,
+            AtomEnum::WM_NORMAL_HINTS,
+            AtomEnum::WM_SIZE_HINTS,
+            &hints,
+        );
+        let _ = self.conn.flush();
+    }
+
+    /// The mouse pointer in root coordinates.
+    pub fn pointer(&self) -> Option<(i32, i32)> {
+        let p = self.conn.query_pointer(self.root).ok()?.reply().ok()?;
+        Some((i32::from(p.root_x), i32::from(p.root_y)))
+    }
+
+    /// Size of the whole screen, the bound to use before winit knows the monitors.
+    pub fn screen_size(&self) -> Option<(i32, i32)> {
+        let g = self.conn.get_geometry(self.root).ok()?.reply().ok()?;
+        Some((i32::from(g.width), i32::from(g.height)))
+    }
+
     /// Ask the window manager to focus `window`, using the hotkey's timestamp so Muffin does not treat
     /// the request as focus stealing.
     pub fn activate(&self, window: u32, time: u32) -> Result<()> {

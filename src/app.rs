@@ -960,6 +960,15 @@ impl App {
             (st.settings.width, st.settings.height)
         };
         ui.window().set_size(LogicalSize::new(w as f32, h as f32));
+        // Placement must reach the WM before the map; moving after show() flashes at the WM's own spot.
+        if self.x11
+            && let Some((x, y)) = self.target_position(w, h)
+        {
+            if let (Some(id), Some(xconn)) = (self.window_id(), &self.xconn) {
+                xconn.set_position_hint(id, x, y);
+            }
+            ui.window().set_position(slint::PhysicalPosition::new(x, y));
+        }
         self.relayout();
         ui.set_scroll_y(0.0);
         self.shown_at.set(Some(Instant::now()));
@@ -999,19 +1008,60 @@ impl App {
             return;
         }
         let Some(xconn) = &self.xconn else { return };
-        let id = self
-            .ui()
+        if let Some(id) = self.window_id()
+            && let Err(e) = xconn.activate(id, time)
+        {
+            eprintln!("could not activate window: {e}");
+        }
+    }
+
+    /// X11 id of the picker window, once winit has created it.
+    fn window_id(&self) -> Option<u32> {
+        self.ui()
             .window()
             .with_winit_window(|w| match w.window_handle().ok()?.as_raw() {
                 RawWindowHandle::Xlib(h) => Some(h.window as u32),
                 RawWindowHandle::Xcb(h) => Some(h.window.get()),
                 _ => None,
-            });
-        if let Some(Some(id)) = id
-            && let Err(e) = xconn.activate(id, time)
-        {
-            eprintln!("could not activate window: {e}");
-        }
+            })
+            .flatten()
+    }
+
+    /// Top-left (physical px) that centers a `width` x `height` logical popup on the pointer, inside its monitor.
+    fn target_position(&self, width: u32, height: u32) -> Option<(i32, i32)> {
+        let xconn = self.xconn.as_ref()?;
+        let ui = self.ui();
+        let window = ui.window();
+        let scale = window.scale_factor();
+        let (w, h) = (
+            (width as f32 * scale).round() as i32,
+            (height as f32 * scale).round() as i32,
+        );
+        let (px, py) = xconn.pointer()?;
+        // Monitors are known only once the window exists; before that use the whole screen.
+        let monitors = window
+            .with_winit_window(|win| {
+                win.available_monitors()
+                    .map(|m| {
+                        (
+                            m.position().x,
+                            m.position().y,
+                            m.size().width as i32,
+                            m.size().height as i32,
+                        )
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .unwrap_or_default();
+        let (mx, my, mw, mh) = monitors
+            .into_iter()
+            .find(|&(x, y, w, h)| (x..x + w).contains(&px) && (y..y + h).contains(&py))
+            .or_else(|| xconn.screen_size().map(|(w, h)| (0, 0, w, h)))
+            .unwrap_or((0, 0, i32::MAX, i32::MAX));
+        Some((
+            (px - w / 2).clamp(mx, mx + (mw - w).max(0)),
+            (py - h / 2).clamp(my, my + (mh - h).max(0)),
+        ))
     }
 
     /// The WM may ignore the first request; keep asking until the picker actually has focus.
