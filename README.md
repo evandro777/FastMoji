@@ -7,7 +7,7 @@
 [![made-for-linux](https://img.shields.io/badge/Linux-1f425f?logo=linux)](https://www.linux.org/)
 [![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-orange)](https://opensource.org/licenses/GPL-3.0)
 
-A popup emoji picker for Linux that is **light and fast**. Written in Rust with [Slint](https://slint.dev).
+A popup emoji picker for Linux that is **light and fast**. Written in Rust with [Slint](https://slint.dev). On X11 it opens centered on the mouse pointer, inside the monitor the pointer is on.
 
 FastMoji is inspired by [Emote](https://github.com/tom-james-watson/Emote) by Tom Watson, a great GTK4 picker. FastMoji keeps the same idea (press a shortcut, search, pick, and the emoji is pasted into the app you were using) and focuses on startup time and memory:
 
@@ -58,7 +58,7 @@ The remote is GPG-signed (system-wide installs refuse unsigned remotes), but the
 
 Download `FastMoji-<version>-x86_64.AppImage`, then `chmod +x` it and run it. It uses the fontconfig, xkbcommon and X11 libraries already on your system. For a keyboard shortcut use the command `/path/to/FastMoji-<version>-x86_64.AppImage --toggle` (it must point at the file, so keep it in a fixed place).
 
-It has update information built in, so a tool such as [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) (`appimageupdatetool FastMoji-*.AppImage`), Gear Lever or AppManager downloads only the changed parts of the next release. The AppImage does not update itself.
+The AppImage does not update itself, but it has update information built in, so a tool such as [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) (`appimageupdatetool FastMoji-*.AppImage`), Gear Lever or AppManager downloads only the changed parts of the next release.
 
 ## Build & Configurations
 
@@ -66,7 +66,7 @@ It has update information built in, so a tool such as [AppImageUpdate](https://g
 
 ## Contributing and releases
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) to build, test and send a change, and [`RELEASING.md`](RELEASING.md) for how a release is cut. CI (format, clippy, tests, packaging checks, and a Flatpak build) runs on every pull request.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) to build, test and send a change, and [`RELEASING.md`](RELEASING.md) for how a release is cut. CI (format, clippy, tests, a `cargo audit` check of dependencies against RustSec, packaging checks, and a Flatpak build) runs on every pull request.
 
 ## License
 

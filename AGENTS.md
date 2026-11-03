@@ -42,6 +42,13 @@ FASTMOJI_DEBUG=1 ./target/fast/fastmoji   # logs open/focus/hide/paste/exit deci
 
 System deps: `libfontconfig-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-dev libxcb1-dev`. No GL/Skia/femtovg is used.
 
+## Code conventions: Editing code
+
+- Use the Edit tool for code changes. Don't splice files with sed, awk, python or heredocs through Bash.
+- After editing Rust, run `cargo fmt && cargo clippy -- -D warnings && cargo test`. Re-read the surrounding block to confirm no braces, lines or whole components (e.g. pages) were deleted.
+- After changing dependencies (`Cargo.toml` or `Cargo.lock`), also run `cargo audit`: CI runs it and fails on known vulnerabilities (warnings such as "unmaintained" do not fail). Fix with `cargo update -p <crate>`.
+- After any change, also run `cargo build --profile fast` so the binary is built and cached for the owner's manual testing.
+
 ## Architecture decisions (do not undo without measuring)
 
 - **Software renderer + emoji as images.** Slint's GL renderer (femtovg) draws the CBDT bitmap Noto font but costs ~108 MB RSS; the software renderer costs ~27 MB but draws *nothing* for that font. So `glyphs.rs` shapes each emoji, takes its PNG from the font, area-averages it down to the **exact physical size it is shown at** (logical size × window scale factor, cache keyed by emoji and size, up to 600 images). Do not go back to one fixed size scaled by Slint: its software renderer scales bilinearly, which skips source pixels when shrinking more than 2x and made the emoji jagged, worse at some sizes than others. The image sizes in `ui/main.slint` are mirrored as constants in `app.rs`. Backend is forced in `main.rs` (`winit` + `software`) and in `Cargo.toml` features (`default-features = false`).
@@ -66,6 +73,7 @@ System deps: `libfontconfig-dev libxkbcommon-dev libxkbcommon-x11-dev libx11-dev
 - **Focus on show:** Muffin ignores a plain `show()`. `x11::activate` stamps `_NET_WM_USER_TIME` with the hotkey event time, calls `XSetInputFocus` and sends `_NET_ACTIVE_WINDOW` with that time. `app.rs` also retries every 100 ms until a focus-in arrives, and ignores focus-out for 300 ms after showing (re-activating instead of hiding).
 - **Paste must wait for the previous window.** We record `_NET_ACTIVE_WINDOW` before showing; after hiding we poll until that window is active **and** holds the X input focus, restoring it with a pager-style `_NET_ACTIVE_WINDOW` if the WM did not.
 - **XTEST key events must be flushed one by one (~8 ms apart) and followed by a round-trip before the connection closes.** Sending the four events back-to-back and dropping the connection made `xed` (GTK3) lose ~25% of pastes. Fixed; do not "optimize" it.
+- **Placement without a jump:** Muffin places every newly mapped window itself, so `set_position()` after `show()` first shows the frame at the WM's spot. `open()` centers the popup on the pointer (clamped to its monitor) *before* `show()`, via `x11::set_position_hint` (USPosition|PPosition in `WM_NORMAL_HINTS`) plus `set_position`. Check with `xev -root -event substructure` on a private Xvfb + muffin display: one frame `ConfigureNotify` after `MapNotify`. Never move the window after `show()`.
 - **Arrow keys:** Left/Right/Up/Down always move through the emoji (handled in `capture-key-pressed`), even while the search box has text. Up on the top emoji row (no search) sets `categories-focused`: then Left/Right cycle categories and Down/Enter (or any other key) return to the grid. `move-vertical` returns false when there is no row to move to.
 - A global key can be owned by one client only; `x11::spawn_hotkey` reports `BadAccess`. The user's other tools may hold shortcuts.
 - Slint notes: use `content-y` (not `viewport-y`); a callback named `close` shadows a builtin (we use `dismiss`); `FocusScope.capture-key-pressed` is needed to intercept keys before `LineEdit`.
@@ -96,6 +104,12 @@ python3 dev/lat.py y "*" <pid> 12   # open latency + RSS
 - **Destructive keys:** the harness sends Ctrl+A, Delete and Ctrl+S to the scratch `xed`. Always go through `focus_scratch_editor()` in `dev/drive.py`, which aborts unless the active window is the scratch file. (A fixed-position click once hit a file manager showing `src/` and trashed the sources; they were restored from the Trash.) Never click or type at hard-coded screen coordinates.
 - **Shell hygiene:** never `pkill -f` with a pattern that also appears in your own command line (it kills the shell); anchor it (`'^\./target/fast/fastmoji'`). Never `pkill -x xed` or `pkill -x fastmoji`: that kills the user's own windows; kill by PID.
 
+### Verifying UI changes
+
+- After any Slint UI change, build and launch the app (`cargo run`), navigate to the affected page, take a screenshot and inspect it before saying the change is done.
+- Specifically check: rows don't stretch when a list has 1 item, badges and buttons are right-aligned, icons are sharp, text is selectable as a block, and empty or error states (e.g. "nothing found") don't throw errors.
+- If you can't launch it (e.g. the flow needs pkexec or a live X11 session), say so explicitly and list what I should test manually.
+
 ## Flatpak
 
 `flatpak/build.sh --devel` builds and installs `io.github.evandro777.FastMoji.Devel` (use `--devel` so an installed release is not replaced). Needs `flatpak-builder` and `org.freedesktop.Sdk//25.08` + `org.freedesktop.Sdk.Extension.rust-stable//25.08`. Crates are vendored by the script (offline build). Sandbox permissions are only the Wayland/X11 sockets and IPC. **The manifest has been validated but not yet built or run**: still to verify are the hotkey, paste, focus and socket sharing inside the sandbox.
@@ -109,7 +123,7 @@ python3 dev/lat.py y "*" <pid> 12   # open latency + RSS
 
 ## Public project, GitHub flow and Flathub
 
-- Repo: `https://github.com/evandro777/FastMoji` (this directory is the repo root). Work on branches, PRs to `master`; CI is `.github/workflows/ci.yml` (fmt, clippy `-D warnings`, tests, metainfo/desktop validation) and `flatpak.yml` (bundle on every push/PR; on a `v*` tag it publishes the bundle to the GitHub release). `RELEASING.md` has the exact steps; the tag must equal the `Cargo.toml` version and the metainfo needs a matching `<release>`.
+- Repo: `https://github.com/evandro777/FastMoji` (this directory is the repo root). Work on branches, PRs to `master`; CI is `.github/workflows/ci.yml` (fmt, clippy `-D warnings`, tests, `cargo audit` against RustSec, metainfo/desktop validation) and `flatpak.yml` (bundle on every push/PR; on a `v*` tag it publishes the bundle to the GitHub release). `RELEASING.md` has the exact steps; the tag must equal the `Cargo.toml` version and the metainfo needs a matching `<release>`.
 - App id is `io.github.evandro777.FastMoji` because Flathub requires `io.github.*` for GitHub-hosted apps.
 - **Flathub policy (important for agents):** Flathub manifests must NOT contain AI-generated or AI-assisted content, AI must not open or automate submission PRs, and AI-generated code/docs must be disclosed by the submitter. So: do **not** write or paste a Flathub manifest, `cargo-sources.json` PR text, or submission PR for the owner. You may explain the process (`docs/FLATHUB.md`), keep the in-repo `flatpak/` files for local/CI builds, and keep the README's AI-assistance note accurate.
 - Formatting is enforced: `rustfmt.toml` has `max_width = 120`; clippy must be clean. Let-chains are used, so `rust-version` is 1.92 (Slint 1.18 requires it).
