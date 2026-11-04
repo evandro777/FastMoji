@@ -41,7 +41,19 @@ Early pilot. Works on **X11** (tested on Cinnamon): global shortcut, clipboard a
 
 ## Install
 
-### Flatpak: easy install with automatic updates
+### Flatpak
+
+#### Install from file (no updates)
+
+Download `FastMoji-<version>-x86_64.flatpak` from [Releases](https://github.com/evandro777/FastMoji/releases), then execute:
+
+```bash
+flatpak install --user ~/Downloads/FastMoji-<version>-x86_64.flatpak
+```
+
+Installing from file, will not auto update.
+
+#### Install with automatic updates
 
 Until FastMoji is on Flathub, every release is also published as a Flatpak remote, so `flatpak update` (or your software centre) keeps it current. A bundle downloaded from Releases does **not** update by itself; you would install the next one over it.
 
@@ -56,9 +68,18 @@ The remote is GPG-signed (system-wide installs refuse unsigned remotes), but the
 
 ### AppImage (with delta updates)
 
-Download `FastMoji-<version>-x86_64.AppImage`, then `chmod +x` it and run it. It uses the fontconfig, xkbcommon and X11 libraries already on your system. For a keyboard shortcut use the command `/path/to/FastMoji-<version>-x86_64.AppImage --toggle` (it must point at the file, so keep it in a fixed place).
+Download `FastMoji-<version>-x86_64.AppImage` from [Releases](https://github.com/evandro777/FastMoji/releases), then execute:
 
-The AppImage does not update itself, but it has update information built in, so a tool such as [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) (`appimageupdatetool FastMoji-*.AppImage`), Gear Lever or AppManager downloads only the changed parts of the next release.
+```bash
+sudo chmod +x ~/Downloads/FastMoji-<version>-x86_64.AppImage
+~/Downloads/FastMoji-<version>-x86_64.AppImage
+```
+
+It uses the fontconfig, xkbcommon and X11 libraries already on your system.
+
+For a keyboard shortcut use the command `/path/to/FastMoji-<version>-x86_64.AppImage --toggle` (it must point at the file, so keep it in a fixed place).
+
+The AppImage does not update itself, but it has update information built in, so a tool such as [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) (`appimageupdatetool FastPaste-*.AppImage`), [Gear Lever](https://github.com/mijorus/gearlever) or [AppManager](https://github.com/kem-a/AppManager) downloads only the changed parts of the next release.
 
 ## Build & Configurations
 
