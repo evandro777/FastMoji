@@ -39,8 +39,6 @@ export component Main inherits Window {
     in property <int> selected-index: -1;
     in property <image> preview-img;
     in property <string> preview-name;
-    in property <[image]> chosen;
-    in property <string> chosen-more;
     in property <int> tone;
     in property <int> size-choice;
     in property <int> language-choice;
@@ -63,11 +61,11 @@ export component Main inherits Window {
     callback scrolled();
     callback hovered(int);
     callback picked(int);
-    callback appended(int);
     callback category-clicked(int);
     callback move-horizontal(int);
     callback move-vertical(int) -> bool;
-    callback accept-selection(bool);
+    callback move-page(int);
+    callback accept-selection();
     callback cycle-category(int);
     callback dismiss();
     callback quit();
@@ -97,7 +95,9 @@ export component Main inherits Window {
                 return accept;
             }
             if e.text == Key.Escape {
-                if root.settings-open { root.settings-open = false; } else { root.dismiss(); }
+                if root.settings-open { root.settings-open = false; }
+                else if root.search-text != "" { root.search-text = ""; root.search(""); }
+                else { root.dismiss(); }
                 return accept;
             }
             if root.settings-open { return reject; }
@@ -112,9 +112,11 @@ export component Main inherits Window {
                 root.categories-focused = false;
             }
             if e.text == Key.Return {
-                root.accept-selection(e.modifiers.shift);
+                root.accept-selection();
                 return accept;
             }
+            if e.text == Key.PageDown { root.move-page(1); return accept; }
+            if e.text == Key.PageUp { root.move-page(-1); return accept; }
             if e.text == Key.DownArrow { root.move-vertical(1); return accept; }
             if e.text == Key.UpArrow {
                 // Up from the top row reaches the category bar (not while searching: no categories then).
@@ -150,21 +152,26 @@ export component Main inherits Window {
         VerticalLayout {
             // Category bar
             HorizontalLayout {
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 12px;
+                padding-right: 12px;
                 padding-top: 8px;
                 spacing: 2px;
                 for category[i] in root.categories: Rectangle {
                     height: 34px;
-                    border-radius: 17px;
-                    border-width: root.categories-focused && i == root.active-category ? 2px : 0px;
-                    border-color: Palette.accent-background;
-                    background: i == root.active-category ? Palette.selection-background.with-alpha(0.35) : (cat-touch.has-hover ? #8883 : transparent);
-                    Image {
-                        source: category.img;
-                        width: 20px;
-                        height: 20px;
-                        opacity: i == root.active-category ? 1.0 : 0.65;
+                    // Fixed-size chip centered in a stretching slot, so it looks the same at any width.
+                    Rectangle {
+                        width: 40px;
+                        height: 32px;
+                        border-radius: 8px;
+                        border-width: root.categories-focused && i == root.active-category ? 2px : 0px;
+                        border-color: Palette.accent-background;
+                        background: i == root.active-category ? Palette.accent-background.with-alpha(0.2) : (cat-touch.has-hover ? Palette.foreground.with-alpha(0.08) : transparent);
+                        Image {
+                            source: category.img;
+                            width: 20px;
+                            height: 20px;
+                            opacity: i == root.active-category || cat-touch.has-hover ? 1.0 : 0.6;
+                        }
                     }
                     cat-touch := TouchArea {
                         mouse-cursor: pointer;
@@ -234,21 +241,19 @@ export component Main inherits Window {
                             width: root.cell;
                             height: root.cell;
                             border-radius: 8px;
-                            background: e.index == root.selected-index ? Palette.selection-background.with-alpha(0.35) : transparent;
+                            background: e.index == root.selected-index ? Palette.accent-background.with-alpha(0.2) : transparent;
+                            border-width: e.index == root.selected-index ? 1px : 0px;
+                            border-color: Palette.accent-background.with-alpha(0.5);
                             Image {
                                 source: e.img;
                                 width: root.emoji-px;
                                 height: root.emoji-px;
                             }
                             touch := TouchArea {
-                                changed has-hover => {
-                                    if self.has-hover { root.hovered(e.index); }
-                                }
                                 pointer-event(ev) => {
-                                    if ev.kind == PointerEventKind.up {
-                                        if ev.button == PointerEventButton.left { root.picked(e.index); }
-                                        if ev.button == PointerEventButton.right { root.appended(e.index); }
-                                    }
+                                    // Only real pointer motion selects: has-hover also fires when the window opens under a still pointer.
+                                    if ev.kind == PointerEventKind.move { root.hovered(e.index); }
+                                    if ev.kind == PointerEventKind.up && ev.button == PointerEventButton.left { root.picked(e.index); }
                                 }
                             }
                         }
@@ -261,7 +266,7 @@ export component Main inherits Window {
                 background: Palette.border;
             }
 
-            // Preview + multi-select strip
+            // Preview
             HorizontalLayout {
                 padding: 10px;
                 spacing: 12px;
@@ -280,17 +285,6 @@ export component Main inherits Window {
                     vertical-alignment: center;
                     horizontal-stretch: 1;
                 }
-                Text {
-                    visible: root.chosen-more != "";
-                    text: root.chosen-more;
-                    color: Palette.foreground.with-alpha(0.6);
-                    vertical-alignment: center;
-                }
-                for img in root.chosen: Image {
-                    source: img;
-                    width: 24px;
-                    height: 24px;
-                }
             }
         }
     }
@@ -300,13 +294,13 @@ export component Main inherits Window {
         TouchArea { clicked => { root.recording-shortcut = false; root.settings-open = false; } }
         Rectangle {
             width: min(root.width - 40px, 340px);
-            height: min(root.height - 20px, 392px);
+            height: min(root.height - 20px, prefs-layout.preferred-height);
             background: Palette.background;
             border-radius: 10px;
             border-width: 1px;
             border-color: Palette.border;
             TouchArea { }
-            VerticalLayout {
+            prefs-layout := VerticalLayout {
                 padding: 18px;
                 spacing: 14px;
                 Text { text: @tr("Preferences"); font-size: 16px; font-weight: 700; }
@@ -381,8 +375,8 @@ export component Main inherits Window {
                 }
                 HorizontalLayout {
                     spacing: 8px;
-                    alignment: end;
                     Button { text: @tr("Quit FastMoji"); clicked => { root.quit(); } }
+                    Rectangle { horizontal-stretch: 1; }
                     Button { text: @tr("About"); clicked => { root.about-open = true; } }
                     Button { text: @tr("Close"); primary: true; clicked => { root.recording-shortcut = false; root.settings-open = false; } }
                 }
@@ -395,13 +389,13 @@ export component Main inherits Window {
         TouchArea { clicked => { root.about-open = false; } }
         Rectangle {
             width: min(root.width - 40px, 320px);
-            height: min(root.height - 20px, 250px);
+            height: min(root.height - 20px, about-layout.preferred-height);
             background: Palette.background;
             border-radius: 10px;
             border-width: 1px;
             border-color: Palette.border;
             TouchArea { }
-            VerticalLayout {
+            about-layout := VerticalLayout {
                 padding: 18px;
                 spacing: 8px;
                 alignment: center;
@@ -413,7 +407,7 @@ export component Main inherits Window {
                 Text {
                     text: "github.com/evandro777/FastMoji";
                     horizontal-alignment: center;
-                    color: #3584e4;
+                    color: Palette.accent-background;
                     TouchArea {
                         mouse-cursor: pointer;
                         clicked => { root.open-url("https://github.com/evandro777/FastMoji"); }

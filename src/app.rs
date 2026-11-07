@@ -49,7 +49,6 @@ const CELL_PADDING: f32 = 14.0;
 /// Image sizes used in `ui/main.slint`; images are rendered at exactly these (times the scale).
 const CATEGORY_PX: f32 = 20.0;
 const PREVIEW_PX: f32 = 36.0;
-const CHOSEN_PX: f32 = 24.0;
 
 /// "Ctrl+Alt+." from a key press, or None for a lone modifier or a key the shortcut parser does not know.
 /// `mods` is [ctrl, alt, shift, meta]; at least one is required (a bare key would steal normal typing).
@@ -219,8 +218,6 @@ struct State {
     row_of: Vec<usize>,
     category_row: [usize; emojis::CATEGORIES.len()],
     selected: usize,
-    /// Emojis queued with Shift+Enter / right click.
-    chosen: Vec<&'static str>,
     columns: usize,
     active: usize,
     saved_scroll: Option<f32>,
@@ -429,7 +426,7 @@ impl App {
         }
     }
 
-    /// Push derived state (selection, preview, multi-select strip, settings) into the UI.
+    /// Push derived state (selection, preview, settings) into the UI.
     fn sync(&self) {
         let ui = self.ui();
         let st = self.st.borrow();
@@ -462,18 +459,6 @@ impl App {
                 ui.set_preview_name("".into());
             }
         }
-        let shown = &st.chosen[st.chosen.len().saturating_sub(4)..];
-        let images: Vec<Image> = shown.iter().map(|c| self.glyphs.image(c, CHOSEN_PX)).collect();
-        ui.set_chosen(ModelRc::new(VecModel::from(images)));
-        let hidden = st.chosen.len() - shown.len();
-        ui.set_chosen_more(
-            if hidden > 0 {
-                format!("+{hidden}")
-            } else {
-                String::new()
-            }
-            .into(),
-        );
     }
 
     // ---- layout and scrolling -------------------------------------------------------------
@@ -628,6 +613,16 @@ impl App {
         true
     }
 
+    /// Moves by one screenful of rows (keeping one row of overlap); stops at the first/last row.
+    fn move_page(&self, direction: i32) {
+        let rows = ((self.ui().get_list_height() / self.st.borrow().cell_px()) as i32 - 1).max(1);
+        for _ in 0..rows {
+            if !self.move_vertical(direction) {
+                break;
+            }
+        }
+    }
+
     fn cycle_category(&self, delta: i32) {
         let count = emojis::CATEGORIES.len() as i32;
         let active = self.st.borrow().active as i32;
@@ -671,31 +666,16 @@ impl App {
             .map(|&e| emojis::char_for(e, st.settings.skin_tone))
     }
 
-    /// Shift+Enter / right click: queue the emoji and keep the picker open.
-    fn append(&self, index: usize) {
-        let Some(ch) = self.emoji_at(index) else { return };
-        let text = {
-            let mut st = self.st.borrow_mut();
-            st.chosen.push(ch);
-            st.settings.push_recent(ch);
-            st.settings.save();
-            st.chosen.concat()
-        };
-        self.copy(&text);
-        self.sync();
-    }
-
-    /// Enter / click: copy (together with anything queued), close and paste.
+    /// Enter / click: copy, close and paste.
     fn select(&self, index: usize) {
         let Some(ch) = self.emoji_at(index) else { return };
-        let (text, paste) = {
+        let paste = {
             let mut st = self.st.borrow_mut();
-            let text = st.chosen.concat() + ch;
             st.settings.push_recent(ch);
             st.settings.save();
-            (text, st.settings.auto_paste)
+            st.settings.auto_paste
         };
-        let copied = self.copy(&text);
+        let copied = self.copy(ch);
         let will_paste = paste && self.x11 && copied;
         // Must be set before hide(): a non-resident FastMoji may only exit after the paste is sent.
         self.paste_pending.set(will_paste);
@@ -772,7 +752,7 @@ impl App {
 
     /// Non-resident mode: quit once the picker is closed and nothing is being pasted. After a
     /// successful paste the job is done and we exit right away. If the user only copied (auto-paste
-    /// off, or a multi-selection that was never pasted), keep serving the clipboard until another
+    /// off), keep serving the clipboard until another
     /// application replaces it (`on_clipboard_lost`), otherwise the copy would be useless.
     fn maybe_exit(&self) {
         if self.resident() || self.paste_pending.get() || self.ui().window().is_visible() {
@@ -911,13 +891,9 @@ impl App {
         self.sync();
     }
 
-    fn accept_selection(&self, shift: bool) {
+    fn accept_selection(&self) {
         let selected = self.st.borrow().selected;
-        if shift {
-            self.append(selected)
-        } else {
-            self.select(selected)
-        }
+        self.select(selected)
     }
 
     // ---- window lifecycle -----------------------------------------------------------------
@@ -945,7 +921,6 @@ impl App {
         self.pasted.set(false);
         {
             let mut st = self.st.borrow_mut();
-            st.chosen.clear();
             st.query.clear();
             st.selected = 0;
             st.active = 0;
@@ -1125,7 +1100,6 @@ pub fn run(show: bool, command: &str) {
         row_of: Vec::new(),
         category_row: [0; emojis::CATEGORIES.len()],
         selected: 0,
-        chosen: Vec::new(),
         columns: 1,
         active: 0,
         saved_scroll: None,
@@ -1199,13 +1173,22 @@ pub fn run(show: bool, command: &str) {
     wire!(on_search, |app, text| app.search(&text));
     wire!(on_width_changed, |app, w| app.on_width(w, false));
     wire!(on_scrolled, |app| app.on_scrolled());
-    wire!(on_hovered, |app, i| app.set_selected(i as usize));
+    // The window opens under the pointer and Slint reports a synthetic move for it; ignore that burst.
+    wire!(on_hovered, |app, i| {
+        if app
+            .shown_at
+            .get()
+            .is_none_or(|t| t.elapsed() > Duration::from_millis(400))
+        {
+            app.set_selected(i as usize);
+        }
+    });
     wire!(on_picked, |app, i| app.select(i as usize));
-    wire!(on_appended, |app, i| app.append(i as usize));
     wire!(on_category_clicked, |app, c| app.jump_to_category(c as usize));
     wire!(on_move_horizontal, |app, d| app.move_horizontal(d));
     wire!(on_move_vertical, |app, d| app.move_vertical(d));
-    wire!(on_accept_selection, |app, shift| app.accept_selection(shift));
+    wire!(on_move_page, |app, d| app.move_page(d));
+    wire!(on_accept_selection, |app| app.accept_selection());
     wire!(on_cycle_category, |app, d| app.cycle_category(d));
     wire!(on_dismiss, |app| app.hide());
     wire!(on_set_tone, |app, i| {

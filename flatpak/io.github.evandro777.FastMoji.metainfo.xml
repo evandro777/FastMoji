@@ -27,7 +27,7 @@
     </p>
     <ul>
       <li>Search as you type, browse by category, and see your recent emojis first</li>
-      <li>Navigate with the arrow keys, Enter to select, Shift+Enter to build a multi-emoji selection</li>
+      <li>Navigate with the arrow keys, Enter to select</li>
       <li>Skin tone and emoji size preferences</li>
       <li>Optional: exit when closed to use no memory in the background</li>
     </ul>
@@ -56,10 +56,9 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
-    <release version="0.2.3" date="2026-10-25">
+    <release version="0.2.4" date="2026-11-07">
       <description>
-        <p>AppImage builds</p>
-        <p>Language support: Português (Brasil), Français, Deutsch, Español, Italiano, 日本語 and 中文.</p>
+        <p>UI polish; remove multi-select; two-step Esc</p>
       </description>
     </release>
   </releases>
