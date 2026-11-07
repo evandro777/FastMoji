@@ -3,7 +3,7 @@ use std::{
     error::Error,
     sync::{
         Arc, Mutex,
-        atomic::{AtomicBool, AtomicUsize, Ordering},
+        atomic::{AtomicBool, AtomicU64, AtomicUsize, Ordering},
     },
 };
 
@@ -12,9 +12,9 @@ use x11rb::{
     protocol::{
         Event,
         xproto::{
-            Atom, AtomEnum, ClientMessageEvent, ConnectionExt as _, CreateWindowAux, EventMask, GrabMode, InputFocus,
-            KEY_PRESS_EVENT, KEY_RELEASE_EVENT, ModMask, PropMode, SELECTION_NOTIFY_EVENT, SelectionNotifyEvent,
-            SelectionRequestEvent, WindowClass,
+            Atom, AtomEnum, ClientMessageEvent, ConnectionExt as _, CreateWindowAux, EventMask,
+            GetKeyboardMappingReply, GrabMode, InputFocus, KEY_PRESS_EVENT, KEY_RELEASE_EVENT, ModMask, PropMode,
+            SELECTION_NOTIFY_EVENT, SelectionNotifyEvent, SelectionRequestEvent, WindowClass,
         },
         xtest::ConnectionExt as _,
     },
@@ -73,11 +73,16 @@ pub fn parse_shortcut(text: &str) -> Option<(ModMask, u32)> {
     (mods != ModMask::from(0u16)).then_some((mods, key))
 }
 
-/// Keycodes for `keysyms`, from one fetch of the keyboard map.
-fn keycodes(conn: &impl Connection, keysyms: &[u32]) -> Result<Vec<u8>> {
+/// The whole keyboard map and the first keycode it covers.
+fn keyboard_map(conn: &impl Connection) -> Result<(u8, GetKeyboardMappingReply)> {
     let setup = conn.setup();
     let (min, max) = (setup.min_keycode, setup.max_keycode);
-    let map = conn.get_keyboard_mapping(min, max - min + 1)?.reply()?;
+    Ok((min, conn.get_keyboard_mapping(min, max - min + 1)?.reply()?))
+}
+
+/// Keycodes for `keysyms`, from one fetch of the keyboard map.
+fn keycodes(conn: &impl Connection, keysyms: &[u32]) -> Result<Vec<u8>> {
+    let (min, map) = keyboard_map(conn)?;
     let per = map.keysyms_per_keycode as usize;
     let chunks = || map.keysyms.chunks(per);
     keysyms
@@ -97,9 +102,7 @@ fn keycodes(conn: &impl Connection, keysyms: &[u32]) -> Result<Vec<u8>> {
 /// where AltGr+7 gives `{`; Ctrl+Alt is AltGr there). Lets the recorder name keys independently of Ctrl/Alt/Shift.
 pub fn base_key(c: char) -> Option<char> {
     let (conn, _) = x11rb::connect(None).ok()?;
-    let setup = conn.setup();
-    let (min, max) = (setup.min_keycode, setup.max_keycode);
-    let map = conn.get_keyboard_mapping(min, max - min + 1).ok()?.reply().ok()?;
+    let (_, map) = keyboard_map(&conn).ok()?;
     let per = map.keysyms_per_keycode as usize;
     let keysym = c as u32;
     let first = map.keysyms.chunks(per).find(|k| k.contains(&keysym))?[0];
@@ -109,9 +112,40 @@ pub fn base_key(c: char) -> Option<char> {
 /// Presses closer together than this are key auto-repeat (the shortcut held down), not new presses.
 const REPEAT_MS: u32 = 100;
 
-/// True when a press at `time` (server ms, wraps) follows the previous one so closely that it is auto-repeat.
-fn is_repeat(last: Option<u32>, time: u32) -> bool {
-    last.is_some_and(|t| time.wrapping_sub(t) < REPEAT_MS)
+/// True when a press at `time` (server ms, wraps) is auto-repeat: X sends each repeat as a release and a press with
+/// the same timestamp (the first one only after the ~500 ms repeat delay), so that is the main test; pressing again
+/// within `REPEAT_MS` of the last press is the fallback.
+fn is_repeat(last_press: Option<u32>, last_release: Option<u32>, time: u32) -> bool {
+    last_release == Some(time) || last_press.is_some_and(|t| time.wrapping_sub(t) < REPEAT_MS)
+}
+
+/// Ask the server to stop sending release+press pairs while a key is held (XKB "detectable auto-repeat").
+/// Applies to this connection only. False when XKB is unavailable, and `is_repeat` is used instead.
+fn detectable_auto_repeat(conn: &RustConnection) -> bool {
+    use x11rb::protocol::xkb::{ConnectionExt as _, ID, PerClientFlag};
+    let flag = PerClientFlag::DETECTABLE_AUTO_REPEAT;
+    let enable = || -> Result<bool> {
+        conn.xkb_use_extension(1, 0)?.reply()?;
+        let reply = conn
+            .xkb_per_client_flags(
+                ID::USE_CORE_KBD.into(),
+                flag,
+                flag,
+                0u32.into(),
+                0u32.into(),
+                0u32.into(),
+            )?
+            .reply()?;
+        Ok(reply.value & flag != PerClientFlag::from(0u32))
+    };
+    enable().unwrap_or(false)
+}
+
+/// Why a shortcut could not be grabbed; `app.rs` turns it into translated text.
+pub enum HotkeyError {
+    /// Another client holds the combination.
+    Taken,
+    Other(String),
 }
 
 /// A grabbed shortcut. `release` frees the key combination and stops the listener thread.
@@ -120,9 +154,26 @@ pub struct Hotkey {
     root: u32,
     /// Our own window: an event sent to it with an empty mask reaches this client, waking the listener.
     wake: u32,
+    /// Wall-clock ms until which the shortcut counts as in use: `u64::MAX` while the key is down, and a short
+    /// grace after its release. Releasing a grabbed key ends the X grab, which bounces the keyboard focus.
+    busy_until: Arc<AtomicU64>,
+}
+
+/// Focus bounce after the grab ends is over by then.
+const RELEASE_GRACE_MS: u64 = 400;
+
+fn now_ms() -> u64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_or(0, |d| d.as_millis() as u64)
 }
 
 impl Hotkey {
+    /// True while the shortcut is held, and just after it was let go.
+    pub fn in_use(&self) -> bool {
+        now_ms() < self.busy_until.load(Ordering::SeqCst)
+    }
+
     pub fn release(&self) {
         let _ = self.conn.ungrab_key(0, self.root, ModMask::ANY);
         let quit = ClientMessageEvent::new(32, self.wake, AtomEnum::CARDINAL, [0; 5]);
@@ -132,12 +183,17 @@ impl Hotkey {
 }
 
 /// Grab the shortcut on its own thread (blocking on the X socket, no polling) and call
-/// `on_press` with the event timestamp. Returns an error text if the combination is taken.
-pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> std::result::Result<Hotkey, String> {
-    let (mods, keysym) = parse_shortcut(shortcut).ok_or_else(|| format!("cannot parse shortcut {shortcut:?}"))?;
-    let (conn, screen) = x11rb::connect(None).map_err(|e| e.to_string())?;
+/// `on_press` with the event timestamp. Fails with `HotkeyError::Taken` if the combination is in use.
+pub fn spawn_hotkey(
+    shortcut: &str,
+    on_press: impl Fn(u32) + Send + 'static,
+) -> std::result::Result<Hotkey, HotkeyError> {
+    let other = |e: &dyn std::fmt::Display| HotkeyError::Other(e.to_string());
+    let (mods, keysym) =
+        parse_shortcut(shortcut).ok_or_else(|| HotkeyError::Other(format!("cannot parse shortcut {shortcut:?}")))?;
+    let (conn, screen) = x11rb::connect(None).map_err(|e| other(&e))?;
     let root = conn.setup().roots[screen].root;
-    let code = keycodes(&conn, &[keysym]).map_err(|e| e.to_string())?[0];
+    let code = keycodes(&conn, &[keysym]).map_err(|e| other(&*e))?[0];
     // Num Lock and Caps Lock must not defeat the shortcut.
     for extra in [
         ModMask::from(0u16),
@@ -147,12 +203,10 @@ pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> 
     ] {
         let cookie = conn
             .grab_key(true, root, mods | extra, code, GrabMode::ASYNC, GrabMode::ASYNC)
-            .map_err(|e| e.to_string())?;
-        cookie
-            .check()
-            .map_err(|_| format!("{shortcut} is already used by another application."))?;
+            .map_err(|e| other(&e))?;
+        cookie.check().map_err(|_| HotkeyError::Taken)?;
     }
-    let wake = conn.generate_id().map_err(|e| e.to_string())?;
+    let wake = conn.generate_id().map_err(|e| other(&e))?;
     conn.create_window(
         0,
         wake,
@@ -166,30 +220,59 @@ pub fn spawn_hotkey(shortcut: &str, on_press: impl Fn(u32) + Send + 'static) -> 
         0,
         &CreateWindowAux::new(),
     )
-    .map_err(|e| e.to_string())?;
-    conn.flush().map_err(|e| e.to_string())?;
+    .map_err(|e| other(&e))?;
+    conn.flush().map_err(|e| other(&e))?;
+    let detectable = detectable_auto_repeat(&conn);
     let conn = Arc::new(conn);
     let listener = conn.clone();
+    let busy_until = Arc::new(AtomicU64::new(0));
+    let busy = busy_until.clone();
     std::thread::spawn(move || {
-        let mut last = None::<u32>;
+        let debug = std::env::var_os("FASTMOJI_DEBUG").is_some();
+        let (mut last, mut released, mut down) = (None::<u32>, None::<u32>, false);
         while let Ok(event) = listener.wait_for_event() {
             match event {
                 Event::KeyPress(ev) => {
-                    if !is_repeat(last, ev.time) {
+                    // Detectable: a held key sends one press and no releases, so "already down" is a repeat.
+                    let repeat = if detectable {
+                        down
+                    } else {
+                        is_repeat(last, released, ev.time)
+                    };
+                    if debug {
+                        eprintln!("hotkey press time={} detectable={detectable} repeat={repeat}", ev.time);
+                    }
+                    busy.store(u64::MAX, Ordering::SeqCst);
+                    if !repeat {
                         on_press(ev.time);
                     }
-                    last = Some(ev.time);
+                    (last, down) = (Some(ev.time), true);
+                }
+                Event::KeyRelease(ev) => {
+                    if debug {
+                        eprintln!("hotkey release time={}", ev.time);
+                    }
+                    busy.store(now_ms() + RELEASE_GRACE_MS, Ordering::SeqCst);
+                    (released, down) = (Some(ev.time), false);
                 }
                 Event::ClientMessage(_) => break,
                 _ => {}
             }
         }
     });
-    Ok(Hotkey { conn, root, wake })
+    Ok(Hotkey {
+        conn,
+        root,
+        wake,
+        busy_until,
+    })
 }
 
 /// Terminals that paste with Ctrl+Shift+V (plain Ctrl+V reaches the shell as a control character).
-const TERMINAL_CLASSES: [&str; 10] = [
+const TERMINAL_CLASSES: [&str; 13] = [
+    "tilix",
+    "ghostty",
+    "st-256color",
     "term",
     "konsole",
     "kitty",
@@ -538,6 +621,13 @@ mod tests {
         assert!(is_terminal_class("gnome-terminal-server\0Gnome-terminal\0"));
         assert!(is_terminal_class("xterm\0XTerm\0"));
         assert!(is_terminal_class("konsole\0konsole\0"));
+        for class in [
+            "tilix\0Tilix\0",
+            "ghostty\0com.mitchellh.ghostty\0",
+            "st-256color\0st-256color\0",
+        ] {
+            assert!(is_terminal_class(class), "{class:?}");
+        }
         assert!(!is_terminal_class("xed\0Xed\0"));
         assert!(!is_terminal_class("firefox\0firefox\0"));
     }
@@ -550,10 +640,17 @@ mod tests {
 
     #[test]
     fn held_key_repeats_are_ignored() {
-        assert!(!is_repeat(None, 5), "first press");
-        assert!(is_repeat(Some(1000), 1030), "auto-repeat");
-        assert!(!is_repeat(Some(1000), 1000 + REPEAT_MS), "a real second press");
-        assert!(is_repeat(Some(u32::MAX - 10), 20), "across the timestamp wrap");
+        assert!(!is_repeat(None, None, 5), "first press");
+        assert!(is_repeat(Some(1000), None, 1030), "auto-repeat");
+        assert!(
+            !is_repeat(Some(1000), Some(1200), 1000 + REPEAT_MS),
+            "a real second press"
+        );
+        assert!(is_repeat(Some(u32::MAX - 10), None, 20), "across the timestamp wrap");
+        assert!(
+            is_repeat(Some(1000), Some(1500), 1500),
+            "first repeat after the ~500 ms delay"
+        );
     }
 
     #[test]

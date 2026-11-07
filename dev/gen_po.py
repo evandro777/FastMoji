@@ -43,6 +43,8 @@ T = [
 ("Tr", "No matches for “{}”", ["Nenhum resultado para “{}”", "Aucun résultat pour « {} »", "Keine Treffer für „{}“", "Sin resultados para “{}”", "Nessun risultato per “{}”", "「{}」に一致するものはありません", "没有与“{}”匹配的结果"]),
 ("Tr", "Results for “{}”", ["Resultados para “{}”", "Résultats pour « {} »", "Ergebnisse für „{}“", "Resultados para “{}”", "Risultati per “{}”", "「{}」の検索結果", "“{}”的搜索结果"]),
 ("Tr", "Shortcut unavailable: {}", ["Atalho indisponível: {}", "Raccourci indisponible : {}", "Tastenkürzel nicht verfügbar: {}", "Atajo no disponible: {}", "Scorciatoia non disponibile: {}", "ショートカットを使用できません: {}", "快捷键不可用：{}"]),
+("Tr", "{} is already used by another application.", ["{} já é usado por outro aplicativo.", "{} est déjà utilisé par une autre application.", "{} wird bereits von einer anderen Anwendung verwendet.", "{} ya lo usa otra aplicación.", "{} è già usato da un’altra applicazione.", "{} は別のアプリケーションで既に使われています。", "{} 已被其他应用程序使用。"]),
+("Tr", "Press keys… (Esc cancels)", ["Pressione as teclas… (Esc cancela)", "Appuyez sur les touches… (Échap annule)", "Tasten drücken … (Esc bricht ab)", "Pulsa las teclas… (Esc cancela)", "Premi i tasti… (Esc annulla)", "キーを押してください… (Esc で取消)", "请按键… (Esc 取消)"]),
 ("Tr", "Cannot parse {}. Example: Ctrl+Alt+.", ["Não foi possível interpretar {}. Exemplo: Ctrl+Alt+.", "Impossible d’analyser {}. Exemple : Ctrl+Alt+.", "{} kann nicht gelesen werden. Beispiel: Ctrl+Alt+.", "No se puede interpretar {}. Ejemplo: Ctrl+Alt+.", "Impossibile interpretare {}. Esempio: Ctrl+Alt+.", "{} を解釈できません。例: Ctrl+Alt+.", "无法解析 {}。示例：Ctrl+Alt+."]),
 ]
 

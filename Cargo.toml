@@ -15,10 +15,9 @@ publish = false
 [dependencies]
 slint = { version = "1.18", default-features = false, features = ["std", "backend-winit", "renderer-software", "software-renderer-systemfonts", "compat-1-2", "unstable-winit-030"] }
 arboard = { version = "3", default-features = false, features = ["wayland-data-control"] }
-x11rb = { version = "0.14", features = ["xtest"] }
+x11rb = { version = "0.14", features = ["xtest", "xkb"] }
 serde = { version = "1", features = ["derive"] }
 toml = "1.1"
-raw-window-handle = "0.6"
 rustybuzz = "0.20"
 ttf-parser = "0.25"
 png = "0.18"

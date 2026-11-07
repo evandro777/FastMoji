@@ -34,7 +34,9 @@ jobs:
 
       - name: appimagetool
         run: |
-          curl -fsSL -o appimagetool https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          # Pinned release + checksum: the tool packs what we publish. To upgrade, change both lines.
+          curl -fsSL -o appimagetool https://github.com/AppImage/appimagetool/releases/download/1.9.1/appimagetool-x86_64.AppImage
+          echo "ed4ce84f0d9caff66f50bcca6ff6f35aae54ce8135408b3fa33abfc3cb384eb0  appimagetool" | sha256sum -c -
           chmod +x appimagetool
           # No FUSE on the runner: unpack instead of running the AppImage directly.
           ./appimagetool --appimage-extract >/dev/null

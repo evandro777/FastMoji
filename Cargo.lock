@@ -997,7 +997,6 @@ dependencies = [
  "arboard",
  "csv",
  "png",
- "raw-window-handle",
  "rustybuzz",
  "serde",
  "slint",

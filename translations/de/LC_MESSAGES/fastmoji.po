@@ -152,5 +152,13 @@ msgid "Shortcut unavailable: {}"
 msgstr "Tastenkürzel nicht verfügbar: {}"
 
 msgctxt "Tr"
+msgid "{} is already used by another application."
+msgstr "{} wird bereits von einer anderen Anwendung verwendet."
+
+msgctxt "Tr"
+msgid "Press keys… (Esc cancels)"
+msgstr "Tasten drücken … (Esc bricht ab)"
+
+msgctxt "Tr"
 msgid "Cannot parse {}. Example: Ctrl+Alt+."
 msgstr "{} kann nicht gelesen werden. Beispiel: Ctrl+Alt+."

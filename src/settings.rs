@@ -1,5 +1,8 @@
 //! User settings in one TOML file under the XDG data dir (`~/.local/share/FastMoji`, or the Flatpak data dir).
-use std::{fs, path::PathBuf};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
 
 use serde::{Deserialize, Serialize};
 
@@ -59,21 +62,22 @@ fn data_dir() -> PathBuf {
     base.join("FastMoji")
 }
 
-fn path() -> PathBuf {
-    data_dir().join("settings.toml")
-}
-
 impl Settings {
     pub fn load() -> Self {
-        let mut s = match fs::read_to_string(path()) {
+        Self::load_from(&data_dir())
+    }
+
+    fn load_from(dir: &Path) -> Self {
+        let file = dir.join("settings.toml");
+        let mut s = match fs::read_to_string(&file) {
             Ok(text) => parse(&text).unwrap_or_else(|e| {
                 // The file is hand-edited; the next save() must not overwrite what the user wrote.
-                let bad = path().with_extension("toml.bad");
+                let bad = file.with_extension("toml.bad");
                 eprintln!(
                     "settings.toml is invalid ({e}); kept as {}, using defaults",
                     bad.display()
                 );
-                let _ = fs::rename(path(), bad);
+                let _ = fs::rename(&file, bad);
                 Settings::default()
             }),
             Err(_) => Settings::default(),
@@ -94,18 +98,18 @@ impl Settings {
     /// Atomic write so a crash can never leave a half-written file. Failures (full disk, read-only
     /// home) are reported on stderr; the picker keeps working with the in-memory settings.
     pub fn save(&self) {
-        if let Err(e) = self.try_save() {
-            eprintln!("cannot save settings to {}: {e}", path().display());
+        let dir = data_dir();
+        if let Err(e) = self.try_save(&dir) {
+            eprintln!("cannot save settings to {}: {e}", dir.display());
         }
     }
 
-    fn try_save(&self) -> std::io::Result<()> {
-        let dir = data_dir();
-        fs::create_dir_all(&dir)?;
+    fn try_save(&self, dir: &Path) -> std::io::Result<()> {
+        fs::create_dir_all(dir)?;
         let text = toml::to_string_pretty(self).map_err(std::io::Error::other)?;
         let tmp = dir.join("settings.toml.tmp");
         fs::write(&tmp, text)?;
-        fs::rename(&tmp, path())
+        fs::rename(&tmp, dir.join("settings.toml"))
     }
 
     /// Move `ch` to the front of the recents, keeping at most `MAX_RECENT`.
@@ -173,6 +177,33 @@ mod tests {
     #[test]
     fn invalid_file_is_an_error_not_defaults() {
         assert!(parse("emoji_size = \"big\"").is_err());
+    }
+
+    #[test]
+    fn saved_settings_reload_and_a_broken_file_is_kept_aside() {
+        let dir = std::env::temp_dir().join(format!("fastmoji-settings-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&dir);
+        let saved = Settings {
+            auto_paste: false,
+            shortcut: "Ctrl+Alt+Y".into(),
+            ..Default::default()
+        };
+        saved.try_save(&dir).unwrap();
+        let loaded = Settings::load_from(&dir);
+        assert!(!loaded.auto_paste);
+        assert_eq!(loaded.shortcut, "Ctrl+Alt+Y");
+
+        fs::write(dir.join("settings.toml"), "emoji_size = \"big\"").unwrap();
+        assert_eq!(Settings::load_from(&dir).emoji_size, 28, "defaults");
+        assert_eq!(
+            fs::read_to_string(dir.join("settings.toml.bad")).unwrap(),
+            "emoji_size = \"big\""
+        );
+        assert!(
+            !dir.join("settings.toml").exists(),
+            "moved, so the next save cannot overwrite it"
+        );
+        let _ = fs::remove_dir_all(&dir);
     }
 
     #[test]

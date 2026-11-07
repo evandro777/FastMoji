@@ -5,10 +5,15 @@ use std::{
     time::{Duration, Instant},
 };
 
-use raw_window_handle::{HasWindowHandle, RawWindowHandle};
 use slint::{
     ComponentHandle, Image, LogicalSize, Model, ModelNotify, ModelRc, ModelTracker, Timer, VecModel,
-    winit_030::{EventResult, WinitWindowAccessor, winit},
+    winit_030::{
+        EventResult, WinitWindowAccessor,
+        winit::{
+            self,
+            raw_window_handle::{HasWindowHandle, RawWindowHandle},
+        },
+    },
 };
 
 use crate::{
@@ -80,19 +85,15 @@ fn shortcut_from_key(text: &str, mods: [bool; 4]) -> Option<String> {
 
 const MODIFIER_NAMES: [&str; 4] = ["Ctrl", "Alt", "Shift", "Super"];
 
-/// Live label while recording: "Ctrl + Alt + …", or the prompt when nothing is held.
-fn held_text(mods: [bool; 4]) -> String {
+/// Live label while recording: "Ctrl + Alt + …", or None when nothing is held (the caller shows the translated prompt).
+fn held_text(mods: [bool; 4]) -> Option<String> {
     let held: Vec<&str> = MODIFIER_NAMES
         .iter()
         .zip(mods)
         .filter(|(_, on)| *on)
         .map(|(n, _)| *n)
         .collect();
-    if held.is_empty() {
-        "Press keys… (Esc cancels)".into()
-    } else {
-        format!("{} + …", held.join(" + "))
-    }
+    (!held.is_empty()).then(|| format!("{} + …", held.join(" + ")))
 }
 
 fn debug(message: impl FnOnce() -> String) {
@@ -149,6 +150,43 @@ fn hold_step(
         return HoldStep::Exit("nobody pasted it in time");
     }
     HoldStep::Wait
+}
+
+enum PasteStep {
+    Wait,
+    /// The WM did not hand focus back by itself: ask for it like a pager would.
+    RestoreFocus,
+    Paste,
+    /// Timed out and the previous window is not in front: keep the emoji on the clipboard only.
+    Skip,
+}
+
+/// One tick of the wait before pasting (see `App::paste_tick`), as a pure decision. `attempts` counts this tick;
+/// `focus_ok` says whether the X input focus is inside the given window (only asked once it matters).
+fn paste_step(
+    previous: Option<u32>,
+    active: Option<u32>,
+    focus_ok: impl FnOnce(u32) -> bool,
+    attempts: u32,
+) -> PasteStep {
+    let ready = match previous {
+        // Give the application a moment to react to getting focus back.
+        Some(window) => active == Some(window) && attempts >= 3 && focus_ok(window),
+        None => attempts >= 6,
+    };
+    if ready || attempts >= PASTE_MAX_POLLS {
+        // On timeout the previous window may be gone or the user went elsewhere: do not send Ctrl+V to
+        // an unrelated window.
+        return if previous.is_none() || active == previous {
+            PasteStep::Paste
+        } else {
+            PasteStep::Skip
+        };
+    }
+    if attempts == 8 && previous.is_some() {
+        return PasteStep::RestoreFocus;
+    }
+    PasteStep::Wait
 }
 
 enum ExitStep {
@@ -486,8 +524,8 @@ impl App {
         };
         self.relayout();
         if let Some((anchor, on_title)) = anchor {
-            let st = self.st.borrow();
-            if let Some(&row) = st.row_of.get(anchor) {
+            let row = self.st.borrow().row_of.get(anchor).copied();
+            if let Some(row) = row {
                 ui.set_scroll_y(-((row - on_title as usize) as f32 * cell));
             }
         }
@@ -512,14 +550,22 @@ impl App {
 
     fn ensure_selected_visible(&self) {
         let ui = self.ui();
-        let st = self.st.borrow();
-        let Some(&row) = st.row_of.get(st.selected) else { return };
-        let (cell, view) = (st.cell_px(), ui.get_list_height());
-        let (top, current) = (row as f32 * cell, -ui.get_scroll_y());
-        if top < current {
-            ui.set_scroll_y(-top);
-        } else if top + cell > current + view {
-            ui.set_scroll_y(-(top + cell - view));
+        let target = {
+            let st = self.st.borrow();
+            let Some(&row) = st.row_of.get(st.selected) else { return };
+            let (cell, view) = (st.cell_px(), ui.get_list_height());
+            let (top, current) = (row as f32 * cell, -ui.get_scroll_y());
+            if top < current {
+                Some(-top)
+            } else if top + cell > current + view {
+                Some(-(top + cell - view))
+            } else {
+                None
+            }
+        };
+        // No State borrow while Slint may call `scrolled` back.
+        if let Some(y) = target {
+            ui.set_scroll_y(y);
         }
     }
 
@@ -529,17 +575,19 @@ impl App {
             ui.set_search_text("".into());
             self.search("");
         }
-        let mut st = self.st.borrow_mut();
-        st.active = category;
-        let row = st.category_row[category];
+        let y = {
+            let mut st = self.st.borrow_mut();
+            st.active = category;
+            let row = st.category_row[category];
+            if let Some(start) = st.anchor_at(row) {
+                st.selected = start;
+            }
+            -(row as f32 * st.cell_px())
+        };
         // Programmatic scrolling must not be reinterpreted by the scroll-spy.
         self.ignore_scroll_until
             .set(Instant::now() + Duration::from_millis(300));
-        ui.set_scroll_y(-(row as f32 * st.cell_px()));
-        if let Some(start) = st.anchor_at(row) {
-            st.selected = start;
-        }
-        drop(st);
+        ui.set_scroll_y(y);
         self.sync();
     }
 
@@ -698,33 +746,24 @@ impl App {
         self.paste_attempts.set(attempts);
         let previous = self.previous_window.get();
         let active = self.active_window();
-        let ready = match previous {
-            // Give the application a moment to react to getting focus back.
-            Some(window) => {
-                active == Some(window)
-                    && attempts >= 3
-                    && self
-                        .xconn
-                        .as_ref()
-                        .is_none_or(|x| x.input_focus_inside(window).unwrap_or(true))
-            }
-            None => attempts >= 6,
+        let focus_ok = |window| {
+            self.xconn
+                .as_ref()
+                .is_none_or(|x| x.input_focus_inside(window).unwrap_or(true))
         };
-        if !ready && attempts == 8 {
-            // The WM did not restore focus by itself.
-            if let Some(window) = previous {
-                debug(|| format!("restoring focus to {window:#x} (active {active:?})"));
-                let _ = self.xconn.as_ref().map(|x| x.focus(window));
-            }
+        let step = paste_step(previous, active, focus_ok, attempts);
+        if matches!(step, PasteStep::RestoreFocus)
+            && let Some(window) = previous
+        {
+            debug(|| format!("restoring focus to {window:#x} (active {active:?})"));
+            let _ = self.xconn.as_ref().map(|x| x.focus(window));
         }
-        if ready || attempts >= PASTE_MAX_POLLS {
+        if matches!(step, PasteStep::Paste | PasteStep::Skip) {
             self.paste_timer.stop();
             if let Some(c) = &self.x11_clipboard {
                 self.reads_before_paste.set(c.reads());
             }
-            // On timeout the previous window may be gone or the user went elsewhere: keep the emoji on
-            // the clipboard instead of sending Ctrl+V to an unrelated window.
-            if previous.is_none() || active == previous {
+            if matches!(step, PasteStep::Paste) {
                 let result = match &self.xconn {
                     Some(x) => x.paste(active.is_some_and(|w| x.is_terminal(w))),
                     None => Err("no X connection".into()),
@@ -850,18 +889,20 @@ impl App {
             return;
         }
         let shortcut = self.st.borrow().settings.shortcut.clone();
-        match x11::spawn_hotkey(&shortcut, |time| post(move |app| app.toggle(time))) {
+        match x11::spawn_hotkey(&shortcut, |time| post(move |app| app.hotkey_pressed(time))) {
             Ok(hotkey) => {
                 *self.hotkey.borrow_mut() = Some(hotkey);
                 self.ui().set_shortcut_error("".into());
             }
             Err(e) => {
-                eprintln!("global shortcut unavailable: {e}");
-                self.ui().set_shortcut_error(
-                    self.ui()
-                        .global::<Tr>()
-                        .invoke_shortcut_unavailable(e.to_string().into()),
-                );
+                let ui = self.ui();
+                let tr = ui.global::<Tr>();
+                let reason = match e {
+                    x11::HotkeyError::Taken => tr.invoke_shortcut_taken(shortcut.as_str().into()),
+                    x11::HotkeyError::Other(text) => text.into(),
+                };
+                eprintln!("global shortcut unavailable: {reason}");
+                self.ui().set_shortcut_error(tr.invoke_shortcut_unavailable(reason));
             }
         }
     }
@@ -906,6 +947,20 @@ impl App {
             self.hide()
         } else {
             self.open(time)
+        }
+    }
+
+    /// The global shortcut only opens the picker or brings it back to the front; it never closes it
+    /// (Esc, a click elsewhere or picking an emoji do). `--toggle` still toggles.
+    fn hotkey_pressed(&self, time: u32) {
+        if self.ui().get_recording_shortcut() {
+            self.ui().set_recording_shortcut(false);
+        } else if self.ui().window().is_visible() {
+            self.last_time.set(time);
+            self.activate(time);
+            self.ui().invoke_focus_search();
+        } else {
+            self.open(time);
         }
     }
 
@@ -1062,14 +1117,26 @@ impl App {
         self.ui().invoke_focus_search();
     }
 
+    /// True when the X input focus is still inside the picker's window.
+    fn focus_still_ours(&self) -> bool {
+        let (Some(id), Some(x)) = (self.window_id(), &self.xconn) else {
+            return false;
+        };
+        x.input_focus_inside(id).unwrap_or(false)
+    }
+
     fn on_focus_lost(&self) {
         self.focused.set(false);
         if self.shown_at.get().is_some_and(|t| t.elapsed() < FOCUS_GRACE) {
             // The WM sometimes bounces focus right after mapping; ask again instead of hiding.
             self.activate(self.last_time.get());
-        } else if self.ui().get_recording_shortcut() {
-            // Pressing the grabbed shortcut itself takes the focus for a moment (X grab), and the hotkey
-            // thread's toggle arrives separately. Hide only if the focus really went elsewhere.
+        } else if self.focus_still_ours() {
+            // Pressing or releasing a grabbed key sends the window a focus-out (mode Grab/Ungrab) although the X
+            // input focus never moved; the hotkey thread's flag can arrive too late to tell, the server cannot.
+            debug(|| "focus-out without a focus change (key grab): ignored".into());
+        } else if self.ui().get_recording_shortcut() || self.hotkey.borrow().as_ref().is_some_and(|h| h.in_use()) {
+            // Pressing or releasing the grabbed shortcut itself bounces the focus (X grab starts and ends), and the
+            // hotkey thread's toggle arrives separately. Hide only if the focus really went elsewhere.
             self.blur_timer.start(
                 slint::TimerMode::SingleShot,
                 FOCUS_GRACE,
@@ -1254,10 +1321,19 @@ pub fn run(show: bool, command: &str) {
             }
         }
     });
-    ui.on_held_text(|ctrl, alt, shift, meta| held_text([ctrl, alt, shift, meta]).into());
+    ui.on_held_text({
+        let ui = ui.as_weak();
+        move |ctrl, alt, shift, meta| match held_text([ctrl, alt, shift, meta]) {
+            Some(text) => text.into(),
+            None => ui.unwrap().global::<Tr>().invoke_press_keys(),
+        }
+    });
     ui.on_open_url(|url| {
         // Needs xdg-open on the host; inside Flatpak it is missing, so the click does nothing there yet.
-        let _ = std::process::Command::new("xdg-open").arg(url.as_str()).spawn();
+        // Reaped on a thread, or every click would leave a zombie in this long-lived process.
+        if let Ok(mut child) = std::process::Command::new("xdg-open").arg(url.as_str()).spawn() {
+            std::thread::spawn(move || _ = child.wait());
+        }
     });
     ui.on_quit(|| {
         let _ = slint::quit_event_loop();
@@ -1290,7 +1366,8 @@ pub fn run(show: bool, command: &str) {
             instance::send(command);
             return;
         }
-        eprintln!("single-instance socket failed: {e}");
+        // Without the socket a later `fastmoji` starts another copy, but a picker that works beats one that never shows.
+        eprintln!("single-instance socket unavailable ({e}); running without single-instance mode");
     }
     if x11_session {
         // The global shortcut only exists while the process stays resident.
@@ -1318,7 +1395,11 @@ mod tests {
             key("\u{f708}", [false, false, false, true]).as_deref(),
             Some("Super+F5")
         );
-        assert_eq!(super::held_text([true, true, false, false]), "Ctrl + Alt + …");
+        assert_eq!(
+            super::held_text([true, true, false, false]).as_deref(),
+            Some("Ctrl + Alt + …")
+        );
+        assert_eq!(super::held_text([false; 4]), None);
         assert_eq!(key("a", [false; 4]), None, "needs a modifier");
         assert_eq!(
             key("{", [true, true, false, false]),
@@ -1386,6 +1467,45 @@ mod tests {
     fn hold_gives_up_after_the_maximum() {
         assert!(matches!(hold(false, true, HOLD_MAX - SEC, 0, None), HoldStep::Wait));
         assert!(matches!(hold(false, true, HOLD_MAX, 0, None), HoldStep::Exit(_)));
+    }
+
+    const W: Option<u32> = Some(7);
+
+    #[test]
+    fn paste_waits_for_the_previous_window_and_its_focus() {
+        assert!(matches!(paste_step(W, W, |_| true, 2), PasteStep::Wait), "too early");
+        assert!(matches!(paste_step(W, W, |_| true, 3), PasteStep::Paste));
+        assert!(
+            matches!(paste_step(W, Some(1), |_| true, 3), PasteStep::Wait),
+            "other window active"
+        );
+        assert!(
+            matches!(paste_step(W, W, |_| false, 3), PasteStep::Wait),
+            "active but no input focus yet"
+        );
+        assert!(matches!(paste_step(None, None, |_| true, 5), PasteStep::Wait));
+        assert!(matches!(paste_step(None, None, |_| true, 6), PasteStep::Paste));
+    }
+
+    #[test]
+    fn paste_asks_the_wm_for_focus_once_at_poll_eight() {
+        assert!(matches!(paste_step(W, Some(1), |_| true, 8), PasteStep::RestoreFocus));
+        assert!(matches!(paste_step(W, Some(1), |_| true, 9), PasteStep::Wait));
+        assert!(
+            matches!(paste_step(None, None, |_| true, 8), PasteStep::Paste),
+            "nothing to restore"
+        );
+    }
+
+    #[test]
+    fn paste_times_out_without_hitting_another_window() {
+        let max = PASTE_MAX_POLLS;
+        assert!(matches!(paste_step(W, Some(1), |_| true, max - 1), PasteStep::Wait));
+        assert!(matches!(paste_step(W, Some(1), |_| true, max), PasteStep::Skip));
+        assert!(
+            matches!(paste_step(W, W, |_| false, max), PasteStep::Paste),
+            "right window, focus unconfirmed"
+        );
     }
 
     #[test]

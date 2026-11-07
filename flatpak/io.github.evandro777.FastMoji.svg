@@ -1,16 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <defs>
-    <radialGradient id="face" cx="40%" cy="32%" r="75%">
-      <stop offset="0" stop-color="#ffe066"/>
-      <stop offset="1" stop-color="#f5a30a"/>
-    </radialGradient>
-  </defs>
-  <circle cx="64" cy="64" r="58" fill="url(#face)"/>
-  <circle cx="64" cy="64" r="58" fill="none" stroke="#c97d00" stroke-width="3"/>
-  <ellipse cx="45" cy="52" rx="7" ry="10" fill="#4a2f00"/>
-  <ellipse cx="83" cy="52" rx="7" ry="10" fill="#4a2f00"/>
-  <path d="M38 78 Q64 104 90 78" fill="none" stroke="#4a2f00" stroke-width="6" stroke-linecap="round"/>
-  <!-- lightning bolt: fast -->
-  <path d="M78 6 L48 62 H66 L54 118 L96 52 H76 Z" fill="#ffffff" stroke="#4a2f00" stroke-width="3" stroke-linejoin="round" opacity="0.95"/>
+  <!-- Fast family icon: flat tile with a stepped top-right corner, white symbol leaning 8 degrees. Solid colours only. -->
+  <path d="M26 0H64V14H92V28H128V102A26 26 0 0 1 102 128H26A26 26 0 0 1 0 102V26A26 26 0 0 1 26 0Z" fill="#cc7b00"/>
+  <g transform="translate(62 68) skewX(-8) translate(-62 -68)" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="46" cy="54" r="7" fill="#ffffff" stroke="none"/>
+    <circle cx="78" cy="54" r="7" fill="#ffffff" stroke="none"/>
+    <path d="M38 74Q62 100 86 74"/>
+  </g>
 </svg>

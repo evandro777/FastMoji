@@ -1,8 +1,4 @@
 /target/
-/target
-/dev/*.png
-/dev/*.log
-/dev/*.pid
 __pycache__/
 
 # Flatpak
@@ -17,7 +13,6 @@ __pycache__/
 # Local test harness output
 /dev/data/
 /dev/run/
-/dev/__pycache__/
 /dev/scratch.txt
 /dev/*.png
 /dev/*.log

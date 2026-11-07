@@ -21,7 +21,7 @@ jobs:
     name: Scan release assets
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_branch, 'v'))
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && startsWith(github.event.workflow_run.head_branch, 'v'))
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -36,7 +36,10 @@ jobs:
           gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern "FastMoji-*.flatpak" --pattern "FastMoji-*.AppImage" --dir assets
           : > report.md
           bad=0
-          for file in assets/*; do
+          shopt -s nullglob
+          files=(assets/*)
+          [ "${#files[@]}" -gt 0 ] || { echo "no release assets matched"; exit 1; }
+          for file in "${files[@]}"; do
             name=$(basename "$file")
             sha=$(sha256sum "$file" | cut -d' ' -f1)
             status=
@@ -67,6 +70,9 @@ jobs:
             echo "- $icon **$name**: $text. [Report](https://www.virustotal.com/gui/file/$sha)" >> report.md
           done
           body=$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json body -q .body)
+          # A re-run replaces the earlier report instead of adding a second one.
+          body=${body%%'## VirusTotal'*}
+          body=$(printf '%s' "$body" | sed -e :a -e '/^[[:space:]]*$/{$d;N;ba' -e '}')
           gh release edit "$TAG" --repo "$GITHUB_REPOSITORY" --notes "$body
 
           ## VirusTotal

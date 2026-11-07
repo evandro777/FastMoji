@@ -21,6 +21,8 @@ export global Tr {
     public pure function no-matches(query: string) -> string { return @tr("No matches for “{}”", query); }
     public pure function results(query: string) -> string { return @tr("Results for “{}”", query); }
     public pure function shortcut-unavailable(error: string) -> string { return @tr("Shortcut unavailable: {}", error); }
+    public pure function shortcut-taken(shortcut: string) -> string { return @tr("{} is already used by another application.", shortcut); }
+    public pure function press-keys() -> string { return @tr("Press keys… (Esc cancels)"); }
     public pure function cannot-parse(text: string) -> string { return @tr("Cannot parse {}. Example: Ctrl+Alt+.", text); }
 }
 
