@@ -22,6 +22,8 @@ FastMoji is inspired by [Emote](https://github.com/tom-james-watson/Emote) by To
 
 The Flatpak build matches the native one when resident (23 MB idle, 27 MB shown, about 6 ms to open). The "not resident" rows are the *Keep FastMoji in memory* option turned off: FastMoji itself needs about 55 ms to start, and about 450 ms of the Flatpak figure is Flatpak setting up its sandbox, so Flatpak users who care about speed should leave the option on. Measured on one machine (Cinnamon, X11).
 
+Page: <https://evandro777.github.io/FastMoji/>
+
 ![FastMoji searching for hearts](docs/screenshots/search.png)
 
 ## Features
