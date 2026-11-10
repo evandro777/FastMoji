@@ -8,8 +8,16 @@ msgid "Search emoji"
 msgstr "搜索表情符号"
 
 msgctxt "Main"
-msgid "Settings"
-msgstr "设置"
+msgid "Appearance"
+msgstr "外观"
+
+msgctxt "Main"
+msgid "Light"
+msgstr "浅色"
+
+msgctxt "Main"
+msgid "Dark"
+msgstr "深色"
 
 msgctxt "Main"
 msgid "Preferences"
@@ -48,8 +56,8 @@ msgid "Language"
 msgstr "语言"
 
 msgctxt "Main"
-msgid "System default"
-msgstr "系统默认"
+msgid "System"
+msgstr "系统"
 
 msgctxt "Main"
 msgid "Automatic paste"
@@ -87,19 +95,23 @@ msgctxt "Main"
 msgid "Close"
 msgstr "关闭"
 
-msgctxt "Main"
+msgctxt "AboutCard"
 msgid "Version {}"
 msgstr "版本 {}"
+
+msgctxt "AboutCard"
+msgid "Close"
+msgstr "关闭"
 
 msgctxt "Main"
 msgid "Light and fast emoji picker for Linux."
 msgstr "轻巧快速的 Linux 表情符号选择器。"
 
-msgctxt "Main"
+msgctxt "AboutCard"
 msgid "Author: {}"
 msgstr "作者：{}"
 
-msgctxt "Main"
+msgctxt "AboutCard"
 msgid "License: {}"
 msgstr "许可证：{}"
 

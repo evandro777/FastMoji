@@ -29,7 +29,7 @@ The Flatpak build matches the native one when resident (23 MB idle, 27 MB shown,
 - Instant search, 9 categories that follow scrolling, and your recent emojis first
 - Keyboard first: arrows (also while typing), `Enter` copy and paste, `Ctrl+F` search, `Ctrl+Tab` categories (or `Up` from the top row to reach the category bar, then `Left`/`Right`, `Down` to go back), `Esc` clear the search, then close
 - Click copies and pastes
-- Skin tone, emoji size and automatic paste preferences
+- Appearance (system, light or dark), skin tone, emoji size and automatic paste preferences
 - Global shortcut (default `Ctrl+Alt+.`) on X11
 - Optional: **do not stay in memory** (see below)
 - Follows the desktop's light/dark theme

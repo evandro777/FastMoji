@@ -1,4 +1,7 @@
-import { Button, ComboBox, LineEdit, ListView, Palette, Switch } from "std-widgets.slint";
+import { Button, ComboBox, ListView, Palette, Switch } from "std-widgets.slint";
+import { Family } from "family.slint";
+import { AboutCard, PrefRow } from "about.slint";
+import { MenuButton, SearchBox } from "controls.slint";
 
 export struct Cell { img: image, index: int }
 // A title row has a non-empty `title`; otherwise it is a row of emoji cells.
@@ -44,6 +47,13 @@ export component Main inherits Window {
     in property <int> tone;
     in property <int> size-choice;
     in property <int> language-choice;
+    // 0 follows the system, 1 light, 2 dark (settings.theme). Palette.color-scheme is the only palette property an app
+    // can set; the colors still follow the system accent.
+    in property <int> theme-choice;
+    changed theme-choice => {
+        Palette.color-scheme = root.theme-choice == 1 ? ColorScheme.light
+            : root.theme-choice == 2 ? ColorScheme.dark : ColorScheme.unknown;
+    }
     in property <bool> auto-paste;
     in property <bool> keep-resident;
     in property <bool> resident-locked;
@@ -75,6 +85,7 @@ export component Main inherits Window {
     callback set-tone(int);
     callback set-size(int);
     callback set-language(int);
+    callback set-theme(int);
     callback set-auto-paste(bool);
     callback set-keep-resident(bool);
     callback record-key(string, bool, bool, bool, bool) -> bool;
@@ -167,7 +178,7 @@ export component Main inherits Window {
                         border-radius: 8px;
                         border-width: root.categories-focused && i == root.active-category ? 2px : 0px;
                         border-color: Palette.accent-background;
-                        background: i == root.active-category ? Palette.accent-background.with-alpha(0.2) : (cat-touch.has-hover ? Palette.foreground.with-alpha(0.08) : transparent);
+                        background: i == root.active-category ? Family.selected : (cat-touch.has-hover ? Palette.foreground.with-alpha(0.08) : transparent);
                         Image {
                             source: category.img;
                             width: 20px;
@@ -187,30 +198,18 @@ export component Main inherits Window {
                 padding: 12px;
                 padding-top: 6px;
                 spacing: 8px;
-                search-box := LineEdit {
-                    placeholder-text: @tr("Search emoji");
+                search-box := SearchBox {
+                    placeholder: @tr("Search emoji");
                     text <=> root.search-text;
                     edited(text) => { root.search(text); }
                 }
-                // A plain Button keeps the native hover/pressed look; the icon is drawn on top
-                // (a Path takes no input, so clicks reach the button) and follows the theme.
                 Rectangle {
                     width: self.height;
-                    Button {
-                        width: 100%;
-                        height: 100%;
-                        accessible-label: @tr("Settings");
+                    MenuButton {
+                        x: (parent.width - self.width) / 2;
+                        y: (parent.height - self.height) / 2;
+                        label: @tr("Preferences");
                         clicked => { root.settings-open = true; }
-                    }
-                    Path {
-                        width: 16px;
-                        height: 14px;
-                        viewbox-width: 16;
-                        viewbox-height: 14;
-                        commands: "M 1 1 L 15 1 M 1 7 L 15 7 M 1 13 L 15 13";
-                        stroke: Palette.foreground;
-                        stroke-width: 2px;
-                        stroke-line-cap: round;
                     }
                 }
             }
@@ -231,10 +230,10 @@ export component Main inherits Window {
                     if line.title != "": Text {
                         x: 12px;
                         text: line.title;
-                        font-size: 13px;
-                        font-weight: 600;
+                        font-size: Family.body;
+                        font-weight: Family.section-weight;
                         vertical-alignment: center;
-                        color: Palette.foreground.with-alpha(0.7);
+                        color: Family.muted;
                     }
                     if line.title == "": HorizontalLayout {
                         padding-left: 6px;
@@ -243,9 +242,7 @@ export component Main inherits Window {
                             width: root.cell;
                             height: root.cell;
                             border-radius: 8px;
-                            background: e.index == root.selected-index ? Palette.accent-background.with-alpha(0.2) : transparent;
-                            border-width: e.index == root.selected-index ? 1px : 0px;
-                            border-color: Palette.accent-background.with-alpha(0.5);
+                            background: e.index == root.selected-index ? Family.selected : transparent;
                             Image {
                                 source: e.img;
                                 width: root.emoji-px;
@@ -281,8 +278,8 @@ export component Main inherits Window {
                 }
                 Text {
                     text: root.preview-name;
-                    font-size: 14px;
-                    font-weight: 600;
+                    font-size: Family.body;
+                    font-weight: Family.section-weight;
                     overflow: elide;
                     vertical-alignment: center;
                     horizontal-stretch: 1;
@@ -292,29 +289,46 @@ export component Main inherits Window {
     }
 
     if root.settings-open: Rectangle {
-        background: #0008;
+        background: Family.scrim;
         TouchArea { clicked => { root.recording-shortcut = false; root.settings-open = false; } }
         Rectangle {
-            width: min(root.width - 40px, 340px);
+            width: min(root.width - 40px, Family.dialog-width);
             height: min(root.height - 20px, prefs-layout.preferred-height);
             background: Palette.background;
-            border-radius: 10px;
+            border-radius: Family.radius;
             border-width: 1px;
             border-color: Palette.border;
             TouchArea { }
             prefs-layout := VerticalLayout {
-                padding: 18px;
-                spacing: 14px;
-                Text { text: @tr("Preferences"); font-size: 16px; font-weight: 700; }
-                HorizontalLayout {
-                    spacing: 12px;
-                    Text { text: @tr("Skin tone"); vertical-alignment: center; horizontal-stretch: 1; }
+                padding: 16px;
+                spacing: Family.gap-l;
+                Text { text: @tr("Preferences"); font-size: Family.page-title; font-weight: Family.page-weight; }
+                PrefRow {
+                    label: @tr("Appearance");
+                    ComboBox {
+                        width: Family.control-width;
+                        model: [@tr("System"), @tr("Light"), @tr("Dark")];
+                        current-index: root.theme-choice;
+                        selected => { root.set-theme(self.current-index); }
+                    }
+                }
+                PrefRow {
+                    label: @tr("Language");
+                    ComboBox {
+                        width: Family.control-width;
+                        model: [@tr("System"), "English", "Português (Brasil)", "Français", "Deutsch", "Español", "Italiano", "日本語", "中文"];
+                        current-index: root.language-choice;
+                        selected => { root.set-language(self.current-index); }
+                    }
+                }
+                PrefRow {
+                    label: @tr("Skin tone");
                     for c[i] in [#ffc83d, #fadcbc, #e0bb95, #bf8f68, #9b643d, #594539]: Rectangle {
                         width: 24px;
                         height: 24px;
                         border-radius: 12px;
                         background: c;
-                        border-width: root.tone == i ? 3px : 1px;
+                        border-width: root.tone == i ? 2px : 1px;
                         border-color: root.tone == i ? Palette.accent-background : Palette.border;
                         TouchArea {
                             mouse-cursor: pointer;
@@ -322,46 +336,34 @@ export component Main inherits Window {
                         }
                     }
                 }
-                HorizontalLayout {
-                    spacing: 12px;
-                    Text { text: @tr("Emoji size"); vertical-alignment: center; horizontal-stretch: 1; }
+                PrefRow {
+                    label: @tr("Emoji size");
                     ComboBox {
+                        width: Family.control-width;
                         model: [@tr("Small ({} px)", 20), @tr("Compact ({} px)", 24), @tr("Default ({} px)", 28), @tr("Large ({} px)", 32), @tr("Extra large ({} px)", 36)];
                         current-index: root.size-choice;
                         selected => { root.set-size(self.current-index); }
                     }
                 }
-                HorizontalLayout {
-                    spacing: 12px;
-                    Text { text: @tr("Language"); vertical-alignment: center; horizontal-stretch: 1; }
-                    ComboBox {
-                        model: [@tr("System default"), "English", "Português (Brasil)", "Français", "Deutsch", "Español", "Italiano", "日本語", "中文"];
-                        current-index: root.language-choice;
-                        selected => { root.set-language(self.current-index); }
-                    }
-                }
-                HorizontalLayout {
-                    spacing: 12px;
-                    Text { text: @tr("Automatic paste"); vertical-alignment: center; horizontal-stretch: 1; }
+                PrefRow {
+                    label: @tr("Automatic paste");
                     Switch {
                         checked: root.auto-paste;
                         toggled => { root.set-auto-paste(self.checked); }
                     }
                 }
-                HorizontalLayout {
-                    spacing: 12px;
-                    Text { text: @tr("Keep FastMoji in memory"); vertical-alignment: center; horizontal-stretch: 1; }
+                PrefRow {
+                    label: @tr("Keep FastMoji in memory");
                     Switch {
                         checked: root.keep-resident;
                         enabled: !root.resident-locked;
                         toggled => { root.set-keep-resident(self.checked); }
                     }
                 }
-                HorizontalLayout {
-                    spacing: 12px;
-                    Text { text: @tr("Shortcut"); vertical-alignment: center; horizontal-stretch: 1; }
+                PrefRow {
+                    label: @tr("Shortcut");
                     Button {
-                        width: 190px;
+                        width: Family.control-width;
                         text: root.recording-shortcut ? root.held-text(root.held[0], root.held[1], root.held[2], root.held[3]) : root.shortcut-label;
                         enabled: root.keep-resident;
                         clicked => { root.held = [false, false, false, false]; root.recording-shortcut = true; }
@@ -369,8 +371,8 @@ export component Main inherits Window {
                 }
                 Text {
                     wrap: word-wrap;
-                    font-size: 11px;
-                    color: root.keep-resident && root.shortcut-error == "" ? Palette.foreground.with-alpha(0.6) : #e5a50a;
+                    font-size: Family.caption;
+                    color: root.keep-resident && root.shortcut-error == "" ? Family.muted : Family.warning;
                     text: root.resident-locked ? @tr("Always on in this session (the clipboard needs it).")
                         : (root.keep-resident ? (root.shortcut-error != "" ? root.shortcut-error : @tr("Required for the {} shortcut. Opens instantly and uses a little memory.", root.shortcut-label))
                         : @tr("Warning: {} is disabled while this is off. Open FastMoji with your own shortcut that runs `fastmoji`.", root.shortcut-label));
@@ -378,8 +380,8 @@ export component Main inherits Window {
                 HorizontalLayout {
                     spacing: 8px;
                     Button { text: @tr("Quit FastMoji"); clicked => { root.quit(); } }
-                    Rectangle { horizontal-stretch: 1; }
                     Button { text: @tr("About"); clicked => { root.about-open = true; } }
+                    Rectangle { horizontal-stretch: 1; }
                     Button { text: @tr("Close"); primary: true; clicked => { root.recording-shortcut = false; root.settings-open = false; } }
                 }
             }
@@ -387,35 +389,27 @@ export component Main inherits Window {
     }
 
     if root.about-open: Rectangle {
-        background: #0008;
+        background: Family.scrim;
         TouchArea { clicked => { root.about-open = false; } }
         Rectangle {
-            width: min(root.width - 40px, 320px);
+            width: min(root.width - 40px, Family.dialog-width);
             height: min(root.height - 20px, about-layout.preferred-height);
             background: Palette.background;
-            border-radius: 10px;
+            border-radius: Family.radius;
             border-width: 1px;
             border-color: Palette.border;
             TouchArea { }
             about-layout := VerticalLayout {
-                padding: 18px;
-                spacing: 8px;
-                alignment: center;
-                Text { text: "FastMoji"; font-size: 20px; font-weight: 700; horizontal-alignment: center; }
-                Text { text: @tr("Version {}", root.version); horizontal-alignment: center; }
-                Text { text: @tr("Light and fast emoji picker for Linux."); horizontal-alignment: center; wrap: word-wrap; }
-                Text { text: @tr("Author: {}", "evandro777"); horizontal-alignment: center; }
-                Text { text: @tr("License: {}", "GPL-3.0-or-later"); horizontal-alignment: center; }
-                Text {
-                    text: "github.com/evandro777/FastMoji";
-                    horizontal-alignment: center;
-                    color: Palette.accent-background;
-                    TouchArea {
-                        mouse-cursor: pointer;
-                        clicked => { root.open-url("https://github.com/evandro777/FastMoji"); }
-                    }
+                padding: 16px;
+                AboutCard {
+                    icon: @image-url("../flatpak/io.github.evandro777.FastMoji.svg");
+                    name: "FastMoji";
+                    version: root.version;
+                    description: @tr("Light and fast emoji picker for Linux.");
+                    url: "github.com/evandro777/FastMoji";
+                    link-clicked(u) => { root.open-url(u); }
+                    close => { root.about-open = false; }
                 }
-                Button { text: @tr("Close"); primary: true; clicked => { root.about-open = false; } }
             }
         }
     }

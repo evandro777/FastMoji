@@ -1,12 +1,12 @@
 //! User settings in one TOML file under the XDG data dir (`~/.local/share/FastMoji`, or the Flatpak data dir).
-use std::{
-    fs,
-    path::{Path, PathBuf},
-};
+use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 
-use crate::emojis;
+use crate::{
+    emojis,
+    files::{read_or_backup, write_atomic},
+};
 
 pub const MAX_RECENT: usize = 60;
 pub const EMOJI_SIZES: [u32; 5] = [20, 24, 28, 32, 36];
@@ -29,6 +29,8 @@ pub struct Settings {
     pub shortcut: String,
     /// "" follows the system locale; otherwise a code from `emojis::language_codes()` or "en".
     pub language: String,
+    /// "" follows the system's light or dark mode; otherwise "light" or "dark".
+    pub theme: String,
     pub width: u32,
     pub height: u32,
 }
@@ -43,6 +45,7 @@ impl Default for Settings {
             keep_resident: true,
             shortcut: "Ctrl+Alt+.".into(),
             language: String::new(),
+            theme: String::new(),
             width: 515,
             height: 500,
         }
@@ -68,20 +71,8 @@ impl Settings {
     }
 
     fn load_from(dir: &Path) -> Self {
-        let file = dir.join("settings.toml");
-        let mut s = match fs::read_to_string(&file) {
-            Ok(text) => parse(&text).unwrap_or_else(|e| {
-                // The file is hand-edited; the next save() must not overwrite what the user wrote.
-                let bad = file.with_extension("toml.bad");
-                eprintln!(
-                    "settings.toml is invalid ({e}); kept as {}, using defaults",
-                    bad.display()
-                );
-                let _ = fs::rename(&file, bad);
-                Settings::default()
-            }),
-            Err(_) => Settings::default(),
-        };
+        // The file is hand-edited; a bad one is moved aside so the next save() must not overwrite what the user wrote.
+        let mut s = read_or_backup(&dir.join("settings.toml"), |t| parse(t).map_err(|e| e.to_string())).0;
         s.normalize();
         s
     }
@@ -105,11 +96,8 @@ impl Settings {
     }
 
     fn try_save(&self, dir: &Path) -> std::io::Result<()> {
-        fs::create_dir_all(dir)?;
         let text = toml::to_string_pretty(self).map_err(std::io::Error::other)?;
-        let tmp = dir.join("settings.toml.tmp");
-        fs::write(&tmp, text)?;
-        fs::rename(&tmp, dir.join("settings.toml"))
+        write_atomic(&dir.join("settings.toml"), text)
     }
 
     /// Move `ch` to the front of the recents, keeping at most `MAX_RECENT`.
@@ -123,6 +111,8 @@ impl Settings {
 
 #[cfg(test)]
 mod tests {
+    use std::fs;
+
     use super::*;
 
     #[test]
@@ -175,6 +165,14 @@ mod tests {
     }
 
     #[test]
+    fn theme_defaults_to_system_for_old_files() {
+        let parsed: Settings = toml::from_str("auto_paste = false").unwrap();
+        assert_eq!(parsed.theme, "");
+        let parsed: Settings = toml::from_str("theme = \"dark\"").unwrap();
+        assert_eq!(parsed.theme, "dark");
+    }
+
+    #[test]
     fn invalid_file_is_an_error_not_defaults() {
         assert!(parse("emoji_size = \"big\"").is_err());
     }
@@ -195,10 +193,12 @@ mod tests {
 
         fs::write(dir.join("settings.toml"), "emoji_size = \"big\"").unwrap();
         assert_eq!(Settings::load_from(&dir).emoji_size, 28, "defaults");
-        assert_eq!(
-            fs::read_to_string(dir.join("settings.toml.bad")).unwrap(),
-            "emoji_size = \"big\""
-        );
+        let backup = fs::read_dir(&dir)
+            .unwrap()
+            .flatten()
+            .find(|e| e.file_name().to_string_lossy().starts_with("settings.toml.bad."))
+            .expect("the broken file is kept aside");
+        assert_eq!(fs::read_to_string(backup.path()).unwrap(), "emoji_size = \"big\"");
         assert!(
             !dir.join("settings.toml").exists(),
             "moved, so the next save cannot overwrite it"

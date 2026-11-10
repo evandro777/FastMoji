@@ -8,8 +8,16 @@ msgid "Search emoji"
 msgstr "絵文字を検索"
 
 msgctxt "Main"
-msgid "Settings"
-msgstr "設定"
+msgid "Appearance"
+msgstr "外観"
+
+msgctxt "Main"
+msgid "Light"
+msgstr "ライト"
+
+msgctxt "Main"
+msgid "Dark"
+msgstr "ダーク"
 
 msgctxt "Main"
 msgid "Preferences"
@@ -48,8 +56,8 @@ msgid "Language"
 msgstr "言語"
 
 msgctxt "Main"
-msgid "System default"
-msgstr "システムの既定"
+msgid "System"
+msgstr "システム"
 
 msgctxt "Main"
 msgid "Automatic paste"
@@ -87,19 +95,23 @@ msgctxt "Main"
 msgid "Close"
 msgstr "閉じる"
 
-msgctxt "Main"
+msgctxt "AboutCard"
 msgid "Version {}"
 msgstr "バージョン {}"
+
+msgctxt "AboutCard"
+msgid "Close"
+msgstr "閉じる"
 
 msgctxt "Main"
 msgid "Light and fast emoji picker for Linux."
 msgstr "Linux 向けの軽くて高速な絵文字ピッカー。"
 
-msgctxt "Main"
+msgctxt "AboutCard"
 msgid "Author: {}"
 msgstr "作者: {}"
 
-msgctxt "Main"
+msgctxt "AboutCard"
 msgid "License: {}"
 msgstr "ライセンス: {}"
 

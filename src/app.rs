@@ -29,6 +29,14 @@ fn language_choices() -> impl Iterator<Item = &'static str> {
     ["", "en"].into_iter().chain(emojis::language_codes())
 }
 
+/// Values of the theme setting in the order of the Appearance list: system default, light, dark.
+const THEMES: [&str; 3] = ["", "light", "dark"];
+
+/// The Appearance list index of a `settings.theme` value; anything unknown follows the system.
+fn theme_index(theme: &str) -> i32 {
+    THEMES.iter().position(|t| *t == theme).unwrap_or(0) as i32
+}
+
 /// The language of the session from the usual POSIX variables ("pt_BR.UTF-8", "fr:en"...).
 fn system_language() -> &'static str {
     let locale = ["LC_ALL", "LC_MESSAGES", "LANGUAGE", "LANG"]
@@ -480,6 +488,7 @@ impl App {
         );
         ui.set_auto_paste(st.settings.auto_paste);
         ui.set_language_choice(language_choices().position(|c| c == st.settings.language).unwrap_or(0) as i32);
+        ui.set_theme_choice(theme_index(&st.settings.theme));
         ui.set_version(env!("CARGO_PKG_VERSION").into());
         ui.set_keep_resident(!self.x11 || st.settings.keep_resident);
         ui.set_resident_locked(!self.x11);
@@ -1127,9 +1136,17 @@ impl App {
 
     fn on_focus_lost(&self) {
         self.focused.set(false);
+        // scripts/ui-snapshot.sh runs without a window manager, so the window loses focus at once; keep it open.
+        #[cfg(debug_assertions)]
+        if std::env::var_os("FASTMOJI_PAGE").is_some() {
+            return;
+        }
         if self.shown_at.get().is_some_and(|t| t.elapsed() < FOCUS_GRACE) {
             // The WM sometimes bounces focus right after mapping; ask again instead of hiding.
             self.activate(self.last_time.get());
+        } else if self.ui().get_settings_open() || self.ui().get_about_open() {
+            // Preferences and About stay while the user works elsewhere; Close or Esc ends it.
+            debug(|| "focus-out ignored: a dialog is open".into());
         } else if self.focus_still_ours() {
             // Pressing or releasing a grabbed key sends the window a focus-out (mode Grab/Ungrab) although the X
             // input focus never moved; the hotkey thread's flag can arrive too late to tell, the server cannot.
@@ -1286,6 +1303,14 @@ pub fn run(show: bool, command: &str) {
         app.set_categories();
         app.relayout();
     });
+    wire!(on_set_theme, |app, i| {
+        {
+            let mut st = app.st.borrow_mut();
+            st.settings.theme = THEMES.get(i as usize).copied().unwrap_or_default().to_string();
+            st.settings.save();
+        }
+        app.sync();
+    });
     wire!(on_set_auto_paste, |app, on| {
         let mut st = app.st.borrow_mut();
         st.settings.auto_paste = on;
@@ -1354,20 +1379,15 @@ pub fn run(show: bool, command: &str) {
         EventResult::Propagate
     });
 
-    if let Err(e) = instance::listen(|command| {
+    // Lost the start-up race to another instance: `claim` handed it our command, so leave.
+    if instance::claim(command, |command| {
         post(move |app| match command.as_str() {
             "toggle" => app.toggle(0),
             "show" => app.open(0),
             _ => {}
         })
     }) {
-        if e.kind() == std::io::ErrorKind::AddrInUse {
-            // Lost the start-up race to another instance: hand it our command and leave.
-            instance::send(command);
-            return;
-        }
-        // Without the socket a later `fastmoji` starts another copy, but a picker that works beats one that never shows.
-        eprintln!("single-instance socket unavailable ({e}); running without single-instance mode");
+        return;
     }
     if x11_session {
         // The global shortcut only exists while the process stays resident.
@@ -1381,11 +1401,27 @@ pub fn run(show: bool, command: &str) {
     if show {
         app.open(0);
     }
+    // scripts/ui-snapshot.sh: open a dialog right away. Debug builds only, like the other apps' fixtures.
+    #[cfg(debug_assertions)]
+    match std::env::var("FASTMOJI_PAGE").as_deref() {
+        Ok("settings") => ui.set_settings_open(true),
+        Ok("about") => ui.set_about_open(true),
+        _ => {}
+    }
     slint::run_event_loop_until_quit().expect("event loop failed");
 }
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn themes_and_their_indexes_agree() {
+        use super::{THEMES, theme_index};
+        for (i, t) in THEMES.iter().enumerate() {
+            assert_eq!(theme_index(t), i as i32);
+        }
+        assert_eq!(theme_index("bogus"), 0);
+    }
+
     #[test]
     fn records_shortcuts() {
         use super::shortcut_from_key as key;
