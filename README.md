@@ -87,6 +87,11 @@ The AppImage does not update itself, but it has update information built in, so 
 
 [Build and configurations information](BUILD.md)
 
+## Other FastApps
+
+- [FastPaste](https://github.com/evandro777/FastPaste): Tiny clipboard history for Linux. Written in Rust with Slint.
+- [FastProcMan](https://github.com/evandro777/FastProcMan): Lightweight Linux process manager built with Rust + Slint.
+
 ## Contributing and releases
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) to build, test and send a change, and [`RELEASING.md`](RELEASING.md) for how a release is cut. CI (format, clippy, tests, a `cargo audit` check of dependencies against RustSec, packaging checks, and a Flatpak build) runs on every pull request.
