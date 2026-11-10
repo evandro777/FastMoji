@@ -81,7 +81,7 @@ It uses the fontconfig, xkbcommon and X11 libraries already on your system.
 
 For a keyboard shortcut use the command `/path/to/FastMoji-<version>-x86_64.AppImage --toggle` (it must point at the file, so keep it in a fixed place).
 
-The AppImage does not update itself, but it has update information built in, so a tool such as [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) (`appimageupdatetool FastPaste-*.AppImage`), [Gear Lever](https://github.com/mijorus/gearlever) or [AppManager](https://github.com/kem-a/AppManager) downloads only the changed parts of the next release.
+The AppImage does not update itself, but it has update information built in, so a tool such as [AppImageUpdate](https://github.com/AppImageCommunity/AppImageUpdate) (`appimageupdatetool FastMoji-*.AppImage`), [Gear Lever](https://github.com/mijorus/gearlever) or [AppManager](https://github.com/kem-a/AppManager) downloads only the changed parts of the next release.
 
 ## Build & Configurations
 
@@ -89,7 +89,7 @@ The AppImage does not update itself, but it has update information built in, so 
 
 ## Other FastApps
 
-- [FastPaste](https://github.com/evandro777/FastPaste): Tiny clipboard history for Linux. Written in Rust with Slint.
+- [FastClipboard](https://github.com/evandro777/FastClipboard): Tiny clipboard history for Linux. Written in Rust with Slint.
 - [FastProcMan](https://github.com/evandro777/FastProcMan): Lightweight Linux process manager built with Rust + Slint.
 
 ## Contributing and releases
