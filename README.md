@@ -41,11 +41,23 @@ Page: <https://evandro777.github.io/FastMoji/>
 
 Early pilot. Works on **X11** (tested on Cinnamon): global shortcut, clipboard and automatic paste. On **Wayland** it shows the picker and copies to the clipboard; there is no global shortcut or automatic paste yet (bind a key to `fastmoji --toggle`).
 
+## Keyboard shortcut
+
+- **Recommended: the in-app shortcut** (Preferences). It is instant because FastMoji stays in memory. On Cinnamon avoid combos with `Super`: while the menu opens on a bare `Super` tap, a quick `Super+key` never reaches FastMoji (only holding the keys works). Use `Ctrl+.` or the default `Ctrl+Alt+.`.
+- **Desktop shortcut** running `flatpak run io.github.evandro777.FastMoji` (or `fastmoji --toggle` on Wayland): works everywhere, but `flatpak run` takes about 0.5 s, so the first keys you type land in the previous window.
+- **Fast desktop shortcut** (needs `socat`): it writes to the running instance's socket and starts the Flatpak only if nobody answers. Use `toggle` instead of `show` if the key should also close the picker.
+
+```bash
+sh -c 'echo show | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/app/io.github.evandro777.FastMoji/fastmoji.sock || flatpak run io.github.evandro777.FastMoji'
+```
+
 ## Install
 
 ### Flatpak
 
 #### Install from file (no updates)
+
+A `.flatpak` file downloaded from Releases is a one-off install (will not auto update). To get automatic updates, go to [Install with automatic updates](<#Install with automatic updates>).
 
 Download `FastMoji-<version>-x86_64.flatpak` from [Releases](https://github.com/evandro777/FastMoji/releases), then execute:
 
@@ -53,11 +65,9 @@ Download `FastMoji-<version>-x86_64.flatpak` from [Releases](https://github.com/
 flatpak install --user ~/Downloads/FastMoji-<version>-x86_64.flatpak
 ```
 
-Installing from file, will not auto update.
-
 #### Install with automatic updates
 
-Until FastMoji is on Flathub, every release is also published as a Flatpak remote, so `flatpak update` (or your software centre) keeps it current. A bundle downloaded from Releases does **not** update by itself; you would install the next one over it.
+This app is not in Flathub yet. You need to add this repository as a remote. Every release is also published as a Flatpak remote, so `flatpak update` (or your software centre) keeps the app updated.
 
 ```bash
 flatpak remote-add --system --if-not-exists fastmoji https://evandro777.github.io/FastMoji/fastmoji.flatpakrepo
