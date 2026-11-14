@@ -51,6 +51,12 @@ Early pilot. Works on **X11** (tested on Cinnamon): global shortcut, clipboard a
 sh -c 'echo show | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/app/io.github.evandro777.FastMoji/fastmoji.sock || flatpak run io.github.evandro777.FastMoji'
 ```
 
+For the AppImage the 0.5 s `flatpak run` delay does not apply (no sandbox), but the socket path differs (`$XDG_RUNTIME_DIR/fastmoji.sock`), so the same trick is:
+
+```bash
+sh -c 'echo show | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/fastmoji.sock || /path/to/FastMoji-<version>-x86_64.AppImage'
+```
+
 ## Install
 
 ### Flatpak
