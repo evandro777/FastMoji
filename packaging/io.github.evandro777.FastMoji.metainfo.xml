@@ -56,9 +56,10 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
-    <release version="0.2.5" date="2026-11-10">
+    <release version="0.3.0" date="2026-11-19">
       <description>
-        <p>UI polish; remove multi-select; two-step Esc</p>
+        <p>Slint 1.19: fixes small cpu usage on idle</p>
+        <p>AppImage and docs</p>
       </description>
     </release>
   </releases>

@@ -4,7 +4,7 @@ Releases are Git tags. CI builds the Flatpak bundle and attaches it to the GitHu
 
 1. Pick the version (`0.2.0`). Update **both**:
     - [Cargo.toml](./Cargo.toml) → `version`
-    - [io.github.evandro777.FastMoji.metainfo.xml](./flatpak/io.github.evandro777.FastMoji.metainfo.xml) → add a `<release version="0.2.0" date="YYYY-MM-DD">` entry with notes (newest first)
+    - [io.github.evandro777.FastMoji.metainfo.xml](./packaging/io.github.evandro777.FastMoji.metainfo.xml) → add a `<release version="0.2.0" date="YYYY-MM-DD">` entry with notes (newest first)
 
 2. Run `cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test && cargo audit`
     - It will update `Cargo.lock` follows the new version (CI uses `--locked` and fails on a stale lock). Commit both.

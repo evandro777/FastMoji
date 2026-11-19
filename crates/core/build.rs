@@ -1,4 +1,4 @@
-//! Compiles the Slint UI and bakes `assets/emojis.csv` into static tables (no runtime CSV parsing).
+//! Bakes `assets/emojis.csv` into static tables (no runtime CSV parsing). The Slint UI is compiled by the app crate.
 use std::{fmt::Write as _, path::PathBuf};
 
 #[path = "src/fold.rs"]
@@ -55,13 +55,6 @@ fn strip_vs16(hex: &str) -> String {
 fn main() {
     println!("cargo:rerun-if-changed=assets/emojis.csv");
     println!("cargo:rerun-if-changed=assets/i18n");
-    println!("cargo:rerun-if-changed=translations");
-    println!("cargo:rerun-if-changed=ui");
-
-    let config = slint_build::CompilerConfiguration::new()
-        .with_style("fluent".into())
-        .with_bundled_translations("translations");
-    slint_build::compile_with_config("ui/main.slint", config).unwrap();
 
     let mut reader = csv::Reader::from_path("assets/emojis.csv").unwrap();
     let headers = reader.headers().unwrap().clone();

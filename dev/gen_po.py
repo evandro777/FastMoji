@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes translations/<lang>/LC_MESSAGES/fastmoji.po (bundled by build.rs). Edit the table, run, commit.
+"""Writes crates/app/translations/<lang>/LC_MESSAGES/fastmoji.po (bundled by build.rs). Edit the table, run, commit.
 Slint's default gettext context is the component name, so msgctxt is `Main` (UI) or `Tr` (strings built in Rust)."""
 import os
 
@@ -54,7 +54,7 @@ T = [
 
 q = lambda s: '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
 for i, lang in enumerate(LANGS):
-    d = f"translations/{lang}/LC_MESSAGES"
+    d = f"crates/app/translations/{lang}/LC_MESSAGES"
     os.makedirs(d, exist_ok=True)
     with open(f"{d}/fastmoji.po", "w") as f:
         f.write(f'msgid ""\nmsgstr ""\n"Content-Type: text/plain; charset=UTF-8\\n"\n"Language: {lang}\\n"\n')

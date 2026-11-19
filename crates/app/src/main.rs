@@ -1,11 +1,10 @@
 mod app;
-mod emojis;
-mod files;
-mod fold;
 mod glyphs;
 mod instance;
-mod settings;
 mod x11;
+
+// The UI-independent modules live in `fastmoji-core`; re-imported here so `crate::emojis` etc. keep working.
+use fastmoji_core::{emojis, settings};
 
 slint::include_modules!();
 

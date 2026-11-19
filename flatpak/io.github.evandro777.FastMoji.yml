@@ -23,9 +23,9 @@ modules:
     build-commands:
       - cargo build --release --offline --locked
       - install -Dm755 target/release/fastmoji ${FLATPAK_DEST}/bin/fastmoji
-      - install -Dm644 flatpak/io.github.evandro777.FastMoji.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 flatpak/io.github.evandro777.FastMoji.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
-      - install -Dm644 flatpak/io.github.evandro777.FastMoji.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dm644 packaging/io.github.evandro777.FastMoji.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 packaging/io.github.evandro777.FastMoji.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 packaging/io.github.evandro777.FastMoji.svg${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       # A development build (app-id ...FastMoji.Devel) must not collide with an installed release.
       - sed -i "s/io\\.github\\.evandro777\\.FastMoji/${FLATPAK_ID}/g" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - case "${FLATPAK_ID}" in *.Devel) sed -i "s/^Name=FastMoji$/Name=FastMoji (Devel)/" ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop ;; esac
@@ -34,6 +34,8 @@ modules:
         path: ..
         skip:
           - target
+          - .git
+          - docs/screenshots
           - dev
           - flatpak/build-dir
           - flatpak/devel

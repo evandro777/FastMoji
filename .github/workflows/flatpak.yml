@@ -37,7 +37,7 @@ jobs:
           version="${GITHUB_REF_NAME#v}"
           crate=$(grep -m1 '^version' Cargo.toml | cut -d'"' -f2)
           [ "$version" = "$crate" ] || { echo "tag $version != Cargo.toml $crate"; exit 1; }
-          grep -q "<release version=\"$version\"" flatpak/$APP_ID.metainfo.xml \
+          grep -q "<release version=\"$version\"" packaging/$APP_ID.metainfo.xml \
             || { echo "metainfo has no <release> entry for $version"; exit 1; }
 
       # Its cargo also runs in the container (same SDK) and is used by build.sh to vendor the crates.

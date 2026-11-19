@@ -13,11 +13,13 @@ cargo build --release --locked
 rm -rf appimage/AppDir
 d=appimage/AppDir
 install -Dm755 target/release/fastmoji "$d/usr/bin/fastmoji"
-install -Dm644 flatpak/$id.desktop "$d/usr/share/applications/$id.desktop"
-install -Dm644 flatpak/$id.svg "$d/usr/share/icons/hicolor/scalable/apps/$id.svg"
-install -Dm644 flatpak/$id.metainfo.xml "$d/usr/share/metainfo/$id.metainfo.xml"
+install -Dm644 packaging/$id.desktop "$d/usr/share/applications/$id.desktop"
+install -Dm644 packaging/$id.svg "$d/usr/share/icons/hicolor/scalable/apps/$id.svg"
+install -Dm644 packaging/$id.metainfo.xml "$d/usr/share/metainfo/$id.metainfo.xml"
 # appimagetool wants the desktop file and icon at the root too.
 cp "$d/usr/share/applications/$id.desktop" "$d/usr/share/icons/hicolor/scalable/apps/$id.svg" "$d/"
+# appimagetool builds .DirIcon from a PNG at the root, not from the SVG.
+install -m644 packaging/$id.png "$d/$id.png"
 ln -s usr/bin/fastmoji "$d/AppRun"
 
 # Update info: AppImageUpdate-style tools read it from the file and fetch the .zsync from the latest release.

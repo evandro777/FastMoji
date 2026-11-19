@@ -1,4 +1,4 @@
-# FastMoji
+# <img src="packaging/io.github.evandro777.FastMoji.svg" width="36" height="36" alt=""> FastMoji
 
 [![CI](https://github.com/evandro777/FastMoji/actions/workflows/ci.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/ci.yml)
 [![Flatpak](https://github.com/evandro777/FastMoji/actions/workflows/flatpak.yml/badge.svg)](https://github.com/evandro777/FastMoji/actions/workflows/flatpak.yml)
